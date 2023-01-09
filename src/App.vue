@@ -2,15 +2,8 @@
   <v-app>
     <v-main>
       <HeaderComponent>
-        
-      <v-sheet id="scrolling-techniques-7" class="overflow-y-auto" max-height="600">
-        <v-container>
-
-          <router-view />
-        </v-container>
-      </v-sheet>
-
-    </HeaderComponent>
+        <router-view />
+      </HeaderComponent>
     </v-main>
   </v-app>
 </template>
@@ -20,7 +13,7 @@ import HeaderComponent from './components/home/Header'
 import { localize } from 'vee-validate';
 export default {
   name: 'App',
-  components: {HeaderComponent},
+  components: { HeaderComponent },
   data: () => ({
     //
   }),

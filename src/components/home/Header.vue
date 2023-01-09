@@ -1,4 +1,5 @@
 <template>
+    <div>
     <v-app-bar
       absolute
       color="white"
@@ -23,6 +24,14 @@
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </v-app-bar>
+    <v-sheet
+      id="scrolling-techniques-7"
+    >
+      <v-container>
+        <slot></slot>
+      </v-container>
+    </v-sheet>
+</div>
 </template>
   
   
