@@ -13,6 +13,8 @@
     </HeaderComponent>
     <JumbotronComponent></JumbotronComponent>
     <WhyGifuComponent></WhyGifuComponent>
+    <SampleComponent></SampleComponent>>
+    <TestimonyComponent></TestimonyComponent>
     </v-main>
   </v-app>
 </template>
@@ -21,10 +23,12 @@
 import HeaderComponent from './components/home/Header'
 import JumbotronComponent from './components/home/Jumbotron'
 import WhyGifuComponent from './components/home/WhyGifu'
+import SampleComponent from './components/home/Sample'
+import TestimonyComponent from './components/home/Testimony'
 import { localize } from 'vee-validate';
 export default {
   name: 'App',
-  components: {HeaderComponent, JumbotronComponent, WhyGifuComponent},
+  components: {HeaderComponent, JumbotronComponent, WhyGifuComponent,SampleComponent,TestimonyComponent},
   data: () => ({
     //
   }),
