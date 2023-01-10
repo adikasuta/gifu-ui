@@ -10,7 +10,7 @@
 
             <v-btn text>{{ $t('header.souvenier') }}</v-btn>
             <v-btn text>{{ $t('header.invitation') }}</v-btn>
-            <v-btn text>{{ $t('header.tracking') }}</v-btn>
+            <v-btn text @click="goToTracking">{{ $t('header.tracking') }}</v-btn>
             <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
             </v-btn>
@@ -36,6 +36,9 @@ export default {
     name: "HeaderComponent",
     components: {},
     methods:{
+        goToTracking(){
+            this.$router.push('/tracking')
+        },
         toggleLanguage(){
             const lang = window.$cookies.get('LANG');
             if(lang == 'id'){

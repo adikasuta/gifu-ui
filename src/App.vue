@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import HeaderComponent from './components/home/Header'
+import HeaderComponent from './components/layout/Header'
 import { localize } from 'vee-validate';
 export default {
   name: 'App',
