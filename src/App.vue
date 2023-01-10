@@ -11,16 +11,20 @@
       </v-sheet>
 
     </HeaderComponent>
+    <JumbotronComponent></JumbotronComponent>
+    <WhyGifuComponent></WhyGifuComponent>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import HeaderComponent from './components/home/Header'
+import JumbotronComponent from './components/home/Jumbotron'
+import WhyGifuComponent from './components/home/WhyGifu'
 import { localize } from 'vee-validate';
 export default {
   name: 'App',
-  components: {HeaderComponent},
+  components: {HeaderComponent, JumbotronComponent, WhyGifuComponent},
   data: () => ({
     //
   }),
