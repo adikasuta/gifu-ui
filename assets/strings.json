@@ -1,94 +1,22 @@
 {
   "en": {
-    "fields": {
-      "email": "Email",
-      "credit_card_number": "Credit Card Number",
-      "expiration_month": "Expiration Month",
-      "expiration_year": "Expiration Year",
-      "cvv": "CVV",
-      "first_name": "First Name",
-      "last_name": "Last Name",
-      "address": "Address",
-      "postal_code": "Postal Code",
-      "phone_number": "Phone Number"
+    "header": {
+      "souvenier": "Souvenier",
+      "invitation": "Invitation",
+      "tracking": "Tracking"
     },
-    "common": {
-      "forbidden":"Your company does not have any credit card saved in OnlinePajak",
-      "yes": "Yes",
-      "no": "No",
-      "limit_card_reached": "You cannot add more card"
-    },
-    "tax_payment": {
-      "view": {
-        "make_as_default": "Make As Default",
-        "edit": "Edit",
-        "remove": "Remove",
-        "my_credit_card": "My Credit Card",
-        "view_my_credit_card": "View My Credit Card",
-        "alert_remove": "Do you really want to remove this Credit Card?"
-      },
-      "form": {
-        "billing_detail_header": "Billing Address",
-        "first_name": "First Name",
-        "last_name": "Last Name",
-        "address": "Address",
-        "locality": "City",
-        "administrative_area": "Province",
-        "postal_code": "Postal Code",
-        "country": "Country",
-        "phone_number": "Phone Number",
-        "credit_card_header": "Credit Card Details",
-        "credit_card_number": "Card Number",
-        "expiration_date": "Expiry Date",
-        "back": "Back",
-        "save": "Save"
-      }
+    "testimonials": {
+      "review1": "I'm pretty satisfied with the result"
     }
   },
   "id": {
-    "fields": {
-      "email": "Email",
-      "credit_card_number": "Nomor Kartu",
-      "expiration_month": "Bulan Kedaluarsa",
-      "expiration_year": "Tahun Kedaluarsa",
-      "cvv": "CVV",
-      "first_name": "Nama Depan",
-      "last_name": "Nama Belakang",
-      "address": "Alamat",
-      "postal_code": "Kode Pos",
-      "phone_number": "Nomor Telepon"
+    "header": {
+      "souvenier": "Suvenir",
+      "invitation": "Undangan",
+      "tracking": "Pelacakan"
     },
-    "common": {
-      "forbidden":"Perusahaan Anda tidak memiliki kartu kredit yang disimpan di OnlinePajak",
-      "yes": "Ya",
-      "no": "Tidak",
-      "limit_card_reached": "Anda tidak dapat menambah kartu lagi"
-    },
-    "tax_payment": {
-      "view": {
-        "make_as_default": "Jadikan Kartu Utama",
-        "edit": "Ubah",
-        "remove": "Hapus",
-        "my_credit_card": "Kartu Kredit Saya",
-        "view_my_credit_card": "Daftar Kartu Kredit Saya",
-        "alert_remove": "Apakah anda yakin ingin menghapus kartu kredit ini?"
-      },
-      "form": {
-        "credit_card_header": "Detail Kartu Kredit",
-        "credit_card_number": "Nomor Kartu Kredit",
-        "expiration_date": "Tanggal Kedaluarsa",
-        "billing_detail_header": "Alamat Penagihan",
-        "first_name": "Nama Depan",
-        "last_name": "Nama Belakang",
-        "address": "Alamat",
-        "locality": "Kota",
-        "administrative_area": "Provinsi",
-        "postal_code": "Kode Pos",
-        "country": "Negara",
-        "phone_number": "Nomor Telepon",
-        "back": "Kembali",
-        "save": "Simpan"
-      }
+    "testimonials": {
+      "review1": "Saya cukup puas dengan hasilnya"
     }
   }
 }

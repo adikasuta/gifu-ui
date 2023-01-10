@@ -8,12 +8,16 @@
             <v-spacer></v-spacer>
 
 
-            <v-btn text>SOUVENIR</v-btn>
-            <v-btn text>INVITATION</v-btn>
-            <v-btn text>TRACKING</v-btn>
+            <v-btn text>{{ $t('header.souvenier') }}</v-btn>
+            <v-btn text>{{ $t('header.invitation') }}</v-btn>
+            <v-btn text>{{ $t('header.tracking') }}</v-btn>
             <v-btn icon>
                 <v-icon>mdi-heart</v-icon>
             </v-btn>
+            <v-btn icon>
+                <v-icon @click="toggleLanguage">mdi-translate</v-icon>
+            </v-btn>
+
 
         </v-app-bar>
         <v-sheet id="scrolling-techniques-7">
@@ -31,6 +35,17 @@
 export default {
     name: "HeaderComponent",
     components: {},
+    methods:{
+        toggleLanguage(){
+            const lang = window.$cookies.get('LANG');
+            if(lang == 'id'){
+                window.$cookies.set('LANG','en');
+            }else{
+                window.$cookies.set('LANG','id');
+            }
+            this.$i18n.locale = window.$cookies.get('LANG')
+        }
+    }
 };
 </script>
 

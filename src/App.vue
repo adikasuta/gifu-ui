@@ -19,7 +19,10 @@ export default {
   }),
   methods: {
     initLanguage: function () {
-
+      const lang = window.$cookies.get('LANG');
+      if(!lang){
+        window.$cookies.set('LANG','id');
+      }
       this.$i18n.locale = window.$cookies.get('LANG')
       localize(window.$cookies.get('LANG'))
     }
