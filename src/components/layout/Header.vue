@@ -8,7 +8,7 @@
             <v-spacer></v-spacer>
 
 
-            <v-btn text>{{ $t('header.souvenier') }}</v-btn>
+            <v-btn text @click="goToSouvenir">{{ $t('header.souvenir') }}</v-btn>
             <v-btn text>{{ $t('header.invitation') }}</v-btn>
             <v-btn text @click="goToTracking">{{ $t('header.tracking') }}</v-btn>
             <v-btn icon>
@@ -38,6 +38,9 @@ export default {
     methods:{
         goToTracking(){
             this.$router.push('/tracking')
+        },
+        goToSouvenir(){
+            this.$router.push('/Souvenir')
         },
         toggleLanguage(){
             const lang = window.$cookies.get('LANG');

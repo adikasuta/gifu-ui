@@ -4,6 +4,7 @@
     <WhyGifuComponent></WhyGifuComponent>
     <SampleComponent></SampleComponent>
     <TestimonyComponent></TestimonyComponent>
+    <FAQComponent></FAQComponent>
   </div>
 </template>
 
@@ -13,13 +14,15 @@ import JumbotronComponent from '../components/home/Jumbotron'
 import WhyGifuComponent from '../components/home/WhyGifu'
 import SampleComponent from '../components/home/Sample'
 import TestimonyComponent from '../components/home/Testimony'
+import FAQComponent from '../components/home/FAQ'
 export default {
   name: "HomepageComponent",
   components: {
     JumbotronComponent,
     WhyGifuComponent,
     SampleComponent,
-    TestimonyComponent
+    TestimonyComponent,
+    FAQComponent
   },
   data() {
     return {
