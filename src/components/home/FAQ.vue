@@ -8,7 +8,6 @@
         :answer="faq.answer"></FAQContent>
       </div >
     </div>
-        <!-- <h3 v-for="(item, itemIndex) of faq" :key="itemIndex"></h3> -->
   </template>
   
   
@@ -54,7 +53,7 @@
 .container{
   padding: auto;
   width: 100%;
-  background-color: antiquewhite;
+  display:flex;
 }
 ul {
   margin: 0;
@@ -68,10 +67,9 @@ ul {
   border-radius: 10px;
   padding: 1rem;
   text-align: center;
-  width: 40%;
-  max-width: 40%;
+  width: 50%;
+  max-width: 50%;
   background-color: rgb(255, 235, 239);
-  float:left
 }
 h2 {
   font-size: 2rem;
@@ -80,4 +78,5 @@ h2 {
   margin: 0 0 1rem 0;
   text-align: center;
 }
+
 </style>

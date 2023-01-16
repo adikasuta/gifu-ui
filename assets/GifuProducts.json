@@ -1,0 +1,22 @@
+[
+    [
+        {
+            "img": "/testimonials/testi_1.jpeg",
+            "name": "Card Holder A",
+            "price": "Rp 6500",
+            "size": "8 x 8 cm"
+        },
+        {
+            "img": "/testimonials/testi_2.jpeg",
+            "name": "Card Holder B",
+            "price": "Rp 6500",
+            "size": "8 x 8 cm"
+        },
+        {
+            "img": "/testimonials/testi_3.jpeg",
+            "name": "Card Holder C",
+            "price": "Rp 6500",
+            "size": "8 x 8 cm"
+        }
+    ]
+]

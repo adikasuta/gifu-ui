@@ -4,16 +4,18 @@
       <HeaderComponent>
         <router-view />
       </HeaderComponent>
+      <FooterComponent></FooterComponent>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import HeaderComponent from './components/layout/Header'
+import FooterComponent from './components/layout/Footer'
 import { localize } from 'vee-validate';
 export default {
   name: 'App',
-  components: { HeaderComponent },
+  components: { HeaderComponent, FooterComponent },
   data: () => ({
     //
   }),

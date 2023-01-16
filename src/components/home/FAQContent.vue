@@ -1,10 +1,16 @@
 <template>
     <div class="items">
-    <h2 @click="toggleDetails">{{ question }}</h2>
-    <h3 v-if="detailsAreVisible">
-        <strong>Answer:</strong>
-        {{ answer }}
-    </h3>
+    <h3>{{ question }}</h3>
+    <v-btn icon @click="toggleDetails">
+                <v-icon>{{ toggleDetails? 'mdi-chevron-down': 'mdi-chevron-up' }}</v-icon>
+            </v-btn>
+            <div v-if="detailsAreVisible">
+                <v-divider></v-divider>
+
+                <v-card-text>
+                    {{answer}}
+                </v-card-text>
+            </div>
     </div>
 </template>
 

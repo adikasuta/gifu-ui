@@ -3,8 +3,8 @@
       <h1>{{ $t('tracking.title') }}</h1>
       <form>
       <div class="form-control">
-      <label for="user-name">{{ $t('tracking.invoicenumber') }}</label>
-      <input id="user-name" name="user-name" type="text" />
+      <label for="invoiceNumber">{{ $t('tracking.invoicenumber') }}</label>
+      <input id="invoiceNumber" name="invoiceNumber" type="text" />
       </div>
         <v-col cols="12">
           <v-autocomplete
@@ -19,7 +19,7 @@
           ></v-autocomplete>
         </v-col>
       <div class="form-control">
-      <label for="user-name">{{ $t('tracking.verification') }}</label>
+      <label for="invoiceNumber">{{ $t('tracking.verification') }}</label>
       <v-text-field
             label="Outlined"
             placeholder="Placeholder"
@@ -56,7 +56,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="item in desserts"
+          v-for="item in orders"
           :key="item.name"
         >
           <td>{{ item.invoicenumber }}</td>
@@ -77,8 +77,14 @@
     data() {
       return {
         status: "",
+        invoiceNumber: " ",
       };
     },
+    methods:{
+      submitform(){
+        console.log('Nomor Invoice' + this.invoiceNumber);
+      }
+    }
   };
   </script>
    

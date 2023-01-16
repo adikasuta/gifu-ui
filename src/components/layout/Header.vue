@@ -1,7 +1,6 @@
 <template>
     <div>
         <v-app-bar absolute color="pink lighten-5" elevate-on-scroll scroll-target="#scrolling-techniques-7">
-            <v-app-bar-nav-icon></v-app-bar-nav-icon>
             <v-img src="LOGO_GIFU.png" max-height="80" max-width="80" />
             <v-toolbar-title class="LogoName">GIFU | PT. Elyon Kriya Aguna</v-toolbar-title>
 
