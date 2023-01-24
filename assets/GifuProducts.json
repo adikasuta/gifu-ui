@@ -1,19 +1,25 @@
 [
     [
         {
-            "img": "/testimonials/testi_1.jpeg",
+            "img": "/products/souvenirs/01.png",
             "name": "Card Holder A",
             "price": "Rp 6500",
             "size": "8 x 8 cm"
         },
         {
-            "img": "/testimonials/testi_2.jpeg",
+            "img": "/products/souvenirs/02.png",
             "name": "Card Holder B",
             "price": "Rp 6500",
             "size": "8 x 8 cm"
         },
         {
-            "img": "/testimonials/testi_3.jpeg",
+            "img": "/products/souvenirs/03.png",
+            "name": "Card Holder C",
+            "price": "Rp 6500",
+            "size": "8 x 8 cm"
+        },
+        {
+            "img": "/products/souvenirs/03.png",
             "name": "Card Holder C",
             "price": "Rp 6500",
             "size": "8 x 8 cm"

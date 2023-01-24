@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomepageComponent from '../views/Homepage';
-import TrackingComponent from '../views/Tracking';
+import TrackingComponent from '../views/theTracking';
 import SouvenirComponent from '../views/Souvenir';
+import OrderSouvenirComponent from '../views/OrderSouvenir';
 
 Vue.use(VueRouter)
 
@@ -13,7 +14,7 @@ const routes = [
     component: HomepageComponent
   },
   {
-    path: '/tracking',
+    path: '/theTracking',
     name: 'TrackingComponent',
     component: TrackingComponent
   },
@@ -21,6 +22,11 @@ const routes = [
     path: '/souvenir',
     name: 'SouvenirComponent',
     component: SouvenirComponent
+  },
+  {
+    path: '/OrderSouvenir',
+    name: 'OrderSouvenirComponent',
+    component: OrderSouvenirComponent
   },
 ]
 

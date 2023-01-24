@@ -17,7 +17,6 @@ export default {
   name: 'App',
   components: { HeaderComponent, FooterComponent },
   data: () => ({
-    //
   }),
   methods: {
     initLanguage: function () {

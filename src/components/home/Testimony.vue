@@ -32,6 +32,11 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  margin: 20px;
+  font-size: 36px;
+
+}
 div {
   text-align: center;
 }

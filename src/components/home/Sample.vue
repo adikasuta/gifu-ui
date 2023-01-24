@@ -1,19 +1,22 @@
 <template>
-    <v-container class="sample lighten-5"> 
-        <v-row >
-            <v-col md="12" class="text-center mb-5" >
+    <div class="sample">
+        <h2>SAMPLE KIT</h2>
+        <button class="button">SHOPEE</button>
+        <button class="button">TOKOPEDIA</button>
+        <!-- <v-row >
+            <v-col class="text-center mb-5" >
                 <h2>SAMPLE KIT</h2>
             </v-col>
         </v-row>
         <v-row>
-            <v-col md="6" class="text-right" >
+            <v-col  class="text-right" >
                 <v-btn >SHOPEE</v-btn>
             </v-col>
-            <v-col md="6">
+            <v-col >
                 <v-btn variant="tonal" color="secondary">TOKOPEDIA</v-btn>
             </v-col>
-        </v-row>
-    </v-container>
+        </v-row> -->
+    </div>
 </template>
 
 <script>
@@ -25,6 +28,21 @@ export default {
 
 <style scoped>
 .sample {
-    background-color: antiquewhite;
+    text-align: center;
+    background-color: rgb(250, 215, 215);
+    width:100vw;
+    padding:30px;
+}
+.button {
+  transition-duration: 0.4s;
+  margin:10px;
+  padding: 10px;
+  background-color: rgb(161, 161, 161);
+  width:180px;
+}
+
+.button:hover {
+  background-color: #ffc4ed; /* Green */
+  color: white;
 }
 </style>

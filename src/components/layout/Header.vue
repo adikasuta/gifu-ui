@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="header">
         <v-app-bar absolute color="pink lighten-5" elevate-on-scroll scroll-target="#scrolling-techniques-7">
             <v-img src="LOGO_GIFU.png" max-height="80" max-width="80" />
             <v-toolbar-title class="LogoName">GIFU | PT. Elyon Kriya Aguna</v-toolbar-title>
@@ -20,9 +20,9 @@
 
         </v-app-bar>
         <v-sheet id="scrolling-techniques-7">
-            <v-container>
+            <!-- <v-container> -->
                 <slot></slot>
-            </v-container>
+            <!-- </v-container> -->
         </v-sheet>
     </div>
 
@@ -36,7 +36,7 @@ export default {
     components: {},
     methods:{
         goToTracking(){
-            this.$router.push('/tracking')
+            this.$router.push('/theTracking')
         },
         goToSouvenir(){
             this.$router.push('/Souvenir')
@@ -61,6 +61,9 @@ export default {
     font-weight: bold;
     text-align: justify;
 }
+/* .header{
+    position: relative;
+} */
 </style>
  
 

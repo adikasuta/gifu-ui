@@ -40,6 +40,7 @@ export default {
 <style scoped>
 .co {
     background-color: rgb(255, 240, 243);
+    width:100vw;
 }
 .WG1 {
     width:35%;

@@ -1,24 +1,30 @@
-[
-    [
-        {
-            "question":"Minimal order berapa?",
-            "answer":"Beberapa produk kami bisa dipesan mulai 30 pcs dan 100 pcs"
-        },
-          {
-            "question":"Pengerjaan Berapa lama?",
-            "answer":"Lama Pengerjaan masing-masing produk berbeda, berkisar antara 2-6 minggu"
-          },
-          {
-            "question":"aaaa",
-            "answer":"bbb"
-          },
-          {
-            "question":"ccc",
-            "answer":"bbb"
-          },
-          {
-            "question":"aaaa",
-            "answer":"bbb"
-          }
-    ]
-]
+{
+  "left": [
+    {
+      "question": "Minimal order berapa?",
+      "answer": "Beberapa produk kami bisa dipesan mulai 30 pcs dan 100 pcs"
+    },
+    {
+      "question": "Pengerjaan Berapa lama?",
+      "answer": "Lama Pengerjaan masing-masing produk berbeda, berkisar antara 2-6 minggu"
+    },
+    {
+      "question": "Pengerjaan Berapa lama?",
+      "answer": "Lama Pengerjaan masing-masing produk berbeda, berkisar antara 2-6 minggu"
+    }
+  ],
+  "right":[
+    {
+      "question": "aaaa",
+      "answer": "bbb"
+    },
+    {
+      "question": "ccc",
+      "answer": "bbb"
+    },
+    {
+      "question": "aaaa",
+      "answer": "bbb"
+    }
+  ]
+}
