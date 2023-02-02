@@ -1,13 +1,10 @@
 <template>
   <div class="Banner">
     <div class="BannerText">
-      <h1>Hello</h1>
-      <p>
-        Cari Souvenir Murah berkualitas? bikin di GIFU aja. Banyak bonusnya!
-        Siap kirim ke seluruh Indonesia. Cukup pesan lewat WA, kami siap membuat
-        souvenir impianmu, tanpa kamu harus keluar rumah. Anti ribet, tinggal
-        bagiin ke tamu aja!
-      </p>
+      <h1>{{ $t('jumbotron.title') }}</h1>
+      <h4>
+        {{ $t('jumbotron.content') }}
+      </h4><br>
       <v-btn>Learn More</v-btn>
     </div>
   </div>
@@ -36,4 +33,5 @@ export default {
   left: 10%;
   top: 30%;
 }
+
 </style>

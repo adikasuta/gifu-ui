@@ -13,6 +13,20 @@
       "invoicenumber": "Invoice Number (up to 3 Invoice)",
       "verification":"Last 4 Digits of Your Phone Number",
       "button": "Track"
+    },
+    "jumbotron":{
+      "title": "Hello",
+      "content":"Are you searching for high quality souvenir in affordable price? GIFU is the right place. So many bonus are waiting for you! We are able to ship all around Indonesia. Just sit on your comfortable couch and order it through your WhatsApp. No need to worry about anything, because what left is time to share it to your lovely guests!      "
+    },
+    "whygifu":{
+      "kualitas": "Quality Guarantee",
+      "garansi":"3 days free RETURN for wrong items.",
+      "antiribet":"One Step at a Time",
+      "allin":"All in package, include emboss, packaging, thank you cards, and souvenir coupons. No additional steps!",
+      "safeshipment":"Safe Shipment",
+      "readytoship":"Ready to ship all over Indonesia. Just sit back and your packages will be right in front of your door.",
+      "onestop":"One Stop Services",
+      "orderyours":"Order your souvenirs, printed invitation, digital invitation, hampers, and Bridesmaid Box from GIFU. You will definitely save your time!"
     }
   },
   "id": {
@@ -29,6 +43,20 @@
       "invoicenumber": "Nomor Invoice (maksimal 3 Invoice)",
       "verification":"4 Digit terakhir nomor HP Anda",
       "button": "Lacak"
+    },
+    "jumbotron":{
+      "title": "Halo",
+      "content":"Cari Souvenir Murah berkualitas? bikin di GIFU aja. Banyak bonusnya! Siap kirim ke seluruh Indonesia. Cukup pesan lewat WA, kami siap membuat souvenir impianmu, tanpa kamu harus keluar rumah. Anti ribet, tinggal bagiin ke tamu aja!"
+    },
+    "whygifu":{
+      "kualitas": "Kualitas Bergaransi",
+      "garansi":"Souvenirmu tidak sesuai pesanan? Jangan khawatir, kami siap RETUR!",
+      "antiribet":"Anti Ribet",
+      "allin":"Sudah ALL IN termasuk emboss / cetak nama, packaging, kartu ucapan terima kasih, dan kupon pengambilan souvenir. Gak usah ribet lagi deh!",
+      "safeshipment":"Pengiriman Aman",
+      "readytoship":"Siap kirim ke seluruh Indonesia. Tak perlu ragu, kamu bisa pesan sample dulu lho!",
+      "onestop":"Satu tempat beres semua",
+      "orderyours":"Pesan Souvenir, Undangan Fisik, Undangan Digital, Hampers, dan Bridesmaid Box cukup di satu tempat saja"
     }
   }
 }

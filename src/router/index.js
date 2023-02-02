@@ -4,6 +4,7 @@ import HomepageComponent from '../views/Homepage';
 import TrackingComponent from '../views/theTracking';
 import SouvenirComponent from '../views/Souvenir';
 import OrderSouvenirComponent from '../views/OrderSouvenir';
+import CartComponent from '../views/TheCart';
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/OrderSouvenir',
     name: 'OrderSouvenirComponent',
     component: OrderSouvenirComponent
+  },
+  {
+    path: '/Cart',
+    name: 'CartComponent',
+    component: CartComponent
   },
 ]
 

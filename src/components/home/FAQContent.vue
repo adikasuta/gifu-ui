@@ -2,7 +2,7 @@
   <div class="items">
     <div class="accordion">
       <div class="item">
-        <p class="question">{{ question }}</p>
+        <h3 class="question">{{ question }}</h3>
         <svg @click="toggleDetails"
           xmlns="http://www.w3.org/2000/svg"
           class="icon"
@@ -18,7 +18,7 @@
           />
         </svg>
 
-        <div v-if="detailsAreVisible">{{ answer }}</div>
+        <h5 v-if="detailsAreVisible">{{ answer }}</h5>
       </div>
     </div>
     <!-- <h3>{{ question }}</h3>

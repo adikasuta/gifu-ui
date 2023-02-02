@@ -10,8 +10,8 @@
             <v-btn text @click="goToSouvenir">{{ $t('header.souvenir') }}</v-btn>
             <v-btn text>{{ $t('header.invitation') }}</v-btn>
             <v-btn text @click="goToTracking">{{ $t('header.tracking') }}</v-btn>
-            <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
+            <v-btn icon @click="goToCart">
+                <v-icon>mdi-cart</v-icon>
             </v-btn>
             <v-btn icon>
                 <v-icon @click="toggleLanguage">mdi-translate</v-icon>
@@ -40,6 +40,9 @@ export default {
         },
         goToSouvenir(){
             this.$router.push('/Souvenir')
+        },
+        goToCart(){
+            this.$router.push('/Cart')
         },
         toggleLanguage(){
             const lang = window.$cookies.get('LANG');

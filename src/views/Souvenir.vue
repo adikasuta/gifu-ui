@@ -2,13 +2,10 @@
   <div>
     <div class="Banner"></div>
     <div class="navbar">
-      <div class="leftside">
-        <input type="checkbox" id="check" name="check" />
-        <label for="check" class="checkbtn">
-          <i class="fas fa-bars icon navburger"></i>
-        </label>
-      </div>
-      <a href="#news">Minimum Order 30 pcs</a>
+      <span class="filter-option">
+        <input type="checkbox" id="moq" checked @change="setFilter" />
+        <label for="moq">Minimum Order 30 pcs</label>
+      </span>
       <div class="dropdown">
         <button class="dropbtn">
           Category
@@ -40,38 +37,47 @@
         :name="item.name"
         :price="item.price"
         :size="item.size"
+        :moq="item.ismoq"
       ></theProducts>
+    </div>
+    <div class="pagination">
+      <v-pagination v-model="page" :length="7" circle></v-pagination>
     </div>
   </div>
 </template>
 
 <script>
 import theProducts from "../../src/components/souvenirs/theProducts.vue";
+import GifuProduct from "../../assets/GifuProducts.json";
 export default {
   name: "SouvenirComponent",
   components: { theProducts },
   data() {
     return {
+      filters: {
+        moq: false,
+      },
       status: "",
-      GifuProduct: [
-        {
-          name: "Card Holder A",
-          price: "Rp 6500",
-          size: "8 x 8 cm",
-        },
-        {
-          name: "Card Holder B",
-          price: "Rp 6500",
-          size: "8 x 8 cm",
-        },
-        {
-          name: "Card Holder B",
-          price: "Rp 6500",
-          size: "8 x 8 cm",
-        },
-      ],
+      GifuProduct,
+      // GifuProduct: [
+      //   {
+      //     name: "Card Holder A",
+      //     price: "Rp 6500",
+      //     size: "8 x 8 cm",
+      //   },
+      //   {
+      //     name: "Card Holder B",
+      //     price: "Rp 6500",
+      //     size: "8 x 8 cm",
+      //   },
+      //   {
+      //     name: "Card Holder B",
+      //     price: "Rp 6500",
+      //     size: "8 x 8 cm",
+      //   },
+      // ],
     };
-  },
+  }
 };
 </script>
 
@@ -164,7 +170,11 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0px;
-  padding:50px;
+  padding: 50px;
+}
+.pagination {
+  padding: 50px;
+  background-color: rgb(253, 245, 245);
 }
 </style>
 

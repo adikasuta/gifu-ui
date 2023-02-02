@@ -1,0 +1,32 @@
+[
+    {
+        "img": "/packagings/cardholder/01.jpg",
+        "name": "Plastik + Thanks Card",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    },
+    {
+        "img": "/packagings/cardholder/02.jpg",
+        "name": "Plastik + Paperbelt",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    },
+    {
+        "img": "/packagings/cardholder/03.jpg",
+        "name": "BTDB",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    },
+    {
+        "img": "/packagings/cardholder/04.jpg",
+        "name": "MNDS",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    },
+    {
+        "img": "/packagings/cardholder/05.png",
+        "name": "MNKY",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    }
+]

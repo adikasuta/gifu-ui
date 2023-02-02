@@ -1,28 +1,64 @@
 [
-    [
-        {
-            "img": "/products/souvenirs/01.png",
-            "name": "Card Holder A",
-            "price": "Rp 6500",
-            "size": "8 x 8 cm"
-        },
-        {
-            "img": "/products/souvenirs/02.png",
-            "name": "Card Holder B",
-            "price": "Rp 6500",
-            "size": "8 x 8 cm"
-        },
-        {
-            "img": "/products/souvenirs/03.png",
-            "name": "Card Holder C",
-            "price": "Rp 6500",
-            "size": "8 x 8 cm"
-        },
-        {
-            "img": "/products/souvenirs/03.png",
-            "name": "Card Holder C",
-            "price": "Rp 6500",
-            "size": "8 x 8 cm"
-        }
-    ]
+    {
+        "img": "/products/souvenirs/01.png",
+        "name": "Card Holder A",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": false
+    },
+    {
+        "img": "/products/souvenirs/02.png",
+        "name": "Card Holder B",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": false
+    },
+    {
+        "img": "/products/souvenirs/03.png",
+        "name": "Card Holder Album",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": true
+    },
+    {
+        "img": "/products/souvenirs/04.png",
+        "name": "Card Holder Basic",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": false
+    },
+    {
+        "img": "/products/souvenirs/05.png",
+        "name": "Card Holder B",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": true
+    },
+    {
+        "img": "/products/souvenirs/06.png",
+        "name": "Card Holder C",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": true
+    },
+    {
+        "img": "/products/souvenirs/07.png",
+        "name": "Card Holder C",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": true
+    },
+    {
+        "img": "/products/souvenirs/08.png",
+        "name": "Card Holder B",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": true
+    },
+    {
+        "img": "/products/souvenirs/09.png",
+        "name": "Card Holder C",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    }
 ]

@@ -4,28 +4,29 @@
             <div class="content"> 
                 
                 <v-icon>mdi-shield-lock-outline</v-icon>
-                <h1>Kualitas Bergaransi</h1>
-                <h4>Souvenirmu tidak sesuai pesanan? Jangan khawatir, kami siap RETUR!</h4>
+                <h3>{{ $t('whygifu.kualitas') }}</h3>
+                <h4>{{ $t('whygifu.garansi') }}</h4>
             </div>
             <div class="content"> 
                 <v-icon>mdi-shield-lock-outline</v-icon>
-                <h1>Anti Ribet</h1>
-                <h4>Sudah ALL IN termasuk emboss / cetak nama, packaging, kartu ucapan terima kasih, dan kupon pengambilan souvenir. Gak usah ribet lagi deh!</h4>
+                <h3>{{ $t('whygifu.antiribet') }}</h3>
+                <h4>{{ $t('whygifu.allin') }}</h4>
             </div>
         </div>
         <div class="WG2">
+            <h2>WHY GIFU?</h2>
             <v-img src="WHY_GIFU.PNG"></v-img>
         </div>
         <div class="WG3">
             <div class="content"> 
                 <v-icon>mdi-shield-lock-outline</v-icon>
-                <h1>Pengiriman Aman</h1>
-                <h4>Siap kirim ke seluruh Indonesia. Tak perlu ragu, kamu bisa pesan sample dulu lho!</h4>
+                <h3>{{ $t('whygifu.safeshipment') }}</h3>
+                <h4>{{ $t('whygifu.readytoship') }}</h4>
             </div>
             <div class="content"> 
                 <v-icon>mdi-shield-lock-outline</v-icon>
-                <h1>One Stop Services</h1>
-                <h4>Pesan Souvenir, Undangan Fisik, Undangan Digital, Hampers, dan Bridesmaid Box cukup di satu tempat saja</h4>
+                <h3>{{ $t('whygifu.onestop') }}</h3>
+                <h4>{{ $t('whygifu.orderyours') }}</h4>
             </div>
         </div>
     </div>
@@ -39,8 +40,9 @@ export default {
 
 <style scoped>
 .co {
-    background-color: rgb(255, 240, 243);
+    background-color: rgb(255, 251, 252);
     width:100vw;
+    margin:30px 30px 30px 10px;
 }
 .WG1 {
     width:35%;
@@ -51,6 +53,7 @@ export default {
     width:30%;
     float: left;
     height:800 px;
+    text-align: center;
 }
 .WG3 {
     width:35%;

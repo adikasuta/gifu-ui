@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Frequently Asked Question</h2>
+    <h2>FREQUENTLY ASKED QUESTION</h2>
     <div class="faqcontainer">
       <FAQContent
         v-for="(item, index) in faq.left"

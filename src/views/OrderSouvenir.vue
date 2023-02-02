@@ -2,7 +2,7 @@
     <div class="cont">
       <div class="productdetails">
         <ProductDescriptions
-        v-for="item in GifuProduct"
+        v-for="item in getShortList(1)"
         :key="item.name"
         :img="item.img"
         :name="item.name"
@@ -19,31 +19,21 @@
 <script>
 import ProductDescriptions from "../../src/components/orders/ProductDescriptions.vue";
 import OrderForm from "../../src/components/orders/OrderForm.vue";
+import GifuProduct from "../../assets/GifuProducts.json"
 export default {
   name: "OrderSouvenirComponent",
   components: { ProductDescriptions, OrderForm },
   data() {
     return {
       status: "",
-      GifuProduct: [
-        {
-          name: "Card Holder A",
-          price: "Rp 6500",
-          size: "8 x 8 cm",
-        },
-        {
-          name: "Card Holder B",
-          price: "Rp 6500",
-          size: "8 x 8 cm",
-        },
-        {
-          name: "Card Holder B",
-          price: "Rp 6500",
-          size: "8 x 8 cm",
-        },
-      ],
+      GifuProduct
     };
   },
+  methods: {
+    getShortList(shortListSize) {
+      return this.GifuProduct.slice(0, shortListSize);
+    }
+}
 }
   </script>
    <style scoped>
@@ -52,12 +42,13 @@ export default {
     grid-template-columns: 1fr 1fr;
     gap:20px;
     margin:20px;
+    height:auto;
   }
   .productdetails{
-    height: 500px;
     padding: 120px;
   }
 .orderform{
-  background-color: green;
+
+  padding: 120px;
 }
   </style>
