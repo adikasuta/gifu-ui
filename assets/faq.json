@@ -1,0 +1,30 @@
+{
+  "left": [
+    {
+      "question": "Minimal order berapa?",
+      "answer": "Beberapa produk kami bisa dipesan mulai 30 pcs dan 100 pcs"
+    },
+    {
+      "question": "Pengerjaan Berapa lama?",
+      "answer": "Lama Pengerjaan masing-masing produk berbeda, berkisar antara 2-6 minggu"
+    },
+    {
+      "question": "Pengerjaan Berapa lama?",
+      "answer": "Lama Pengerjaan masing-masing produk berbeda, berkisar antara 2-6 minggu"
+    }
+  ],
+  "right":[
+    {
+      "question": "Apakah sudah termasuk ongkos pengiriman?",
+      "answer": "Harga yang tertera belum termasuk ongkir, namun kami menyediakan banyak opsi ekspedisi dengan harga ekonomis sesuai budget customer (Sicepat, Indah Cargo, dll)"
+    },
+    {
+      "question": "Apakah souvenir dan undangan bisa dikirim ke luar Pulau?",
+      "answer": "Bisa, kami telah berhasil melayani pemesanan dari berbagai daerah di seluruh Indonesia (Sumatera, Kalimantan, Sulawesi, Bali, Maluku, Papua, dll)"
+    },
+    {
+      "question": "Apakah customer boleh mengirim desain sendiri",
+      "answer": "Boleh, customer juga bisa memilih dari Catalog desain Gifu (ada 100++ pilihan desain)"
+    }
+  ]
+}

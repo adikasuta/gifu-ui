@@ -1,0 +1,32 @@
+[
+    {
+        "img": "/materials/souvenirs/01.png",
+        "name": "BTSL",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    },
+    {
+        "img": "/materials/souvenirs/02.png",
+        "name": "BTMC",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    },
+    {
+        "img": "/materials/souvenirs/03.png",
+        "name": "BTDB",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    },
+    {
+        "img": "/materials/souvenirs/04.png",
+        "name": "MNDS",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    },
+    {
+        "img": "/materials/souvenirs/05.png",
+        "name": "MNKY",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    }
+]

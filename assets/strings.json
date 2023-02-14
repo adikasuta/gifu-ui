@@ -1,94 +1,62 @@
 {
   "en": {
-    "fields": {
-      "email": "Email",
-      "credit_card_number": "Credit Card Number",
-      "expiration_month": "Expiration Month",
-      "expiration_year": "Expiration Year",
-      "cvv": "CVV",
-      "first_name": "First Name",
-      "last_name": "Last Name",
-      "address": "Address",
-      "postal_code": "Postal Code",
-      "phone_number": "Phone Number"
+    "header": {
+      "souvenir": "Souvenir",
+      "invitation": "Invitation",
+      "tracking": "Tracking"
     },
-    "common": {
-      "forbidden":"Your company does not have any credit card saved in OnlinePajak",
-      "yes": "Yes",
-      "no": "No",
-      "limit_card_reached": "You cannot add more card"
+    "testimonials": {
+      "review1": "I'm pretty satisfied with the result"
     },
-    "tax_payment": {
-      "view": {
-        "make_as_default": "Make As Default",
-        "edit": "Edit",
-        "remove": "Remove",
-        "my_credit_card": "My Credit Card",
-        "view_my_credit_card": "View My Credit Card",
-        "alert_remove": "Do you really want to remove this Credit Card?"
-      },
-      "form": {
-        "billing_detail_header": "Billing Address",
-        "first_name": "First Name",
-        "last_name": "Last Name",
-        "address": "Address",
-        "locality": "City",
-        "administrative_area": "Province",
-        "postal_code": "Postal Code",
-        "country": "Country",
-        "phone_number": "Phone Number",
-        "credit_card_header": "Credit Card Details",
-        "credit_card_number": "Card Number",
-        "expiration_date": "Expiry Date",
-        "back": "Back",
-        "save": "Save"
-      }
+    "tracking":{
+      "title": "Track Your Order",
+      "invoicenumber": "Invoice Number (up to 3 Invoice)",
+      "verification":"Last 4 Digits of Your Phone Number",
+      "button": "Track"
+    },
+    "jumbotron":{
+      "title": "Hello",
+      "content":"Are you searching for high quality souvenir in affordable price? GIFU is the right place. So many bonus are waiting for you! We are able to ship all around Indonesia. Just sit on your comfortable couch and order it through your WhatsApp. No need to worry about anything, because what left is time to share it to your lovely guests!      "
+    },
+    "whygifu":{
+      "kualitas": "Quality Guarantee",
+      "garansi":"3 days free RETURN for wrong items.",
+      "antiribet":"One Step at a Time",
+      "allin":"All in package, include emboss, packaging, thank you cards, and souvenir coupons. No additional steps!",
+      "safeshipment":"Safe Shipment",
+      "readytoship":"Ready to ship all over Indonesia. Just sit back and your packages will be right in front of your door.",
+      "onestop":"One Stop Services",
+      "orderyours":"Order your souvenirs, printed invitation, digital invitation, hampers, and Bridesmaid Box from GIFU. You will definitely save your time!"
     }
   },
   "id": {
-    "fields": {
-      "email": "Email",
-      "credit_card_number": "Nomor Kartu",
-      "expiration_month": "Bulan Kedaluarsa",
-      "expiration_year": "Tahun Kedaluarsa",
-      "cvv": "CVV",
-      "first_name": "Nama Depan",
-      "last_name": "Nama Belakang",
-      "address": "Alamat",
-      "postal_code": "Kode Pos",
-      "phone_number": "Nomor Telepon"
+    "header": {
+      "souvenir": "Suvenir",
+      "invitation": "Undangan",
+      "tracking": "Pelacakan"
     },
-    "common": {
-      "forbidden":"Perusahaan Anda tidak memiliki kartu kredit yang disimpan di OnlinePajak",
-      "yes": "Ya",
-      "no": "Tidak",
-      "limit_card_reached": "Anda tidak dapat menambah kartu lagi"
+    "testimonials": {
+      "review1": "Saya cukup puas dengan hasilnya"
     },
-    "tax_payment": {
-      "view": {
-        "make_as_default": "Jadikan Kartu Utama",
-        "edit": "Ubah",
-        "remove": "Hapus",
-        "my_credit_card": "Kartu Kredit Saya",
-        "view_my_credit_card": "Daftar Kartu Kredit Saya",
-        "alert_remove": "Apakah anda yakin ingin menghapus kartu kredit ini?"
-      },
-      "form": {
-        "credit_card_header": "Detail Kartu Kredit",
-        "credit_card_number": "Nomor Kartu Kredit",
-        "expiration_date": "Tanggal Kedaluarsa",
-        "billing_detail_header": "Alamat Penagihan",
-        "first_name": "Nama Depan",
-        "last_name": "Nama Belakang",
-        "address": "Alamat",
-        "locality": "Kota",
-        "administrative_area": "Provinsi",
-        "postal_code": "Kode Pos",
-        "country": "Negara",
-        "phone_number": "Nomor Telepon",
-        "back": "Kembali",
-        "save": "Simpan"
-      }
+    "tracking":{
+      "title": "Lacak Pesanan Anda",
+      "invoicenumber": "Nomor Invoice (maksimal 3 Invoice)",
+      "verification":"4 Digit terakhir nomor HP Anda",
+      "button": "Lacak"
+    },
+    "jumbotron":{
+      "title": "Halo",
+      "content":"Cari Souvenir Murah berkualitas? bikin di GIFU aja. Banyak bonusnya! Siap kirim ke seluruh Indonesia. Cukup pesan lewat WA, kami siap membuat souvenir impianmu, tanpa kamu harus keluar rumah. Anti ribet, tinggal bagiin ke tamu aja!"
+    },
+    "whygifu":{
+      "kualitas": "Kualitas Bergaransi",
+      "garansi":"Souvenirmu tidak sesuai pesanan? Jangan khawatir, kami siap RETUR!",
+      "antiribet":"Anti Ribet",
+      "allin":"Sudah ALL IN termasuk emboss / cetak nama, packaging, kartu ucapan terima kasih, dan kupon pengambilan souvenir. Gak usah ribet lagi deh!",
+      "safeshipment":"Pengiriman Aman",
+      "readytoship":"Siap kirim ke seluruh Indonesia. Tak perlu ragu, kamu bisa pesan sample dulu lho!",
+      "onestop":"Satu tempat beres semua",
+      "orderyours":"Pesan Souvenir, Undangan Fisik, Undangan Digital, Hampers, dan Bridesmaid Box cukup di satu tempat saja"
     }
   }
 }
