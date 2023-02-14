@@ -23,6 +23,10 @@
         </div>
         <cartCard></cartCard>
       </div>
+      <div class="buttons">
+          <button @click="previous">TAMBAH PRODUK LAINNYA</button>
+          <button @click="goToCheckout">CHECKOUT</button>
+        </div>
       </div>
       <!-- <table>
         <tr>
@@ -40,6 +44,11 @@
 <script>
 import cartCard from "../components/cart/cartCard.vue";
 export default {
+  methods:{
+    goToCheckout(){
+            this.$router.push('/Checkout')
+        }
+  },
   components: { cartCard }
 };
 </script>
@@ -73,6 +82,10 @@ td {
 }
 .tiga, .empat, .lima{
   width: 10%;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
 }
 button {
   transition-duration: 0.4s;

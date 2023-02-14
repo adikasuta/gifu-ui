@@ -1,0 +1,27 @@
+[
+    {
+        "img": "/additionalinvitation/silkribbon.jpg",
+        "name": "silkribbon",
+        "price": "Rp 6500"
+    },
+    {
+        "img": "/additionalinvitation/satinribbon.jpg",
+        "name": "satinribbon",
+        "price": "Rp 6500"
+    },
+    {
+        "img": "/additionalinvitation/waxseal.jpg",
+        "name": "waxseal",
+        "price": "Rp 6500"
+    },
+    {
+        "img": "/additionalinvitation/vellumwrap.jpg",
+        "name": "vellumwrap",
+        "price": "Rp 6500"
+    },
+    {
+        "img": "/additionalinvitation/envelope.jpg",
+        "name": "envelope",
+        "price": "Rp 6500"
+    }
+]

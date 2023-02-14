@@ -8,7 +8,7 @@
 
 
             <v-btn text @click="goToSouvenir">{{ $t('header.souvenir') }}</v-btn>
-            <v-btn text>{{ $t('header.invitation') }}</v-btn>
+            <v-btn text @click="goToInvitation">{{ $t('header.invitation') }}</v-btn>
             <v-btn text @click="goToTracking">{{ $t('header.tracking') }}</v-btn>
             <v-btn icon @click="goToCart">
                 <v-icon>mdi-cart</v-icon>
@@ -40,6 +40,9 @@ export default {
         },
         goToSouvenir(){
             this.$router.push('/Souvenir')
+        },
+        goToInvitation(){
+            this.$router.push('/Invitation')
         },
         goToCart(){
             this.$router.push('/Cart')

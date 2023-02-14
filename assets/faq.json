@@ -15,16 +15,16 @@
   ],
   "right":[
     {
-      "question": "aaaa",
-      "answer": "bbb"
+      "question": "Apakah sudah termasuk ongkos pengiriman?",
+      "answer": "Harga yang tertera belum termasuk ongkir, namun kami menyediakan banyak opsi ekspedisi dengan harga ekonomis sesuai budget customer (Sicepat, Indah Cargo, dll)"
     },
     {
-      "question": "ccc",
-      "answer": "bbb"
+      "question": "Apakah souvenir dan undangan bisa dikirim ke luar Pulau?",
+      "answer": "Bisa, kami telah berhasil melayani pemesanan dari berbagai daerah di seluruh Indonesia (Sumatera, Kalimantan, Sulawesi, Bali, Maluku, Papua, dll)"
     },
     {
-      "question": "aaaa",
-      "answer": "bbb"
+      "question": "Apakah customer boleh mengirim desain sendiri",
+      "answer": "Boleh, customer juga bisa memilih dari Catalog desain Gifu (ada 100++ pilihan desain)"
     }
   ]
 }

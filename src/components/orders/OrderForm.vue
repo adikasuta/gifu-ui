@@ -2,75 +2,101 @@
   <div>
     <div>
       <form>
-        <table v-if="counter === 0">
-          <tr>
-            <td><h4>COLORS</h4></td>
-            <td><TheMaterials></TheMaterials></td>
-          </tr>
-          <tr>
-            <td><h4>TOTALS</h4></td>
-            <td><h5>AUTOMATIC TOTALS</h5></td>
-          </tr>
-          <tr>
-            <td><h4>PACKAGING</h4></td>
-            <td><CarrouselCheckbox></CarrouselCheckbox></td>
-          </tr>
-          <tr>
-            <td><h4>PACKAGING COLOR 1</h4></td>
-            <td><CarrouselCheckbox></CarrouselCheckbox></td>
-          </tr>
-          <tr>
-            <td><h4>PACKAGING COLOR 2</h4></td>
-            <td><CarrouselCheckbox></CarrouselCheckbox></td>
-          </tr>
-          <tr>
-            <td><h4>ADDITIONALS</h4></td>
-            <td><CarrouselCheckbox></CarrouselCheckbox></td>
-          </tr>
-        </table>
-        <table v-if="counter === 1">
-          <tr>
-            <td><h4>EMBOSS</h4></td>
-            <td>
-              <button id="show-modal" @click="showModal = true">
-                CHOOSE DESIGN
-              </button>
-            </td>
-            <td>
-              <label for="content">CONTENT</label>
-              <input id="content" name="content" type="text" />
-            </td>
-          </tr>
-          <tr>
-            <td><h4>SIZE</h4></td>
-            <td colspan="2">
-              <select id="size" name="size">
-                <option value="2.5cm">2.5cm</option>
-                <option value="3 cm">3 cm</option>
-                <option value="3.5 cm">3.5 cm</option>
-                <option value="4 cm">4 cm</option>
-                <option value="4.5 cm">4.5 cm</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><h4>POSITION</h4></td>
-            <td colspan="2"><CarrouselCheckbox></CarrouselCheckbox></td>
-          </tr>
-          <tr>
-            <td><h4>THANK YOU CARD</h4></td>
-            <td colspan="2">
-              <button id="show-modal" @click="showModal = true">
-                CHOOSE DESIGN
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td><h4>NOTES</h4></td>
-            <td colspan="2"><input id="notes" name="notes" type="text" /></td>
-          </tr>
-        </table>
-        <table v-if="counter === 2">
+        <!-- PAGE 1 -->
+        <div v-if="counter === 0">
+          <table>
+            <tr>
+              <td><h4>COLORS</h4></td>
+              <td><TheMaterials></TheMaterials></td>
+            </tr>
+            <tr>
+              <td><h4>TOTALS</h4></td>
+              <td><h5>AUTOMATIC TOTALS</h5></td>
+            </tr>
+            <tr>
+              <td><h4>PACKAGING</h4></td>
+              <td><CarrouselCheckbox></CarrouselCheckbox></td>
+            </tr>
+            <tr>
+              <td><h4>PACKAGING COLOR 1</h4></td>
+              <td><CarrouselCheckbox></CarrouselCheckbox></td>
+            </tr>
+            <tr>
+              <td><h4>PACKAGING COLOR 2</h4></td>
+              <td><CarrouselCheckbox></CarrouselCheckbox></td>
+            </tr>
+            <tr>
+              <td><h4>ADDITIONALS</h4></td>
+              <td><CarrouselCheckbox></CarrouselCheckbox></td>
+            </tr>
+          </table>
+          <div class="progressbarContainer">
+            <div class="progressbar-wrapper">
+              <ul class="progressbar">
+                <li class="active">Product Details</li>
+                <li>Design</li>
+                <li>Customer Details</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- PAGE 2 -->
+        <div v-if="counter === 1">
+          <table>
+            <tr>
+              <td><h4>EMBOSS</h4></td>
+              <td>
+                <button id="show-modal" @click="showModal = true">
+                  CHOOSE DESIGN
+                </button>
+              </td>
+              <td>
+                <label for="content">CONTENT</label>
+                <input id="content" name="content" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td><h4>SIZE</h4></td>
+              <td colspan="2">
+                <select id="size" name="size">
+                  <option value="2.5cm">2.5cm</option>
+                  <option value="3 cm">3 cm</option>
+                  <option value="3.5 cm">3.5 cm</option>
+                  <option value="4 cm">4 cm</option>
+                  <option value="4.5 cm">4.5 cm</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><h4>POSITION</h4></td>
+              <td colspan="2"><CarrouselCheckbox></CarrouselCheckbox></td>
+            </tr>
+            <tr>
+              <td><h4>THANK YOU CARD</h4></td>
+              <td colspan="2">
+                <button id="show-modal" @click="showModal = true">
+                  CHOOSE DESIGN
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td><h4>NOTES</h4></td>
+              <td colspan="2"><input id="notes" name="notes" type="text" /></td>
+            </tr>
+          </table>
+          <div class="progressbarContainer">
+            <div class="progressbar-wrapper">
+              <ul class="progressbar">
+                <li>Product Details</li>
+                <li class="active">Design</li>
+                <li>Customer Details</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- PAGE 3 -->
+        <div v-if="counter === 2">
+        <table >
           <tr>
             <td><h4>DATA PEMESAN</h4></td>
             <td>
@@ -212,37 +238,62 @@
 
           <tr>
             <td><h4>PREFERRED SHIPPING VENDOR</h4></td>
-            <td colspan="2" class="shippingvendor" >
-                <input id="shippingvendor-self" name="shippingvendor" type="checkbox" />
-                <label for="shippingvendor-self">SELF PICKUP</label>
-                <input id="shippingvendor-sicepat" name="shippingvendor" type="checkbox" />
-                <label for="shippingvendor-sicepat">SICEPAT</label>
-                <input  id="shippingvendor-tutorials" name="shippingvendor" type="checkbox"/>
-                <label for="shippingvendor-indahcargo">INDAH CARGO</label>
-                <input id="shippingvendor-gojek" name="shippingvendor" type="checkbox" />
-                <label for="shippingvendor-gojek">GOJEK / GRAB</label>
+            <td colspan="2" class="shippingvendor">
+              <input
+                id="shippingvendor-self"
+                name="shippingvendor"
+                type="checkbox"
+              />
+              <label for="shippingvendor-self">SELF PICKUP</label>
+              <input
+                id="shippingvendor-sicepat"
+                name="shippingvendor"
+                type="checkbox"
+              />
+              <label for="shippingvendor-sicepat">SICEPAT</label>
+              <input
+                id="shippingvendor-tutorials"
+                name="shippingvendor"
+                type="checkbox"
+              />
+              <label for="shippingvendor-indahcargo">INDAH CARGO</label>
+              <input
+                id="shippingvendor-gojek"
+                name="shippingvendor"
+                type="checkbox"
+              />
+              <label for="shippingvendor-gojek">GOJEK / GRAB</label>
             </td>
           </tr>
           <tr>
             <td><h4>PREFFERED PACKING</h4></td>
-            <td colspan="2"><input id="prefferedpacking" name="prefferedpacking" type="checkbox" />
-                <label for="prefferedpacking">WOODEN CRATE</label></td>
+            <td colspan="2">
+              <input
+                id="prefferedpacking"
+                name="prefferedpacking"
+                type="checkbox"
+              />
+              <label for="prefferedpacking">WOODEN CRATE</label>
+            </td>
           </tr>
+          
         </table>
-      </form>
-      <div class="progressbarContainer">
-        <div class="progressbar-wrapper">
-          <ul class="progressbar">
-            <li class="active">Product Details</li>
-            <li>Design</li>
-            <li>Customer Details</li>
-            <li>Step 4</li>
-          </ul>
-        </div>
+        <div class="progressbarContainer">
+            <div class="progressbar-wrapper">
+              <ul class="progressbar">
+                <li>Product Details</li>
+                <li>Design</li>
+                <li class="active">Customer Details</li>
+              </ul>
+            </div>
+          </div>
       </div>
+      </form>
+
       <div class="buttons">
         <button @click="previous">PREVIOUS</button>
-        <button @click="next">NEXT</button>
+        <button v-if="counter === 0 || (counter === 1)" @click="next">NEXT</button>
+        <button v-if="counter === 2" @click=goToInvoice>NEXT</button>
       </div>
     </div>
   </div>
@@ -261,10 +312,14 @@ export default {
   methods: {
     next() {
       this.counter++;
+      this.$emit(this.counter);
     },
     previous() {
       this.counter--;
     },
+    goToInvoice(){
+            this.$router.push('/invoiceSouvenir')
+        }
   },
 };
 </script>
@@ -282,7 +337,7 @@ export default {
 
 .progressbar li {
   list-style-type: none;
-  width: 25%;
+  width: 33%;
   float: left;
   font-size: 16px;
   position: relative;
@@ -372,12 +427,12 @@ label {
   font-size: 20px;
   margin: 5px;
 }
-input[type='checkbox']{
+input[type="checkbox"] {
   display: inline-block;
   width: 20px;
   margin-right: 1rem;
 }
-.shippingvendor{
+.shippingvendor {
   align-items: center;
 }
 </style>

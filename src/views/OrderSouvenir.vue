@@ -1,5 +1,5 @@
 <template>
-    <div class="cont">
+    <div class="cont" v-if="counter === 0">
       <div class="productdetails">
         <ProductDescriptions
         v-for="item in getShortList(1)"
@@ -26,7 +26,8 @@ export default {
   data() {
     return {
       status: "",
-      GifuProduct
+      GifuProduct,
+      counter: 0
     };
   },
   methods: {
