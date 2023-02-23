@@ -31,7 +31,7 @@
     </div>
     <div class="products">
       <theProducts
-        v-for="item in GifuProduct"
+        v-for="item in invitationProducts"
         :key="item.name"
         :img="item.img"
         :name="item.name"
@@ -48,7 +48,7 @@
 
 <script>
 import theProducts from "../components/invitation/theProducts.vue";
-import GifuProduct from "../../assets/GifuProducts.json";
+import invitationProducts from "../../assets/InvitationProducts.json";
 export default {
   name: "SouvenirComponent",
   components: { theProducts },
@@ -58,7 +58,7 @@ export default {
         moq: false,
       },
       status: "",
-      GifuProduct,
+      invitationProducts,
       // GifuProduct: [
       //   {
       //     name: "Card Holder A",

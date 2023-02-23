@@ -84,6 +84,7 @@
     return {
       chips: [],
       currentInput: "",
+      orders: []
     };
   },
   methods: {
@@ -103,20 +104,6 @@
     },
   },
 };
-//   name: "TrackingComponent",
-//   components: {},
-//   data() {
-//     return {
-//       status: "",
-//       invoiceNumber: " ",
-//     };
-//   },
-//   methods: {
-//     submitform() {
-//       console.log("Nomor Invoice" + this.invoiceNumber);
-//     },
-//   },
-// };
 </script>
 
    <style scoped>
