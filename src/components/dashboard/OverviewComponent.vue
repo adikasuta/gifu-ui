@@ -1,4 +1,5 @@
 <template>
+<div>
     <v-card color="#202022" class="rounded-lg" flat>
       <v-row>
         <v-col cols="12" sm="4">
@@ -63,6 +64,7 @@
         </v-col>
       </v-row>
     </v-card>
+  </div>
   </template>
   
   <script>
@@ -71,4 +73,7 @@
   };
   </script>
   <style scoped>
+  div{
+    margin: 100px 30px auto
+  }
 </style>
