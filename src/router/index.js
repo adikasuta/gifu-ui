@@ -11,6 +11,8 @@ import InvoiceInvitationComponent from '../views/invoiceInvitation';
 import designInvitationComponent from '../views/designInvitation';
 import CartComponent from '../views/TheCart';
 import CheckoutComponent from '../views/CheckoutComponent';
+import LoginComponent from '../views/loginComponent';
+import DashboardComponent from '../views/DashboardComponent';
 
 
 Vue.use(VueRouter)
@@ -70,6 +72,16 @@ const routes = [
     path: '/Checkout',
     name: 'CheckoutComponent',
     component: CheckoutComponent
+  },
+  {
+    path: '/Login',
+    name: 'LoginComponent',
+    component: LoginComponent
+  },
+  {
+    path: '/Dashboard',
+    name: 'DashboardComponent',
+    component: DashboardComponent
   },
 ]
 

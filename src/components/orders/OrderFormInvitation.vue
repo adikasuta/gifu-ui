@@ -203,20 +203,15 @@
             </tr>
 
             <tr>
-              <td><h4>POSITION</h4></td>
+              <td><h4>RIBBON COLOR</h4></td>
               <td colspan="2"><CarrouselCheckbox></CarrouselCheckbox></td>
             </tr>
             <tr>
-              <td><h4>THANK YOU CARD</h4></td>
+              <td><h4>PACKING SERVICE</h4></td>
               <td colspan="2">
-                <button id="show-modal" @click="showModal = true">
-                  CHOOSE DESIGN
-                </button>
+                <h4>YES</h4><input type="checkbox">
+                <h4>NO</h4><input type="checkbox">
               </td>
-            </tr>
-            <tr>
-              <td><h4>NOTES</h4></td>
-              <td colspan="2"><input id="notes" name="notes" type="text" /></td>
             </tr>
           </table>
           <div class="progressbarContainer">
@@ -237,11 +232,15 @@
               <td>
                 <table class="noborder">
                   <tr>
-                    <td><label for="namapemesan">NAME</label></td>
+                    <td>
+                      <label for="namapemesan"><h5>NAME</h5></label>
+                    </td>
                     <td>
                       <input id="namapemesan" name="namapemesan" type="text" />
                     </td>
-                    <td><label for="emailpemesan">EMAIL</label></td>
+                    <td>
+                      <label for="emailpemesan"><h5>EMAIL</h5></label>
+                    </td>
                     <td>
                       <input
                         id="emailpemesan"
@@ -251,7 +250,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><label for="nohppemesan">PHONE NUMBER</label></td>
+                    <td>
+                      <label for="nohppemesan"><h5>PHONE NUMBER</h5></label>
+                    </td>
                     <td>
                       <input id="nohppemesan" name="nohppemesan" type="text" />
                     </td>
@@ -264,16 +265,23 @@
               <td>
                 <table class="noborder">
                   <tr>
+                    <td width="10%">
+                      <label for="bridefullname"><h5>FULLNAME</h5> </label>
+                    </td>
                     <td>
-                      <label for="bridefullname">FULLNAME</label>
                       <input
                         id="bridefullname"
                         name="bridefullname"
                         type="text"
                       />
                     </td>
+
                     <td>
-                      <label for="bridemothersname">MOTHER'S NAME</label>
+                      <label for="bridemothersname"
+                        ><h5>MOTHER'S NAME</h5>
+                      </label>
+                    </td>
+                    <td>
                       <input
                         id="bridemothersname"
                         name="bridemothersname"
@@ -282,30 +290,114 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><label for="bridenickname">NICKNAME</label>
-                    <input
-                      id="bridenickname"
-                      name="bridenickname"
-                      type="text"
-                    />
-                  </td>
-                  <td>
-                      <label for="bridefathersname">FATHER'S NAME</label>
+                    <td>
+                      <label for="bridenickname"><h5>NICKNAME</h5> </label>
+                    </td>
+                    <td>
+                      <input
+                        id="bridenickname"
+                        name="bridenickname"
+                        type="text"
+                      />
+                    </td>
+
+                    <td>
+                      <label for="bridefathersname"
+                        ><h5>FATHER'S NAME</h5>
+                      </label>
+                    </td>
+                    <td>
                       <input
                         id="bridefathersname"
                         name="bridefathersname"
                         type="text"
                       />
                     </td>
-                    
                   </tr>
                   <tr>
-                    <label for="brideinstagram">INSTAGRAM ACCOUNT</label>
-                    <input
-                      id="brideinstagram"
-                      name="brideinstagram"
-                      type="text"
-                    />
+                    <td>
+                      <label for="brideinstagram"
+                        ><h5>INSTAGRAM ACCOUNT</h5>
+                      </label>
+                    </td>
+                    <td>
+                      <input
+                        id="brideinstagram"
+                        name="brideinstagram"
+                        type="text"
+                      />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td><h4>THE GROOM</h4></td>
+              <td>
+                <table class="noborder">
+                  <tr>
+                    <td width="10%">
+                      <label for="groomfullname"><h5>FULLNAME</h5> </label>
+                    </td>
+                    <td>
+                      <input
+                        id="groomfullname"
+                        name="groomfullname"
+                        type="text"
+                      />
+                    </td>
+
+                    <td>
+                      <label for="groommothersname"
+                        ><h5>MOTHER'S NAME</h5>
+                      </label>
+                    </td>
+                    <td>
+                      <input
+                        id="groommothersname"
+                        name="groommothersname"
+                        type="text"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label for="groomnickname"><h5>NICKNAME</h5> </label>
+                    </td>
+                    <td>
+                      <input
+                        id="groomnickname"
+                        name="groomnickname"
+                        type="text"
+                      />
+                    </td>
+
+                    <td>
+                      <label for="groomfathersname"
+                        ><h5>FATHER'S NAME</h5>
+                      </label>
+                    </td>
+                    <td>
+                      <input
+                        id="groomfathersname"
+                        name="groomfathersname"
+                        type="text"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label for="groominstagram"
+                        ><h5>INSTAGRAM ACCOUNT</h5>
+                      </label>
+                    </td>
+                    <td>
+                      <input
+                        id="groominstagram"
+                        name="groominstagram"
+                        type="text"
+                      />
+                    </td>
                   </tr>
                 </table>
               </td>
@@ -313,17 +405,37 @@
             <tr>
               <td><h4>EVENT DETAIL</h4></td>
               <td>
-                <table class="noborder">
-                  <td>
-                    <label for="date">DATE</label>
-                    <input id="date" name="date" type="text" />
-                  </td>
-                  <td>
-                    <label for="venue">VENUE</label>
-                    <input id="venue" name="venue" type="text" />
-                  </td>
-                </table>
+                <div class="eventdetail">
+                  <table class="noborder">
+                    <tr>
+                      <td>
+                        <label for="eventname"><h5>EVENT NAME</h5></label>
+                      </td>
+                      <td>
+                        <input id="eventname" name="eventname" type="text" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label for="date"><h5>DATE & TIME</h5></label>
+                      </td>
+                      <td><input id="date" name="date" type="text" /></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label for="venue"><h5>VENUE</h5></label>
+                      </td>
+                      <td><input id="venue" name="venue" type="text" /></td>
+                    </tr>
+                  </table>
+                  <button>REMOVE</button>
+                </div>
+                <button>ADD EVENT</button>
               </td>
+            </tr>
+            <tr>
+              <td><h4>NOTES</h4></td>
+              <td colspan="2"><input id="notes" name="notes" type="text" /></td>
             </tr>
             <tr>
               <td><h4>SHIPPING ADDRESS</h4></td>
@@ -597,6 +709,7 @@ td {
 .noborder td,
 tr {
   border: 0px;
+  padding: 0%;
 }
 input {
   border: 2px solid;
@@ -625,5 +738,10 @@ input[type="checkbox"] {
 }
 .shippingvendor {
   align-items: center;
+}
+.eventdetail {
+  background-color: #e0e0e0;
+  border-radius: 15px;
+  padding: 10px;
 }
 </style>

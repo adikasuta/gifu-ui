@@ -1,0 +1,64 @@
+[
+    {
+        "img": "/products/invitations/01.png",
+        "name": "Blangko Dua",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": false
+    },
+    {
+        "img": "/products/invitations/02.png",
+        "name": "Blangko Tiga",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": false
+    },
+    {
+        "img": "/products/invitations/03.png",
+        "name": "Card Holder Album",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": true
+    },
+    {
+        "img": "/products/invitations/04.png",
+        "name": "Card Holder Basic",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": false
+    },
+    {
+        "img": "/products/invitations/05.png",
+        "name": "Card Holder B",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": true
+    },
+    {
+        "img": "/products/invitations/06.png",
+        "name": "Card Holder C",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": true
+    },
+    {
+        "img": "/products/invitations/07.png",
+        "name": "Card Holder C",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": true
+    },
+    {
+        "img": "/products/invitations/08.png",
+        "name": "Card Holder B",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm",
+        "isMOQ": true
+    },
+    {
+        "img": "/products/invitations/09.png",
+        "name": "Card Holder C",
+        "price": "Rp 6500",
+        "size": "8 x 8 cm"
+    }
+]
