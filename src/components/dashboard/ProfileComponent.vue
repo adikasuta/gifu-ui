@@ -7,7 +7,7 @@
         <td>
           <input id="username" name="username" type="text" />
         </td>
-        <td rowspan="7" class="profpic">
+        <td rowspan="6" class="profpic">
           <h4>PROFILE PICTURE</h4>
           <v-img class="pa-6 bg-secondary rounded-circle d-inline-block" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg" height="80px" width="80px"></v-img>
           <br><button>CHANGE</button>
@@ -48,29 +48,24 @@
       </tr>
       <tr>
         <td class="right"><h4>DATE OF BIRTH</h4></td>
-        <td>DATE</td>
-        <td>
-          <select id="size" name="size">
+        <td ><label for="DATE">DATE</label>
+          <select id="date" name="date">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-        </td>
-        <td>MONTH</td>
-        <td>
-          <select id="size" name="size">
+          <label for="MONTH">MONTH</label>
+          <select id="date" name="date">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-        </td>
-        <td>YEAR</td>
-        <td>
-          <select id="size" name="size">
+          <label for="YEAR">YEAR</label>
+          <select id="date" name="date">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -107,6 +102,11 @@ text-align: center;
 #gender-male {
   width: 15px;
   height: 15px;
+}
+#date{
+  position: relative;
+  width: 20px;
+  border: 1px #acacac;
 }
 .buttons {
   display: flex;
