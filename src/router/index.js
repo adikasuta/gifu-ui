@@ -13,6 +13,7 @@ import CartComponent from '../views/TheCart';
 import CheckoutComponent from '../views/CheckoutComponent';
 import LoginComponent from '../views/loginComponent';
 import DashboardComponent from '../views/DashboardComponent';
+import WorkflowComponent from '../views/internal-dashboard/Workflow';
 
 
 Vue.use(VueRouter)
@@ -82,6 +83,11 @@ const routes = [
     path: '/Dashboard',
     name: 'DashboardComponent',
     component: DashboardComponent
+  },
+  {
+    path: '/Dashboard/workflow',
+    name: 'WorkflowComponent',
+    component: WorkflowComponent
   },
 ]
 

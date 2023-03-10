@@ -37,36 +37,5 @@ export default {
   },
 };
 </script>
- 
-<style>
-h1{
-  font-family: "Lora";
-  font-size: 49px;
-}
-h2{
-  font-family: "Lora";
-  font-size: 31px;
-}
-h3{
-  font-family: "Lora";
-  font-weight: 600;
-  font-size: 25px;
-}
-h4{
-  font-family: "Poppins";
-  font-weight: 500;
-  font-size: 20px;
-}
-h5{
-  font-family: "Poppins";
-  font-weight: 400;
-  font-size: 16px;
-}
-
-div {
-  /* FONTSIZE 8 / 10 / 13 / 16 / 20 /25 / 31 / 39 / 49 */
-  margin: 0;
-}
-</style>
 
 
