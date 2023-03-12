@@ -38,7 +38,7 @@
     <v-row>
       <v-col cols="12">
         <v-pagination
-          v-model="pagination.currentPage"
+          v-model="pagination.pageNumber"
           :length="pagination.totalPages"
         ></v-pagination>
       </v-col>
@@ -71,8 +71,9 @@ export default {
         },
       ],
       pagination: {
-        currentPage: 0,
+        pageNumber: 1,
         totalPages: 0,
+        pageSize: 20,
       },
       workflowList: [],
     };
@@ -84,14 +85,16 @@ export default {
   methods: {
     ...mapActions(useReferenceData, ["loadReferenceData"]),
     async handleRefresh() {
-      const workflowPage = await WorkflowService.getWorkflows(this.filter);
+      const workflowPage = await WorkflowService.getWorkflows({
+        ...this.filter,
+        ...this.pagination,
+      });
       this.workflowList = workflowPage.content.map((item) => {
         return {
           ...item,
           isView: true,
         };
       });
-      console.log(this.workflowList);
       this.pagination.totalPages = workflowPage.totalPages;
     },
     handleAddWorkflow() {

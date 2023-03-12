@@ -12,11 +12,10 @@
           </v-col>
           <v-col lg="5" offset-lg="1" sm="6">
             <h3>{{ $t("views.workflow.fields.products") }}</h3>
-            <subtitle-1>{{
-              getNames(workflowContent.products, ", ")
-            }}</subtitle-1>
+            <p>{{ getNames(workflowContent.products, ", ") }}</p>
           </v-col>
         </v-row>
+        <v-divider class="mb-5"></v-divider>
         <v-row>
           <v-col lg="4" md="6">
             <h3>{{ $t("views.workflow.fields.category") }}</h3>
@@ -28,18 +27,27 @@
             <p>PE</p>
           </v-col>
           <v-col lg="6" md="4">
-            <v-btn elevation="2" small>
+            <v-btn elevation="2" small @click="handleAddNewCategory">
               <v-icon dark> mdi-plus </v-icon>
               {{ $t("views.workflow.addNewCategory") }}</v-btn
             >
           </v-col>
         </v-row>
-        <v-row v-for="item of workflowContent.productCategories" :key="item.id">
+        <v-row
+          v-for="(item, index) of workflowContent.productCategories"
+          :key="item.id"
+        >
           <v-col lg="4" md="6">
             <v-select
               item-text="name"
               item-value="id"
-              :items="categories"
+              item-disabled="disabled"
+              :items="getCategoryRefs"
+              @change="
+                (e) => {
+                  handleChangeCategory(e, index);
+                }
+              "
               :label="$t('views.workflow.fields.category')"
               outlined
               v-model="item.id"
@@ -53,11 +61,28 @@
             <p>{{ item.productionEstimation }}</p>
           </v-col>
           <v-col lg="6" md="4">
-            <v-btn elevation="2" small class="mr-5">
+            <v-btn
+              elevation="2"
+              small
+              @click="() => handleEditCategory(index)"
+              class="mr-5"
+            >
               {{ $t("views.workflow.edit") }}</v-btn
             >
-            <v-btn elevation="2" small>
-              {{ $t("views.workflow.remove") }}</v-btn
+            <v-btn
+              class="mr-5"
+              elevation="2"
+              small
+              @click="() => handleRemoveMapping(index)"
+            >
+              {{ $t("views.workflow.removeCategoryMapping") }}</v-btn
+            >
+            <v-btn
+              elevation="2"
+              small
+              @click="() => handleRemoveCategory(index)"
+            >
+              {{ $t("views.workflow.removeCategoryCompletely") }}</v-btn
             >
           </v-col>
         </v-row>
@@ -99,9 +124,7 @@
                 item-text="name"
                 item-value="id"
                 v-model="item.assignedToUserId"
-                :loading="loading"
                 :items="users"
-                :search-input.sync="search"
                 cache-items
                 outlined
                 flat
@@ -116,12 +139,17 @@
                 :label="$t('views.workflow.fields.needApproval')"
               ></v-checkbox>
             </v-col>
-            <v-col cols="1">
-              <v-btn @click="()=>{handleDeleteStep(index)}" elevation="2" small
+            <v-col cols="2">
+              <v-btn
+                class="mr-5"
+                @click="
+                  () => {
+                    handleDeleteStep(index);
+                  }
+                "
+                elevation="2"
+                small
                 ><v-icon> mdi-trash-can </v-icon></v-btn
-              >
-            </v-col>
-            <v-col cols="1"
               ><v-btn elevation="2" small
                 ><v-icon> mdi-drag </v-icon></v-btn
               ></v-col
@@ -141,37 +169,126 @@
         >
       </v-card-actions>
     </v-card>
+    <v-dialog v-model="isAddNewCategory" persistent>
+      <AddNewCategory
+        v-if="isAddNewCategory"
+        @close:dialog="toggleCategoryDialog"
+        :category="toBeChangedCategory"
+      />
+    </v-dialog>
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
+    <v-dialog v-model="isError" width="25%" persistent>
+      <ErrorDialog
+        :errorDescription="errorMessage"
+        @close:dialog="isError = !isError"
+      />
+    </v-dialog>
+    <ConfirmationDialog ref="confirmationDialog" />
   </ValidationObserver>
 </template>
 
 <script>
-import draggable from "vuedraggable";
+import ErrorDialog from "../dialogs/ErrorDialog.vue";
+import ConfirmationDialog from "../dialogs/ConfirmationDialog";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
+import draggable from "vuedraggable";
+import AddNewCategory from "./AddNewCategory";
 import { mapState } from "pinia";
 import StringUtils from "../../utils/StringUtils";
 import { useReferenceData } from "../../store/reference-data";
 import WorkflowService from "../../services/Workflow.service";
+import CategoryService from "../../services/Category.service";
 // import { ValidationObserver } from "vee-validate";
 // import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 export default {
   name: "WorkflowEditMode",
-  components: { LoadingDialog, draggable },
+  components: {
+    LoadingDialog,
+    draggable,
+    AddNewCategory,
+    ConfirmationDialog,
+    ErrorDialog,
+  },
   props: ["workflow"],
   data() {
     return {
       workflowContent: this.workflow,
-      productCategoryRefs: [],
       isLoading: false,
+      isAddNewCategory: false,
+      toBeChangedCategory: null,
+      isError: false,
+      errorMessage: "",
     };
   },
   computed: {
     ...mapState(useReferenceData, ["categories", "users"]),
+    getCategoryRefs() {
+      const categoryIds = this.workflowContent.productCategories.map((it) => {
+        return it.id;
+      });
+      return this.categories.map((it) => {
+        const disabled = categoryIds.includes(it.id);
+        return {
+          ...it,
+          disabled,
+        };
+      });
+    },
   },
   methods: {
     ...StringUtils,
+    handleRemoveMapping(index) {
+      this.workflowContent.productCategories.splice(index, 1);
+    },
+    async handleRemoveCategory(index) {
+      const yes = await this.$refs.confirmationDialog.showDialog(
+        "views.workflow.confirmations.removeCategory"
+      );
+      if (yes) {
+        try {
+          this.isLoading = true;
+          const selected = this.workflowContent.productCategories[index];
+          await CategoryService.deleteProductCategory(selected.id);
+          this.workflowContent.productCategories.splice(index, 1);
+          this.isLoading = false;
+        } catch (error) {
+          this.isLoading = false;
+          this.isError = true;
+          this.errorMessage = "Unhandled Error";
+          if (error.response) {
+            this.errorMessage = error.response.data.message;
+          }
+        }
+      }
+    },
+    handleChangeCategory(e, index) {
+      const ref = this.categories.filter((it) => {
+        return it.id == e;
+      });
+      this.workflowContent.productCategories[index].designEstimation =
+        ref[0].designEstimation;
+      this.workflowContent.productCategories[index].productionEstimation =
+        ref[0].productionEstimation;
+    },
+    handleEditCategory(index) {
+      this.toBeChangedCategory = this.workflowContent.productCategories[index];
+      this.toggleCategoryDialog();
+    },
+    handleAddNewCategory() {
+      this.toBeChangedCategory = {
+        id: null,
+        name: "",
+        productType: null,
+        designEstimation: null,
+        productionEstimation: null,
+      };
+      this.toggleCategoryDialog();
+    },
+    toggleCategoryDialog() {
+      this.isAddNewCategory = !this.isAddNewCategory;
+    },
     handleChangeName(e) {
       const changed = {
         ...this.workflowContent,
@@ -180,47 +297,56 @@ export default {
       this.$emit("on:changeName", changed);
     },
     async handleSaveWorkflow() {
-      this.isLoading = true;
-      const request = {
-        ...this.workflowContent,
-        productCategoryIds: this.workflowContent.productCategories.map(
-          (it) => it.id
-        ),
-      };
-      if (this.workflow.id) {
-        await WorkflowService.putWorkflows(request);
-      } else {
-        await WorkflowService.postWorkflows(request);
+      try {
+        this.isLoading = true;
+        const request = {
+          ...this.workflowContent,
+          productCategoryIds: this.workflowContent.productCategories.map(
+            (it) => it.id
+          ),
+        };
+        if (this.workflow.id) {
+          await WorkflowService.putWorkflows(request);
+        } else {
+          await WorkflowService.postWorkflows(request);
+        }
+        this.$emit("on:refresh");
+        this.$emit("on:view");
+        this.isLoading = false;
+      } catch (error) {
+        this.isLoading = false;
+        this.isError = true;
+        this.errorMessage = "Unhandled Error";
+        if (error.response) {
+          this.errorMessage = error.response.data.message;
+        }
       }
-      this.$emit("on:refresh");
-      this.$emit("on:view");
-      this.isLoading = false;
     },
     handleBack() {
-      if(this.workflowContent.id == null){
-        this.$emit("on:refresh");
-      }
-      this.$emit("on:view");
+      this.$emit("on:refresh");
+      this.$nextTick(() => {
+        this.$emit("on:view");
+      });
     },
     handleEdit() {
       this.$emit("on:edit");
     },
-    handleAddCategoryMapping(){
+    handleAddCategoryMapping() {
       this.workflowContent.productCategories.push({
         id: null,
-        name: ""
-      })
+        name: "",
+      });
     },
-    handleAddStep(){
+    handleAddStep() {
       this.workflowContent.steps.push({
         id: null,
         name: "",
         needApproval: false,
         assignedToUserId: null,
-      })
+      });
     },
     handleDeleteStep(index) {
-      this.workflowContent.steps.splice(index,1)
+      this.workflowContent.steps.splice(index, 1);
     },
   },
 };

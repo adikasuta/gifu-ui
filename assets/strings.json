@@ -1,6 +1,8 @@
 {
   "en": {
     "common":{
+      "yes":"Yes",
+      "cancel":"Cancel",
       "fields":{
         "categoryName":"Category"
       }
@@ -35,18 +37,30 @@
     },
     "views":{
       "workflow":{
+        "confirmations":{
+          "removeCategory":"Are you want to permanently remove this category?",
+          "removeWorkflow":"Are you want to permanently remove this workflow?"
+        },
         "title":"Workflow",
         "add":"Add Workflow",
         "edit":"Edit",
         "back":"Back",
         "save":"Save",
         "remove":"Remove",
+        "removeCategoryMapping":"Remove Mapping",
+        "removeCompletely":"Remove Category",
         "search":"Search",
         "filter":"Filter by",
+        "updateCategory":"Edit Category",
         "addNewCategory":"Add New Category",
         "addCategory":"Add Category Mapping",
         "addStep":"Add Step",
+        "deadline":"Deadline",
         "fields":{
+          "productionEstimation":"Production Estimation",
+          "designEstimation":"Design Estimation",
+          "productType":"Product Type",
+          "categoryName":"Category Name",
           "workflowName":"Workflow Name",
           "products":"Products",
           "category":"Product Type - Category",
@@ -59,6 +73,8 @@
   },
   "id": {
     "common":{
+      "yes":"Ya",
+      "cancel":"Batalkan",
       "fields":{
         "categoryName":"Kategori"
       }
@@ -93,18 +109,30 @@
     },
     "views":{
       "workflow":{
+        "confirmations":{
+          "removeCategory":"Apakah anda ingin menghapus permanen kategori ini?",
+          "removeWorkflow":"Apakah anda ingin menghapus permanen workflow ini?"
+        },
         "title":"Workflow",
         "add":"Tambah Workflow Baru",
         "edit":"Ubah",
         "back":"Kembali",
         "save":"Simpan",
         "remove":"Hapus",
+        "removeCategoryMapping":"Hapus Mapping",
+        "removeCategoryCompletely":"Hapus Kategori",
         "search":"Cari",
         "filter":"Filter berdasarkan",
+        "updateCategory":"Ubah Kategori",
         "addNewCategory":"Tambah Kategori Baru",
         "addCategory":"Tempel kategori lainnya",
         "addStep":"Tambah Step",
+        "deadline":"Deadline",
         "fields":{
+          "productionEstimation":"Estimasi Produksi",
+          "designEstimation":"Estimasi Desain",
+          "productType":"Jenis Produk",
+          "categoryName":"Nama Kategori",
           "workflowName":"Nama Workflow",
           "products":"Produk",
           "category":"Jenis Produk - Kategori",
