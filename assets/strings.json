@@ -1,5 +1,12 @@
 {
   "en": {
+    "common":{
+      "yes":"Yes",
+      "cancel":"Cancel",
+      "fields":{
+        "categoryName":"Category"
+      }
+    },
     "header": {
       "souvenir": "Souvenir",
       "invitation": "Invitation",
@@ -27,9 +34,51 @@
       "readytoship":"Ready to ship all over Indonesia. Just sit back and your packages will be right in front of your door.",
       "onestop":"One Stop Services",
       "orderyours":"Order your souvenirs, printed invitation, digital invitation, hampers, and Bridesmaid Box from GIFU. You will definitely save your time!"
+    },
+    "views":{
+      "workflow":{
+        "confirmations":{
+          "removeCategory":"Are you want to permanently remove this category?",
+          "removeWorkflow":"Are you want to permanently remove this workflow?"
+        },
+        "title":"Workflow",
+        "add":"Add Workflow",
+        "edit":"Edit",
+        "back":"Back",
+        "save":"Save",
+        "remove":"Remove",
+        "removeCategoryMapping":"Remove Mapping",
+        "removeCompletely":"Remove Category",
+        "search":"Search",
+        "filter":"Filter by",
+        "updateCategory":"Edit Category",
+        "addNewCategory":"Add New Category",
+        "addCategory":"Add Category Mapping",
+        "addStep":"Add Step",
+        "deadline":"Deadline",
+        "fields":{
+          "productionEstimation":"Production Estimation",
+          "designEstimation":"Design Estimation",
+          "productType":"Product Type",
+          "categoryName":"Category Name",
+          "workflowName":"Workflow Name",
+          "products":"Products",
+          "category":"Product Type - Category",
+          "step":"Step",
+          "assignTo":"Assigned to",
+          "needApproval":"Need approval"
+        }
+      }
     }
   },
   "id": {
+    "common":{
+      "yes":"Ya",
+      "cancel":"Batalkan",
+      "fields":{
+        "categoryName":"Kategori"
+      }
+    },
     "header": {
       "souvenir": "Suvenir",
       "invitation": "Undangan",
@@ -57,6 +106,41 @@
       "readytoship":"Siap kirim ke seluruh Indonesia. Tak perlu ragu, kamu bisa pesan sample dulu lho!",
       "onestop":"Satu tempat beres semua",
       "orderyours":"Pesan Souvenir, Undangan Fisik, Undangan Digital, Hampers, dan Bridesmaid Box cukup di satu tempat saja"
+    },
+    "views":{
+      "workflow":{
+        "confirmations":{
+          "removeCategory":"Apakah anda ingin menghapus permanen kategori ini?",
+          "removeWorkflow":"Apakah anda ingin menghapus permanen workflow ini?"
+        },
+        "title":"Workflow",
+        "add":"Tambah Workflow Baru",
+        "edit":"Ubah",
+        "back":"Kembali",
+        "save":"Simpan",
+        "remove":"Hapus",
+        "removeCategoryMapping":"Hapus Mapping",
+        "removeCategoryCompletely":"Hapus Kategori",
+        "search":"Cari",
+        "filter":"Filter berdasarkan",
+        "updateCategory":"Ubah Kategori",
+        "addNewCategory":"Tambah Kategori Baru",
+        "addCategory":"Tempel kategori lainnya",
+        "addStep":"Tambah Step",
+        "deadline":"Deadline",
+        "fields":{
+          "productionEstimation":"Estimasi Produksi",
+          "designEstimation":"Estimasi Desain",
+          "productType":"Jenis Produk",
+          "categoryName":"Nama Kategori",
+          "workflowName":"Nama Workflow",
+          "products":"Produk",
+          "category":"Jenis Produk - Kategori",
+          "step":"Step",
+          "assignTo":"Staff",
+          "needApproval":"Butuh approval"
+        }
+      }
     }
   }
 }
