@@ -5,6 +5,7 @@
       <h3>{{ name }}</h3>
       <h4>{{ price }}</h4>
       <h5>{{ size }}</h5>
+      <h6>{{ weight }}</h6>
     </div>
   </div>
 </template>
@@ -16,6 +17,7 @@ export default {
     name: String,
     price: String,
     size: String,
+    weight: String,
   },
   }
 </script>
