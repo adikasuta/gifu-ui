@@ -2,13 +2,16 @@
   <div>
     <div class="Banner"></div>
     <div class="navbar">
-      <span class="filter-option">
+      <li>
+      <div class="filter-option">
         <input type="checkbox" id="moq" checked @change="setFilter" />
-        <label for="moq">Minimum Order 30 pcs</label>
-      </span>
+        <label for="moq"><h5>Minimum Order 30 pcs</h5></label>
+      </div>
+    </li>
+    <li>
       <div class="dropdown">
         <button class="dropbtn">
-          Category
+          <h5>Category</h5>
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
@@ -16,9 +19,12 @@
           <a href="#">Bulky Pouch</a>
           <a href="#">Totebag</a>
         </div>
+      </div>
+    </li>
+    <li>
         <div class="dropdown">
           <button class="dropbtn">
-            Price
+            <h5>Price</h5>
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
@@ -26,8 +32,8 @@
             <a href="#">Rp 10.000 - Rp 20.000</a>
             <a href="#">Diatas Rp 20.000</a>
           </div>
-        </div>
       </div>
+    </li>
     </div>
     <div class="products">
       <theProducts
@@ -58,30 +64,33 @@ export default {
         moq: false,
       },
       status: "",
-      GifuProduct,
-      // GifuProduct: [
-      //   {
-      //     name: "Card Holder A",
-      //     price: "Rp 6500",
-      //     size: "8 x 8 cm",
-      //   },
-      //   {
-      //     name: "Card Holder B",
-      //     price: "Rp 6500",
-      //     size: "8 x 8 cm",
-      //   },
-      //   {
-      //     name: "Card Holder B",
-      //     price: "Rp 6500",
-      //     size: "8 x 8 cm",
-      //   },
-      // ],
+      GifuProduct
     };
   }
 };
 </script>
 
 <style scoped>
+#moq{
+  margin:0 10px 0 0;
+}
+.filter-option{
+  display: flex;
+  padding: 10px;
+}
+li{
+  border-right: 1px solid #bbb;
+  display: inline;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+li:last-child {
+  border-right: none;
+}
+li:hover {
+  background-color: #9e9d9d;
+}
 .Banner {
   background-image: url(../../public/HomepageBanner.png);
   width: 100vw;
@@ -97,6 +106,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 
 .checkbtn {
@@ -131,10 +141,6 @@ export default {
 }
 
 /* Add a red background color to navbar links on hover */
-.navbar a:hover,
-.dropdown:hover .dropbtn {
-  background-color: rgb(139, 139, 139);
-}
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {

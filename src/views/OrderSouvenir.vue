@@ -8,6 +8,7 @@
         :name="item.name"
         :price="item.price"
         :size="item.size"
+        :weight="item.weight"
       ></ProductDescriptions>
       </div>
       <div class="orderform">
@@ -46,7 +47,7 @@ export default {
     height:auto;
   }
   .productdetails{
-    padding: 120px;
+    padding: 50px;
   }
 .orderform{
 

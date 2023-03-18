@@ -2,25 +2,6 @@
   <div class="mt-10">
     <h1>{{ $t("tracking.title") }}</h1>
     <form>
-      <!-- autocomplete with dropdown -->
-      <!-- <div class="form-control">
-      <label for="invoiceNumber">{{ $t('tracking.invoicenumber') }}</label>
-      <input id="invoiceNumber" name="invoiceNumber" type="text" />
-      </div>
-        <v-col cols="12">
-          <v-autocomplete
-            v-model="values"
-            :items="items"
-            outlined
-            dense
-            chips
-            small-chips
-            label="Max 3 Invoice"
-            multiple
-          ></v-autocomplete>
-        </v-col> -->
-
-      <!-- autocomplete without dropdown -->
       <div class="chip-container">
         <div class="chip" v-for="(chip, i) of chips" :key="chip.label">
           {{ chip }}
@@ -64,6 +45,7 @@
             <td>{{ item.product }}</td>
           </tr>
         </tbody>
+        <p>{{ currentInput}}</p>
       </template>
     </v-simple-table>
   </div>
@@ -84,7 +66,7 @@
     return {
       chips: [],
       currentInput: "",
-      orders: []
+      orders: [],
     };
   },
   methods: {
