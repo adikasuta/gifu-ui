@@ -4,4 +4,7 @@ export default {
   async getProductType() {
     return await api.get(`${BASE_URL}/product-type`);
   },
+  async getVariantType(){
+    return await api.get(`${BASE_URL}/variant-type`);
+  }
 }

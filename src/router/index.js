@@ -14,6 +14,9 @@ import CheckoutComponent from '../views/CheckoutComponent';
 import LoginComponent from '../views/loginComponent';
 import DashboardComponent from '../views/DashboardComponent';
 import WorkflowComponent from '../views/internal-dashboard/Workflow';
+import VariantComponent from '../views/internal-dashboard/variant/Variant';
+import EditVariantPage from '../views/internal-dashboard/variant/EditVariantPage';
+import CreateVariantPage from '../views/internal-dashboard/variant/CreateVariantPage';
 
 
 Vue.use(VueRouter)
@@ -88,6 +91,41 @@ const routes = [
     path: '/Dashboard/workflow',
     name: 'WorkflowComponent',
     component: WorkflowComponent
+  },
+  {
+    path: '/Dashboard/variant',
+    name: 'VariantComponent',
+    component: VariantComponent,
+    meta:{
+      breadcrumb:[
+        {name: "Home", link: "#/dashboard"},
+        {name: "Search Variant"}
+      ]
+    }
+  },
+  {
+    path: '/Dashboard/variant/add',
+    name: 'AddVariantComponent',
+    component: CreateVariantPage,
+    meta:{
+      breadcrumb:[
+        {name: "Home", link: "#/dashboard"},
+        {name: "Search Variant", link: "#/dashboard/variant"},
+        {name: "Add Variant"}
+      ]
+    }
+  },
+  {
+    path: '/Dashboard/variant/:id',
+    name: 'EditVariantComponent',
+    component: EditVariantPage,
+    meta:{
+      breadcrumb:[
+        {name: "Home", link: "#/dashboard"},
+        {name: "Search Variant", link: "#/dashboard/variant"},
+        {name: "Edit Variant"}
+      ]
+    }
   },
 ]
 

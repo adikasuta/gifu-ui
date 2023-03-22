@@ -6,6 +6,7 @@ import ReferenceService from "../services/Reference.service";
 export const useReferenceData = defineStore('ReferenceData', {
   state: () => ({
     productTypes:[],
+    variantTypes:[],
     categories:[],
     provinces:[],
     cities:[],
@@ -22,6 +23,7 @@ export const useReferenceData = defineStore('ReferenceData', {
       this.productTypes = await ReferenceService.getProductType();
       this.categories = await CategoryService.getProductCategories();
       this.users = await UserService.getUserRef();
+      this.variantTypes = await ReferenceService.getVariantType();
     }
   }
 })
