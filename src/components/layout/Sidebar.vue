@@ -11,12 +11,33 @@
         </v-btn>
       </v-list-item>
 
-      <v-list-item link>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6"> Sandra Adams </v-list-item-title>
-          <v-list-item-subtitle>sandra_a88@gmail.com</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-list-item link v-bind="attrs" v-on="on">
+            <v-list-item-content>
+              <v-list-item-title class="text-h6">
+                Sandra Adams
+              </v-list-item-title>
+              <v-list-item-subtitle>sandra_a88@gmail.com</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+        <v-list nav dense>
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-account-circle</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Profile</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-list>
 
     <v-divider></v-divider>
@@ -24,21 +45,33 @@
     <v-list nav dense>
       <v-list-item link>
         <v-list-item-icon>
-          <v-icon>mdi-folder</v-icon>
+          <v-icon>mdi-home-account</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>My Files</v-list-item-title>
+        <v-list-item-title>Home</v-list-item-title>
       </v-list-item>
       <v-list-item link>
         <v-list-item-icon>
-          <v-icon>mdi-account-multiple</v-icon>
+          <v-icon>mdi-list-box</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>Shared with me</v-list-item-title>
+        <v-list-item-title>Products</v-list-item-title>
       </v-list-item>
       <v-list-item link>
         <v-list-item-icon>
-          <v-icon>mdi-star</v-icon>
+          <v-icon>mdi-format-list-group</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>Starred</v-list-item-title>
+        <v-list-item-title>Catalog</v-list-item-title>
+      </v-list-item>
+      <v-list-item link>
+        <v-list-item-icon>
+          <v-icon>mdi-sitemap</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>Workflow</v-list-item-title>
+      </v-list-item>
+      <v-list-item link>
+        <v-list-item-icon>
+          <v-icon>mdi-account-group</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>Roles and Permissions</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
