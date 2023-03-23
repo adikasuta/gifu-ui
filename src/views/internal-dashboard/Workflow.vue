@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <slot name="breadcrumb"></slot>
     <v-row>
       <v-col cols="12">
         <h3>{{ $t("views.workflow.title") }}</h3>

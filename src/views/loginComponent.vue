@@ -1,30 +1,78 @@
 <template>
-    <div class="container">
-  <v-sheet width="300" class="mx-auto">
-    <v-form fast-fail @submit.prevent>
-      <v-text-field
-        v-model="email"
-        label="Email"
-        :rules="emailRules"
-      ></v-text-field>
+  <div>
+    <v-container class="mt-10">
+      <v-row>
+        <v-col cols="4" offset="4">
+          <v-text-field v-model="loginForm.email" label="Email"></v-text-field>
 
-      <v-text-field
-        v-model="password"
-        label="Password"
-        :rules="passwordRules"
-      ></v-text-field>
+          <v-text-field
+            type="password"
+            v-model="loginForm.password"
+            label="Password"
+          ></v-text-field>
 
-      <v-btn type="submit" block class="mt-2">Submit</v-btn>
-    </v-form>
-  </v-sheet>
-</div>
+          <v-btn @click="handleSubmit" block class="mt-2">Submit</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-dialog v-model="isLoading" width="100" persistent>
+      <LoadingDialog />
+    </v-dialog>
+    <v-dialog v-model="isError" width="25%" persistent>
+      <ErrorDialog
+        :errorDescription="errorMessage"
+        @close:dialog="isError = !isError"
+      />
+    </v-dialog>
+  </div>
 </template>
 
 <script>
+import AuthService from "../services/Auth.service";
+import ErrorDialog from "../components/dialogs/ErrorDialog.vue";
+import LoadingDialog from "../components/dialogs/LoadingDialog.vue";
+import Cookies from "js-cookie";
+
+export default {
+  components: {
+    ErrorDialog,
+    LoadingDialog,
+  },
+  data() {
+    return {
+      loginForm: {
+        email: "",
+        password: "",
+      },
+      isLoading: false,
+      isError: false,
+      errorMessage: "",
+    };
+  },
+  async created() {
+    this.loginForm = {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    async handleSubmit() {
+      try {
+        this.isLoading = true;
+        const response = await AuthService.login(this.loginForm);
+        const now = new Date();
+        const expires = new Date(now.getTime() + 30 * 60 * 1000);
+        Cookies.set("BEARER", response.token, { expires });
+        this.isLoading = false;
+        this.$router.push("/dashboard");
+      } catch (error) {
+        this.isLoading = false;
+        this.isError = true;
+        this.errorMessage = "Password or Email is not valid";
+      }
+    },
+  },
+};
 </script>
 
-<style scoped>
-.container {
-  margin:90px auto;
-}
-</style>
+<style scoped></style>

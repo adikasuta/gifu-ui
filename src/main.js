@@ -6,14 +6,36 @@ import VueCompositionAPI from '@vue/composition-api'
 import VueMask from 'v-mask'
 import { createPinia, PiniaVuePlugin } from 'pinia'
 import i18n from './plugins/i18n'
-import VueCookies from 'vue-cookies'
+import SessionUtils from './utils/SessionUtils';
 //attach pinia state manager
 Vue.use(PiniaVuePlugin)
 const pinia = createPinia()
 Vue.use(VueCompositionAPI)
 Vue.use(VueMask)
-Vue.use(VueCookies, { expire: '7d'})
 Vue.config.productionTip = false
+
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)){
+    if(!SessionUtils.isAuthorized()){
+      next({ name: 'LoginComponent' })
+    } else {
+      const sessionData = SessionUtils.getSessionData();
+      if(to.matched.some(record=>record.meta.requiresPermission)){
+        if(to.matched.some(record=>{
+          return sessionData.permissions.includes(record.meta.requiresPermission)
+        })){
+          next();
+        }else {
+          next({ name: 'LoginComponent' })//TODO: change to unauthorize page
+        }
+      }else {
+        next();
+      }
+    }
+  }else{
+    next();
+  }
+})
 
 new Vue({
   i18n,

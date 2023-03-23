@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 export default {
   name: "HeaderComponent",
   components: {},
@@ -43,13 +44,13 @@ export default {
       this.$router.push("/Cart");
     },
     toggleLanguage() {
-      const lang = window.$cookies.get("LANG");
+      const lang = Cookies.get("LANG");
       if (lang == "id") {
-        window.$cookies.set("LANG", "en");
+        Cookies.set("LANG", "en");
       } else {
-        window.$cookies.set("LANG", "id");
+        Cookies.set("LANG", "id");
       }
-      this.$i18n.locale = window.$cookies.get("LANG");
+      this.$i18n.locale = Cookies.get("LANG");
     },
   },
 };

@@ -5,7 +5,7 @@
         <v-list-item-avatar>
           <v-img src="https://randomuser.me/api/portraits/women/85.jpg"></v-img>
         </v-list-item-avatar>
-        <v-list-item-title>Hi Sandra</v-list-item-title>
+        <v-list-item-title>Hi {{userName}}</v-list-item-title>
         <v-btn icon @click.stop="mini = !mini">
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
@@ -16,9 +16,9 @@
           <v-list-item link v-bind="attrs" v-on="on">
             <v-list-item-content>
               <v-list-item-title class="text-h6">
-                Sandra Adams
+                {{userName}}
               </v-list-item-title>
-              <v-list-item-subtitle>sandra_a88@gmail.com</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ userEmail }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </template>
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import SessionUtils from '../../utils/SessionUtils';
 export default {
   name: "SidebarComponent",
   components: {},
@@ -86,6 +87,14 @@ export default {
       drawer: true,
       mini: true,
     };
+  },
+  computed:{
+    userName(){
+      return SessionUtils.getSessionData().name
+    },
+    userEmail(){
+      return SessionUtils.getSessionData().email
+    }
   },
   methods: {
     goToTracking() {
@@ -99,15 +108,6 @@ export default {
     },
     goToCart() {
       this.$router.push("/Cart");
-    },
-    toggleLanguage() {
-      const lang = window.$cookies.get("LANG");
-      if (lang == "id") {
-        window.$cookies.set("LANG", "en");
-      } else {
-        window.$cookies.set("LANG", "id");
-      }
-      this.$i18n.locale = window.$cookies.get("LANG");
     },
   },
 };

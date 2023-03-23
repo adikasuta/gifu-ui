@@ -25,78 +25,130 @@ const routes = [
   {
     path: '/',
     name: 'HomepageComponent',
-    component: HomepageComponent
+    component: HomepageComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/theTracking',
     name: 'TrackingComponent',
-    component: TrackingComponent
+    component: TrackingComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/souvenir',
     name: 'SouvenirComponent',
-    component: SouvenirComponent
+    component: SouvenirComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/OrderSouvenir',
     name: 'OrderSouvenirComponent',
-    component: OrderSouvenirComponent
+    component: OrderSouvenirComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/InvoiceSouvenir',
     name: 'InvoiceSouvenirComponent',
-    component: InvoiceSouvenirComponent
+    component: InvoiceSouvenirComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/Invitation',
     name: 'InvitationComponent',
-    component: InvitationComponent
+    component: InvitationComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/OrderInvitation',
     name: 'OrderInvitationComponent',
-    component: OrderInvitationComponent
+    component: OrderInvitationComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/InvoiceInvitation',
     name: 'InvoiceInvitationComponent',
-    component: InvoiceInvitationComponent
+    component: InvoiceInvitationComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/designInvitation',
     name: 'designInvitationComponent',
-    component: designInvitationComponent
+    component: designInvitationComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/Cart',
     name: 'CartComponent',
-    component: CartComponent
+    component: CartComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/Checkout',
     name: 'CheckoutComponent',
-    component: CheckoutComponent
+    component: CheckoutComponent,
+    meta:{
+      hideSidebar: true,
+    }
   },
   {
     path: '/Login',
     name: 'LoginComponent',
-    component: LoginComponent
+    component: LoginComponent,
+    meta:{
+      hideHeader: true,
+      hideSidebar: true,
+      hideFooter: true,
+    }
   },
   {
     path: '/Dashboard',
     name: 'DashboardComponent',
-    component: DashboardComponent
+    component: DashboardComponent,
+    meta:{
+      requiresAuth: true,
+      breadcrumb:[
+        {name: "Home"}
+      ]
+    }
   },
   {
     path: '/Dashboard/workflow',
     name: 'WorkflowComponent',
-    component: WorkflowComponent
+    component: WorkflowComponent,
+    meta:{
+      requiresAuth: true,
+      breadcrumb:[
+        {name: "Home", link: "#/dashboard"},
+        {name: "Search Workflow"}
+      ]
+    }
   },
   {
     path: '/Dashboard/variant',
     name: 'VariantComponent',
     component: VariantComponent,
     meta:{
+      requiresAuth: true,
       breadcrumb:[
         {name: "Home", link: "#/dashboard"},
         {name: "Search Variant"}
@@ -108,6 +160,7 @@ const routes = [
     name: 'AddVariantComponent',
     component: CreateVariantPage,
     meta:{
+      requiresAuth: true,
       breadcrumb:[
         {name: "Home", link: "#/dashboard"},
         {name: "Search Variant", link: "#/dashboard/variant"},
@@ -120,6 +173,7 @@ const routes = [
     name: 'EditVariantComponent',
     component: EditVariantPage,
     meta:{
+      requiresAuth: true,
       breadcrumb:[
         {name: "Home", link: "#/dashboard"},
         {name: "Search Variant", link: "#/dashboard/variant"},

@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <HeaderComponent />
-    <SidebarComponent v-if="true" />
+    <HeaderComponent v-if="!this.$route.meta.hideHeader" />
+    <SidebarComponent v-if="true && !this.$route.meta.hideSidebar" />
     <v-main>
       <v-sheet id="scrolling-techniques-7" class="overflow-y-auto">
         <router-view>
@@ -15,13 +15,14 @@
             </v-breadcrumbs>
           </template>
         </router-view>
-        <FooterComponent />
+        <FooterComponent v-if="!this.$route.meta.hideFooter" />
       </v-sheet>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 import HeaderComponent from "./components/layout/Header";
 import SidebarComponent from "./components/layout/Sidebar";
 import FooterComponent from "./components/layout/Footer";
@@ -39,12 +40,12 @@ export default {
   methods: {
     ...mapActions(useReferenceData, ["loadReferenceData"]),
     initLanguage: function () {
-      const lang = window.$cookies.get("LANG");
+      const lang = Cookies.get("LANG");
       if (!lang) {
-        window.$cookies.set("LANG", "id");
+        Cookies.set("LANG", "id");
       }
-      this.$i18n.locale = window.$cookies.get("LANG");
-      localize(window.$cookies.get("LANG"));
+      this.$i18n.locale = Cookies.get("LANG");
+      localize(Cookies.get("LANG"));
     },
   },
   watch:{

@@ -1,4 +1,6 @@
 import axios from "axios";
+import Cookies from 'js-cookie';
+
 const BASE_URL = process.env.VUE_APP_BACKEND_BASE_URL || 'http://localhost:3000'
 const METHOD = {
   GET: "get",
@@ -44,6 +46,11 @@ function call(
   formatResponse = DEFAULT_RESPONSE_FORMATTER
 ) {
   return new Promise((resolve, reject) => {
+    const token = Cookies.get('BEARER');
+    const defaultHeader = {};
+    if(token){
+      defaultHeader['Authorization'] = 'Bearer '+token;
+    }
     axios({
       url: `${BASE_URL}${url}`,
       method,
@@ -51,7 +58,10 @@ function call(
       params,
 
       // Options
-      headers: headers,
+      headers: {
+        ...headers,
+        ...defaultHeader
+      },
       withCredentials: true,
       crossDomain: true
     })
