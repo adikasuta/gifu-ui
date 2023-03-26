@@ -2,8 +2,9 @@
   <v-navigation-drawer app v-model="drawer" :mini-variant.sync="mini" permanent>
     <v-list>
       <v-list-item class="px-2">
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/women/85.jpg"></v-img>
+        <v-list-item-avatar color="red">
+          <!-- <v-img src="https://randomuser.me/api/portraits/women/85.jpg"></v-img> -->
+          <span class="white--text text-h5">{{initials}}</span>
         </v-list-item-avatar>
         <v-list-item-title>Hi {{userName}}</v-list-item-title>
         <v-btn icon @click.stop="mini = !mini">
@@ -43,7 +44,7 @@
     <v-divider></v-divider>
 
     <v-list nav dense>
-      <v-list-item link>
+      <v-list-item link href="#/dashboard">
         <v-list-item-icon>
           <v-icon>mdi-home-account</v-icon>
         </v-list-item-icon>
@@ -55,23 +56,23 @@
         </v-list-item-icon>
         <v-list-item-title>Products</v-list-item-title>
       </v-list-item>
-      <v-list-item link>
+      <v-list-item link href="#/dashboard/variant">
         <v-list-item-icon>
           <v-icon>mdi-format-list-group</v-icon>
         </v-list-item-icon>
         <v-list-item-title>Catalog</v-list-item-title>
       </v-list-item>
-      <v-list-item link>
+      <v-list-item link href="#/dashboard/workflow">
         <v-list-item-icon>
           <v-icon>mdi-sitemap</v-icon>
         </v-list-item-icon>
         <v-list-item-title>Workflow</v-list-item-title>
       </v-list-item>
-      <v-list-item link>
+      <v-list-item link href="#/dashboard/user">
         <v-list-item-icon>
           <v-icon>mdi-account-group</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>Roles and Permissions</v-list-item-title>
+        <v-list-item-title>User Administration</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -79,6 +80,7 @@
 
 <script>
 import SessionUtils from '../../utils/SessionUtils';
+import StringUtils from '../../utils/StringUtils';
 export default {
   name: "SidebarComponent",
   components: {},
@@ -89,27 +91,16 @@ export default {
     };
   },
   computed:{
+    initials(){
+      return StringUtils.getInitials(SessionUtils.getSessionData().name)
+    },
     userName(){
       return SessionUtils.getSessionData().name
     },
     userEmail(){
       return SessionUtils.getSessionData().email
     }
-  },
-  methods: {
-    goToTracking() {
-      this.$router.push("/theTracking");
-    },
-    goToSouvenir() {
-      this.$router.push("/Souvenir");
-    },
-    goToInvitation() {
-      this.$router.push("/Invitation");
-    },
-    goToCart() {
-      this.$router.push("/Cart");
-    },
-  },
+  }
 };
 </script>
 

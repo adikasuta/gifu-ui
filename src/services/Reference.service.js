@@ -6,5 +6,8 @@ export default {
   },
   async getVariantType(){
     return await api.get(`${BASE_URL}/variant-type`);
+  },
+  async getRoles(){
+    return await api.get(`${BASE_URL}/roles`);
   }
 }

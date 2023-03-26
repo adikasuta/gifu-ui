@@ -36,6 +36,19 @@
       "orderyours": "Order your souvenirs, printed invitation, digital invitation, hampers, and Bridesmaid Box from GIFU. You will definitely save your time!"
     },
     "views": {
+      "administration": {
+        "title": "Role and Permission",
+        "addAccount": "Add Account",
+        "active":"Active",
+        "inactive":"Inactive",
+        "edit":"Edit User",
+        "fields": {
+          "name": "Name",
+          "role": "Role",
+          "status": "Status",
+          "action": "Action"
+        }
+      },
       "variant": {
         "confirmations": {
           "removeContent": "Apakah anda ingin menghapus permanen konten ini?",
@@ -130,6 +143,19 @@
       "orderyours": "Pesan Souvenir, Undangan Fisik, Undangan Digital, Hampers, dan Bridesmaid Box cukup di satu tempat saja"
     },
     "views": {
+      "administration": {
+        "title": "Peran dan Izin",
+        "addAccount": "Tambah Akun",
+        "active":"Aktif",
+        "inactive":"Non Aktif",
+        "edit":"Ubah User",
+        "fields": {
+          "name": "Nama",
+          "role": "Peran",
+          "status": "Status",
+          "action": "Aksi"
+        }
+      },
       "variant": {
         "confirmations": {
           "removeContent": "Apakah anda ingin menghapus permanen konten ini?",

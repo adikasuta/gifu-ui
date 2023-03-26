@@ -7,6 +7,7 @@ export const useReferenceData = defineStore('ReferenceData', {
   state: () => ({
     productTypes:[],
     variantTypes:[],
+    roles:[],
     categories:[],
     provinces:[],
     cities:[],
@@ -24,6 +25,7 @@ export const useReferenceData = defineStore('ReferenceData', {
       this.categories = await CategoryService.getProductCategories();
       this.users = await UserService.getUserRef();
       this.variantTypes = await ReferenceService.getVariantType();
+      this.roles = await ReferenceService.getRoles();
     }
   }
 })

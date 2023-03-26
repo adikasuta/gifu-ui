@@ -17,6 +17,7 @@ import WorkflowComponent from '../views/internal-dashboard/Workflow';
 import VariantComponent from '../views/internal-dashboard/variant/Variant';
 import EditVariantPage from '../views/internal-dashboard/variant/EditVariantPage';
 import CreateVariantPage from '../views/internal-dashboard/variant/CreateVariantPage';
+import SearchUsers from '../views/internal-dashboard/administration/SearchUsers';
 
 
 Vue.use(VueRouter)
@@ -121,7 +122,7 @@ const routes = [
     }
   },
   {
-    path: '/Dashboard',
+    path: '/dashboard',
     name: 'DashboardComponent',
     component: DashboardComponent,
     meta:{
@@ -132,7 +133,19 @@ const routes = [
     }
   },
   {
-    path: '/Dashboard/workflow',
+    path: '/dashboard/user',
+    name: 'SearchUsers',
+    component: SearchUsers,
+    meta:{
+      requiresAuth: true,
+      breadcrumb:[
+        {name: "Home", link: "#/dashboard"},
+        {name: "Search Users"}
+      ]
+    }
+  },
+  {
+    path: '/dashboard/workflow',
     name: 'WorkflowComponent',
     component: WorkflowComponent,
     meta:{
@@ -144,7 +157,7 @@ const routes = [
     }
   },
   {
-    path: '/Dashboard/variant',
+    path: '/dashboard/variant',
     name: 'VariantComponent',
     component: VariantComponent,
     meta:{
@@ -156,7 +169,7 @@ const routes = [
     }
   },
   {
-    path: '/Dashboard/variant/add',
+    path: '/dashboard/variant/add',
     name: 'AddVariantComponent',
     component: CreateVariantPage,
     meta:{
@@ -169,7 +182,7 @@ const routes = [
     }
   },
   {
-    path: '/Dashboard/variant/:id',
+    path: '/dashboard/variant/:id',
     name: 'EditVariantComponent',
     component: EditVariantPage,
     meta:{

@@ -4,7 +4,6 @@
     id="inspire"
     :style="{ background: $vuetify.theme.themes.dark.background }"
   >
-    <SideBarComponent />
     <v-container>
       <v-row>
         <v-col cols="12" sm="8">
@@ -27,7 +26,7 @@
 
 <script>
 // @ is an alias to /src
-import SideBarComponent from "../components/dashboard/SideBarComponent";
+// import SideBarComponent from "../components/dashboard/SideBarComponent";
 import OverviewComponent from "../components/dashboard/OverviewComponent";
 import ProfileComponent from "../components/dashboard/ProfileComponent";
 import RolesandPermissionComponent from "../components/dashboard/RolesandPermissionComponent";
@@ -38,7 +37,7 @@ import JobComponent from "../components/dashboard/JobComponent";
 export default {
   data: () => ({}),
   components: {
-    SideBarComponent,
+    // SideBarComponent,
     OverviewComponent,
     ProfileComponent,
     RolesandPermissionComponent,
