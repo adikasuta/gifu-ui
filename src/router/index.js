@@ -124,6 +124,7 @@ const routes = [
       hideFooter: true,
     }
   },
+  
   {
     path: '/dashboard',
     name: 'DashboardComponent',

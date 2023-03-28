@@ -1,5 +1,5 @@
 import api from "./api";
-const BASE_URL = '/api/public/product'
+const BASE_URL = '/public/api/product'
 export default {
   async searchProducts(filter) {
     return await api.get(`${BASE_URL}`, filter);
