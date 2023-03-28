@@ -1,12 +1,12 @@
 <template>
-    <v-img :src="fileUrl" :max-width="maxWidth"></v-img>
+    <v-img :src="fileUrl" :max-width="maxWidth" :height="height"></v-img>
   </template>
   
   <script>
   const BASE_URL =
     process.env.VUE_APP_BACKEND_BASE_URL || "http://localhost:3000";
   export default {
-    props: ["filename","maxWidth", "isPreview"],
+    props: ["filename","maxWidth", "isPreview", "height"],
     computed:{
       fileUrl(){
         if(this.isPreview){
