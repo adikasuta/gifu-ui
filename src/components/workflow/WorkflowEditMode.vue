@@ -4,11 +4,19 @@
       <v-card-text>
         <v-row>
           <v-col lg="5" sm="6">
-            <v-text-field
-              :label="$t('views.workflow.fields.workflowName')"
-              v-model="workflowContent.name"
-              outlined
-            ></v-text-field>
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Workflow Name"
+              rules="required"
+              ref="provider"
+            >
+              <v-text-field
+                :label="$t('views.workflow.fields.workflowName')"
+                v-model="workflowContent.name"
+                outlined
+                :error-messages="errors"
+              ></v-text-field>
+            </ValidationProvider>
           </v-col>
           <v-col lg="5" offset-lg="1" sm="6">
             <h3>{{ $t("views.workflow.fields.products") }}</h3>
@@ -38,21 +46,29 @@
           :key="item.id"
         >
           <v-col lg="4" md="6">
-            <v-select
-              item-text="name"
-              item-value="id"
-              item-disabled="disabled"
-              :items="getCategoryRefs"
-              @change="
-                (e) => {
-                  handleChangeCategory(e, index);
-                }
-              "
-              :label="$t('views.workflow.fields.category')"
-              outlined
-              v-model="item.id"
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Product Category"
+              rules="required"
+              ref="provider"
             >
-            </v-select>
+              <v-select
+                item-text="name"
+                item-value="id"
+                item-disabled="disabled"
+                :error-messages="errors"
+                :items="getCategoryRefs"
+                @change="
+                  (e) => {
+                    handleChangeCategory(e, index);
+                  }
+                "
+                :label="$t('views.workflow.fields.category')"
+                outlined
+                v-model="item.id"
+              >
+              </v-select>
+            </ValidationProvider>
           </v-col>
           <v-col cols="1">
             <p>{{ item.designEstimation }}</p>
@@ -113,25 +129,41 @@
         <draggable v-model="workflowContent.steps" @start="true">
           <v-row v-for="(item, index) of workflowContent.steps" :key="item.id">
             <v-col cols="4">
-              <v-text-field
-                :label="$t('views.workflow.fields.step')"
-                outlined
-                v-model="item.name"
-              ></v-text-field>
+              <ValidationProvider
+                v-slot="{ errors }"
+                :name="`Step ${index+1}`"
+                rules="required"
+                ref="provider"
+              >
+                <v-text-field
+                  :label="$t('views.workflow.fields.step')"
+                  outlined
+                  v-model="item.name"
+                  :error-messages="errors"
+                ></v-text-field>
+              </ValidationProvider>
             </v-col>
             <v-col cols="4">
-              <v-autocomplete
-                item-text="name"
-                item-value="id"
-                v-model="item.assignedToUserId"
-                :items="users"
-                cache-items
-                outlined
-                flat
-                hide-no-data
-                hide-details
-                :label="$t('views.workflow.fields.assignTo')"
-              ></v-autocomplete>
+              <ValidationProvider
+                v-slot="{ errors }"
+                :name="`Staff ${index+1}`"
+                rules="required"
+                ref="provider"
+              >
+                <v-autocomplete
+                  item-text="name"
+                  item-value="id"
+                  v-model="item.assignedToUserId"
+                  :items="users"
+                  cache-items
+                  outlined
+                  flat
+                  :error-messages="errors"
+                  hide-no-data
+                  hide-details
+                  :label="$t('views.workflow.fields.assignTo')"
+                ></v-autocomplete>
+              </ValidationProvider>
             </v-col>
             <v-col cols="2">
               <v-checkbox
@@ -200,8 +232,8 @@ import StringUtils from "../../utils/StringUtils";
 import { useReferenceData } from "../../store/reference-data";
 import WorkflowService from "../../services/Workflow.service";
 import CategoryService from "../../services/Category.service";
-// import { ValidationObserver } from "vee-validate";
-// import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
+import { ValidationObserver } from "vee-validate";
+import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 export default {
   name: "WorkflowEditMode",
   components: {
@@ -210,6 +242,8 @@ export default {
     AddNewCategory,
     ConfirmationDialog,
     ErrorDialog,
+    ValidationObserver,
+    ValidationProvider,
   },
   props: ["workflow"],
   data() {
@@ -297,30 +331,34 @@ export default {
       this.$emit("on:changeName", changed);
     },
     async handleSaveWorkflow() {
-      try {
-        this.isLoading = true;
-        const request = {
-          ...this.workflowContent,
-          productCategoryIds: this.workflowContent.productCategories.map(
-            (it) => it.id
-          ),
-        };
-        if (this.workflow.id) {
-          await WorkflowService.putWorkflows(request);
-        } else {
-          await WorkflowService.postWorkflows(request);
+      this.$refs.observer.validate().then(async (success) => {
+        if (success) {
+          try {
+            this.isLoading = true;
+            const request = {
+              ...this.workflowContent,
+              productCategoryIds: this.workflowContent.productCategories.map(
+                (it) => it.id
+              ),
+            };
+            if (this.workflow.id) {
+              await WorkflowService.putWorkflows(request);
+            } else {
+              await WorkflowService.postWorkflows(request);
+            }
+            this.$emit("on:refresh");
+            this.$emit("on:view");
+            this.isLoading = false;
+          } catch (error) {
+            this.isLoading = false;
+            this.isError = true;
+            this.errorMessage = "Unhandled Error";
+            if (error.response) {
+              this.errorMessage = error.response.data.message;
+            }
+          }
         }
-        this.$emit("on:refresh");
-        this.$emit("on:view");
-        this.isLoading = false;
-      } catch (error) {
-        this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
-      }
+      });
     },
     handleBack() {
       this.$emit("on:refresh");

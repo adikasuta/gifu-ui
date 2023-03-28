@@ -1,15 +1,9 @@
 <template>
   <div>
     <v-card>
-      <v-card-title
-        ><v-text-field
-          solo
-          v-model="name"
-          :label="$t('views.workflow.fields.workflowName')"
-          append-icon="mdi-pencil"
-          @change="handleChangeName"
-        ></v-text-field
-      ></v-card-title>
+      <v-card-title>
+        {{ name }}
+      </v-card-title>
       <v-card-subtitle>
         <v-row>
           <v-col cols="10">

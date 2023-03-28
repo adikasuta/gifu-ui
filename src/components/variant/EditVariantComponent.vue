@@ -1,37 +1,56 @@
 <template>
   <div>
-    <BasicForm>
-      <template v-slot:header>
-        {{ isCreate ? $t("views.variant.add") : $t("views.variant.edit") }}
-      </template>
-      <template v-slot:body>
-        <v-row>
-          <v-col cols="12">
-            <v-text-field
-              :label="$t('views.variant.fields.name')"
-              outlined
-              v-model="variant.name"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12">
-            <v-select
-              :items="variantTypes"
-              :label="$t('views.variant.fields.variantTypeCode')"
-              outlined
-              v-model="variant.variantTypeCode"
-            >
-            </v-select>
-          </v-col>
-        </v-row>
-      </template>
-      <template v-slot:footer>
-        <v-btn elevation="2" color="primary" @click="handleSave">
-          {{ $t("views.variant.submit") }}</v-btn
-        >
-      </template>
-    </BasicForm>
+    <ValidationObserver ref="observer">
+      <BasicForm>
+        <template v-slot:header>
+          {{ isCreate ? $t("views.variant.add") : $t("views.variant.edit") }}
+        </template>
+        <template v-slot:body>
+          <v-row>
+            <v-col cols="12">
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="variantName"
+                rules="required"
+                ref="provider"
+              >
+                <v-text-field
+                  :label="$t('views.variant.fields.name')"
+                  outlined
+                  v-model="variant.name"
+                  :error-messages="errors"
+                ></v-text-field>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12">
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="variantType"
+                rules="required"
+                ref="provider"
+              >
+                <v-select
+                  :items="variantTypes"
+                  :label="$t('views.variant.fields.variantTypeCode')"
+                  outlined
+                  v-model="variant.variantTypeCode"
+                  :error-messages="errors"
+                >
+                </v-select>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+        </template>
+        <template v-slot:footer>
+          <v-btn elevation="2" color="primary" @click="handleSave">
+            {{ $t("views.variant.submit") }}</v-btn
+          >
+        </template>
+      </BasicForm>
+    </ValidationObserver>
+
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
@@ -45,6 +64,8 @@
 </template>
 
 <script>
+import { ValidationObserver } from "vee-validate";
+import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import BasicForm from "../layout/BasicForm";
@@ -57,6 +78,8 @@ export default {
     BasicForm,
     ErrorDialog,
     LoadingDialog,
+    ValidationObserver,
+    ValidationProvider,
   },
   data() {
     return {
@@ -89,21 +112,25 @@ export default {
       };
     },
     async handleSave() {
-      try {
-        this.isLoading = true;
-        await VariantService.postVariant(this.variant);
-        this.isLoading = false;
-        if(this.isCreate){
-          this.$router.push(`/dashboard/variant`);
+      this.$refs.observer.validate().then(async (success) => {
+        if (success) {
+          try {
+            this.isLoading = true;
+            await VariantService.postVariant(this.variant);
+            this.isLoading = false;
+            if (this.isCreate) {
+              this.$router.push(`/dashboard/variant`);
+            }
+          } catch (error) {
+            this.isLoading = false;
+            this.isError = true;
+            this.errorMessage = "Unhandled Error";
+            if (error.response) {
+              this.errorMessage = error.response.data.message;
+            }
+          }
         }
-      } catch (error) {
-        this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
-      }
+      });
     },
     async handleRefresh() {
       try {

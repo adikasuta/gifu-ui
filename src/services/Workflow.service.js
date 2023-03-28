@@ -2,8 +2,7 @@ import api from "./api";
 const WORKFLOW_BASE_URL = '/api/workflow'
 export default {
   async getWorkflows(filter) {
-    const {fieldName, query, pageNumber, pageSize} = filter;
-    return await api.get(`${WORKFLOW_BASE_URL}?fieldName=${fieldName}&query=${query}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
+    return await api.get(`${WORKFLOW_BASE_URL}`,filter);
   },
   async deleteWorkflows(id) {
     return await api.delete(`${WORKFLOW_BASE_URL}/${id}`);

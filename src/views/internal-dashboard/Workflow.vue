@@ -17,11 +17,15 @@
         ></v-text-field>
       </v-col>
       <v-col lg="2" md="4" sm="6">
-        <TranslatedSelection
+        <v-select
+          v-model="filter.productCategoryId"
+          :items="categories"
+          item-text="name"
+          item-value="id"
+          :label="$t('views.product.fields.productCategory')"
+          outlined
           @change="handleRefresh"
-          :items="filterItems"
-          v-model="filter.fieldName"
-        />
+        ></v-select>
       </v-col>
     </v-row>
     <v-row v-for="item of workflowList" :key="item.id">
@@ -44,26 +48,41 @@
         ></v-pagination>
       </v-col>
     </v-row>
+
+    <v-dialog v-model="isLoading" width="100" persistent>
+      <LoadingDialog />
+    </v-dialog>
+    <v-dialog v-model="isError" width="25%" persistent>
+      <ErrorDialog
+        :errorDescription="errorMessage"
+        @close:dialog="isError = !isError"
+      />
+    </v-dialog>
+    <ConfirmationDialog ref="confirmationDialog" />
   </v-container>
 </template>
 
 <script>
-import { mapActions } from "pinia";
+import ErrorDialog from "../../components/dialogs/ErrorDialog.vue";
+import ConfirmationDialog from "../../components/dialogs/ConfirmationDialog";
+import LoadingDialog from "../../components/dialogs/LoadingDialog.vue";
+import { mapState } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
 import WorkflowService from "../../services/Workflow.service";
-import TranslatedSelection from "../../components/common/TranslatedSelection";
 import WorkflowListItem from "../../components/workflow/WorkflowListItem";
 export default {
   name: "WorkflowComponent",
   components: {
-    TranslatedSelection,
     WorkflowListItem,
+    ErrorDialog,
+    ConfirmationDialog,
+    LoadingDialog,
   },
   data() {
     return {
       filter: {
         query: "",
-        fieldName: "",
+        productCategoryId: "",
       },
       filterItems: [
         {
@@ -77,32 +96,47 @@ export default {
         pageSize: 20,
       },
       workflowList: [],
+      isLoading: false,
+      isError: false,
+      errorMessage: "",
     };
   },
   async created() {
-    await this.loadReferenceData();
     await this.handleRefresh();
   },
+  computed: {
+    ...mapState(useReferenceData, ["categories"]),
+  },
   methods: {
-    ...mapActions(useReferenceData, ["loadReferenceData"]),
     async handleRefresh() {
-      const workflowPage = await WorkflowService.getWorkflows({
-        ...this.filter,
-        ...this.pagination,
-      });
-      this.workflowList = workflowPage.content.map((item) => {
-        return {
-          ...item,
-          isView: true,
-        };
-      });
-      this.pagination.totalPages = workflowPage.totalPages;
+      try {
+        this.isLoading = true;
+        const workflowPage = await WorkflowService.getWorkflows({
+          ...this.filter,
+          ...this.pagination,
+        });
+        this.workflowList = workflowPage.content.map((item) => {
+          return {
+            ...item,
+            isView: true,
+          };
+        });
+        this.pagination.totalPages = workflowPage.totalPages;
+        this.isLoading = false;
+      } catch (error) {
+        this.isLoading = false;
+        this.isError = true;
+        this.errorMessage = "Unhandled Error";
+        if (error.response) {
+          this.errorMessage = error.response.data.message;
+        }
+      }
     },
     handleAddWorkflow() {
       this.workflowList.push({
         id: null,
         name: "",
-        products:[],
+        products: [],
         productCategories: [],
         steps: [],
       });

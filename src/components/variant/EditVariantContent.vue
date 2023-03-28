@@ -1,43 +1,61 @@
 <template>
   <div>
-    <BasicForm>
-      <template v-slot:header>
-        {{
-          isCreate
-            ? $t("views.variant.addContent")
-            : $t("views.variant.editContent")
-        }}
-      </template>
-      <template v-slot:body>
-        <v-row>
-          <v-col cols="12">
-            <v-text-field
-              :label="$t('views.variant.fields.name')"
-              outlined
-              v-model="contentForm.name"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12">
-            <v-file-input
-              v-model="file"
-              accept="image/png, image/jpeg, image/bmp"
-              placeholder="Pick an image"
-              label="Image"
-            ></v-file-input>
-          </v-col>
-        </v-row>
-      </template>
-      <template v-slot:footer>
-        <v-btn elevation="2" color="primary" @click="handleSave">
-          {{ $t("views.variant.submit") }}</v-btn
-        >
-        <v-btn elevation="2" color="primary" @click="hideDialog" class="mr-5">
-          {{ $t("views.variant.back") }}</v-btn
-        >
-      </template>
-    </BasicForm>
+    <ValidationObserver ref="observer">
+      <BasicForm>
+        <template v-slot:header>
+          {{
+            isCreate
+              ? $t("views.variant.addContent")
+              : $t("views.variant.editContent")
+          }}
+        </template>
+        <template v-slot:body>
+          <v-row>
+            <v-col cols="12">
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Content Name"
+                rules="required"
+                ref="provider"
+              >
+                <v-text-field
+                  :label="$t('views.variant.fields.name')"
+                  outlined
+                  :error-messages="errors"
+                  v-model="contentForm.name"
+                ></v-text-field>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12">
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Content Image"
+                rules="file_size"
+                ref="provider"
+              >
+                <v-file-input
+                  v-model="file"
+                  accept="image/png, image/jpeg, image/bmp"
+                  placeholder="Pick an image"
+                  label="Image"
+                  :error-messages="errors"
+                ></v-file-input>
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+        </template>
+        <template v-slot:footer>
+          <v-btn elevation="2" color="primary" @click="handleSave">
+            {{ $t("views.variant.submit") }}</v-btn
+          >
+          <v-btn elevation="2" color="primary" @click="hideDialog" class="mr-5">
+            {{ $t("views.variant.back") }}</v-btn
+          >
+        </template>
+      </BasicForm>
+    </ValidationObserver>
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
@@ -51,6 +69,8 @@
 </template>
 
 <script>
+import { ValidationObserver } from "vee-validate";
+import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import BasicForm from "../layout/BasicForm";
@@ -61,6 +81,8 @@ export default {
     BasicForm,
     ErrorDialog,
     LoadingDialog,
+    ValidationProvider,
+    ValidationObserver,
   },
   data() {
     return {
@@ -84,23 +106,27 @@ export default {
       this.file = null;
     },
     async handleSave() {
-      try {
-        this.isLoading = true;
-        this.formData.set("file", this.file);
-        this.formData.set("payload", JSON.stringify(this.contentForm));
-        await VariantService.postContent(this.variantId, this.formData);
+      this.$refs.observer.validate().then(async (success) => {
+        if (success) {
+          try {
+            this.isLoading = true;
+            this.formData.set("file", this.file);
+            this.formData.set("payload", JSON.stringify(this.contentForm));
+            await VariantService.postContent(this.variantId, this.formData);
 
-        this.$emit("on:refresh");
-        this.hideDialog();
-        this.isLoading = false;
-      } catch (error) {
-        this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
+            this.$emit("on:refresh");
+            this.hideDialog();
+            this.isLoading = false;
+          } catch (error) {
+            this.isLoading = false;
+            this.isError = true;
+            this.errorMessage = "Unhandled Error";
+            if (error.response) {
+              this.errorMessage = error.response.data.message;
+            }
+          }
         }
-      }
+      });
     },
   },
 };

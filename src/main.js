@@ -7,12 +7,25 @@ import VueMask from 'v-mask'
 import { createPinia, PiniaVuePlugin } from 'pinia'
 import i18n from './plugins/i18n'
 import SessionUtils from './utils/SessionUtils';
+import {
+  extend,
+} from "vee-validate/dist/vee-validate.full";
 //attach pinia state manager
 Vue.use(PiniaVuePlugin)
 const pinia = createPinia()
 Vue.use(VueCompositionAPI)
 Vue.use(VueMask)
 Vue.config.productionTip = false
+
+extend("file_size", {
+  validate: (value) => {
+    if (value && value.size > 2 * 1024 * 1024) {
+      return false;
+    }
+    return true;
+  },
+  message: () => `File size exceeds limit of 2MB`,
+});
 
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)){

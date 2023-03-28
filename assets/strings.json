@@ -3,9 +3,15 @@
     "common": {
       "yes": "Yes",
       "cancel": "Cancel",
+      "remove":"Remove",
       "fields": {
         "categoryName": "Category"
       }
+    },
+    "fields":{
+      "variantType":"Variant Type",
+      "variant":"Variant",
+      "variantName":"Variant Name"
     },
     "header": {
       "souvenir": "Souvenir",
@@ -36,6 +42,48 @@
       "orderyours": "Order your souvenirs, printed invitation, digital invitation, hampers, and Bridesmaid Box from GIFU. You will definitely save your time!"
     },
     "views": {
+      "product":{
+        "title": "Product",
+        "add":"Add Product",
+        "edit":"Edit",
+        "addViewRule":"Add Rule",
+        "addPricingRange":"Add Pricing Range",
+        "removePricingRange":"Remove Pricing Range",
+        "save":"Save",
+        "cancel":"Cancel",
+        "variationFormSetting":"Variation Form Setting",
+        "addVariationFormSetting":"Add Variation Form Setting",
+        "variantPricingCombination":"Variant Pricing Combination Setting",
+        "addVariantPricingCombination":"Add Variant Pricing Combination Setting",
+        "pricingRange":"Product Pricing Range",
+        "alwaysShow":"Always visible",
+        "modifyRule":"Modify Rule",
+        "fields":{
+          "picture":"Product Photo",
+          "size":"Size",
+          "weight":"Wieght",
+          "minOrder":"Minimum Order",
+          "description":"Description",
+          "variantType":"Variant Type",
+          "variant":"Variant",
+          "firstSubVariant":"First Subvariant",
+          "secondSubVariant":"Second Subvariant",
+          "min":"Start from",
+          "max":"Until",
+          "willBeVisibleWhen":"Will be visible when",
+          "width":"Width",
+          "length":"Length",
+          "height":"Height",
+
+          "name":"Name",
+          "variation":"Variation",
+          "price":"Price",
+          "pricingRanges":"Ranges",
+          "action":"Action",
+          "productType":"Product Type",
+          "productCategory":"Product Category"
+        }
+      },
       "administration": {
         "title": "Role and Permission",
         "addAccount": "Add Account",
@@ -110,9 +158,15 @@
     "common": {
       "yes": "Ya",
       "cancel": "Batalkan",
+      "remove":"Hapus",
       "fields": {
         "categoryName": "Kategori"
       }
+    },
+    "fields":{
+      "variantType":"Jenis Varian",
+      "variant":"Varian",
+      "variantName":"Nama Varian"
     },
     "header": {
       "souvenir": "Suvenir",
@@ -143,6 +197,48 @@
       "orderyours": "Pesan Souvenir, Undangan Fisik, Undangan Digital, Hampers, dan Bridesmaid Box cukup di satu tempat saja"
     },
     "views": {
+      "product":{
+        "title": "Produk",
+        "add":"Tambah Produk",
+        "edit":"Ubah",
+        "addViewRule":"Tambah Aturan",
+        "addPricingRange":"Tambah Range Harga",
+        "removePricingRange":"Hapus Range Harga",
+        "alwaysShow":"Selalu Muncul",
+        "pricingRange":"Range Harga Produk",
+        "save":"Simpan",
+        "cancel":"Batalkan",
+        "variationFormSetting":"Seting Form Variasi",
+        "addVariationFormSetting":"Tambah Setting Form Variasi",
+        "variantPricingCombination":"Setting Kombinasi Harga Varian",
+        "addVariantPricingCombination":"Tambah Setting Kombinasi Harga Varian",
+        "modifyRule":"Ubah Aturan",
+        "fields":{
+          "picture":"Foto Produk",
+          "size":"Ukuran",
+          "weight":"Berat",
+          "minOrder":"Minimal Pemesanan",
+          "description":"Deskripsi",
+          "variantType":"Jenis Varian",
+          "variant":"Varian",
+          "firstSubVariant":"Subvarian pertama",
+          "secondSubVariant":"Subvarian kedua",
+          "min":"Mulai dari",
+          "max":"Hingga",
+          "willBeVisibleWhen":"Akan muncul jika",
+          "width":"Lebar",
+          "length":"Panjang",
+          "height":"Tinggi",
+
+          "name":"Nama",
+          "variation":"Variasi",
+          "price":"Harga",
+          "pricingRanges":"Range",
+          "action":"Aksi",
+          "productType":"Jenis Produk",
+          "productCategory":"Kategori Produk"
+        }
+      },
       "administration": {
         "title": "Peran dan Izin",
         "addAccount": "Tambah Akun",
