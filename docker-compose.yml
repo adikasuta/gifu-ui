@@ -10,3 +10,4 @@ services:
     volumes:
       - /var/opt/app_data/files/picture:/var/data/files/picture
       - /var/opt/certs:/certs
+      - ./:/app
