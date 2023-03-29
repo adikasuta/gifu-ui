@@ -1,7 +1,12 @@
 version: "3.8"
+
 services:
   gifu-ui:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILDKIT_CACHE_SIZE=1g
     container_name: gifu-ui
     ports:
       - "3000:3000"
