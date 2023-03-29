@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - BUILDKIT_CACHE_SIZE=1g
+        - BUILDKIT_CACHE_SIZE=2g
     container_name: gifu-ui
     ports:
       - "3000:3000"
