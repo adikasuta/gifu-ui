@@ -10,7 +10,7 @@ export default {
   props: ["filename"],
   computed:{
     fileUrl(){
-       return BASE_URL+"/api/public/assets/images?filename="+this.filename
+       return BASE_URL+"/public/api/assets/images?filename="+this.filename
     }
   }
 };
