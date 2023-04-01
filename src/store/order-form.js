@@ -38,49 +38,27 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
       customerEmail: "",
       phoneNumber: "",
     },
-    souvenirForm: {
+    SOUVENIR: {
       quantity: 0,
       notes: "",
       brideName: "",
       groomName: "",
       eventDate: null,
       eventVenue: "",
-      COLOR: [],
-      PACKAGING: {
-        variantId: null,
-        contentId: null
+      variants: {
+        COLOR: [],
+        PACKAGING: null,
+        COLOR_PACKAGING_1: null,
+        COLOR_PACKAGING_2: null,
+        ACCESSORIES: null,
+        EMBOSS_DESIGN: null,
+        SIZE: null,
+        POSITION: null,
+        GREETINGS_DESIGN: null,
       },
-      COLOR_PACKAGING_1: {
-        variantId: null,
-        contentId: null
-      },
-      COLOR_PACKAGING_2: {
-        variantId: null,
-        contentId: null
-      },
-      ACCESSORIES: {
-        variantId: null,
-        contentId: null
-      },
-      EMBOSS_DESIGN: {
-        variantId: null,
-        contentId: null,
-        additionalText: "",
-      },
-      SIZE: {
-        variantId: null,
-        contentId: null,
-      },
-      POSITION: {
-        variantId: null,
-        contentId: null,
-      },
-      GREETINGS_DESIGN: {
-        variantId: null,
-        contentId: null,
-      },
+
     },
-    invitationForm: {
+    INVITATION: {
       quantity: 0,
       notes: "",
       brideInfo: {
@@ -126,6 +104,13 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
     }
   }),
   getters: {
+    getQtyFromColor(state){
+      let qty = 0;
+      for(const content of state.SOUVENIR.variants.COLOR){
+        qty+=content.quantity;
+      }
+      return qty;
+    },
     getInvitationOrderPayload(state) {
       let eventDetail, variants;
       state.invitationForm.brideInfo.fullname
@@ -178,7 +163,7 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
     getPrice(state) {
       let quantity = 0;
       if (state.productType === ProductTypeCodes.SOUVENIR) {
-        quantity = state.souvenirForm.quantity || 0;
+        quantity = state.SOUVENIR.quantity || 0;
       }
       if (state.productType === ProductTypeCodes.INVITATION) {
         quantity = state.invitationForm.quantity || 0;
@@ -200,7 +185,7 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
     },
     getReferenceContents: (state) => (variantTypeCode) => {
       let variantIds = []
-      let form = state.souvenirForm;
+      let form = state.SOUVENIR;
       if (state.productType == ProductTypeCodes.INVITATION) {
         form = state.invitationForm;
       }
@@ -232,6 +217,26 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
     }
   },
   actions: {
+    transformValue(variantTypeCode, contentId) {
+      const variants = this.getReferenceVariants(variantTypeCode);
+      let variantId = null;
+      for (const variant of variants) {
+        for (const content of variant.contents) {
+          if (content.id == contentId) {
+            variantId = variant.id;
+            break;
+          }
+        }
+        if (variantId != null) {
+          break;
+        }
+      }
+      const productType = this.$state.productType;
+      this.$state[productType].variants[variantTypeCode] = {
+        variantId,
+        contentId,
+      };
+    },
     async postSouvenirOrder() {
 
     },

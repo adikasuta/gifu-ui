@@ -61,6 +61,7 @@
                     v-mask="'##'"
                     v-model="contentCategory.designEstimation"
                     :error-messages="errors"
+                    :suffix="$t('views.workflow.fields.week')"
                   ></v-text-field>
                 </ValidationProvider>
               </v-col>
@@ -79,6 +80,7 @@
                     v-mask="'##'"
                     v-model="contentCategory.productionEstimation"
                     :error-messages="errors"
+                    :suffix="$t('views.workflow.fields.week')"
                   ></v-text-field>
                 </ValidationProvider>
               </v-col>

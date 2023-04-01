@@ -40,12 +40,12 @@ export default {
   components: { VueRadioButton, ValidationProvider },
   props: [],
   computed: {
-    ...mapWritableState(useOrderProductForm, ["invitationForm"]),
+    ...mapWritableState(useOrderProductForm, ["INVITATION"]),
     ...mapState(useOrderProductForm, ["getReferenceContents"]),
   },
   created() {
-    if(this.invitationForm.variants.PRODUCT_DESIGN.contentId){
-      this.contentId=this.invitationForm.variants.PRODUCT_DESIGN.contentId;
+    if(this.INVITATION.variants.PRODUCT_DESIGN.contentId){
+      this.contentId=this.INVITATION.variants.PRODUCT_DESIGN.contentId;
     }
     this.contentReferences = this.getReferenceContents(
       VariantTypeCodes.ENVELOPE_PAPER
@@ -63,15 +63,14 @@ export default {
     contentId(){
       const variants = this.contentReferences.filter(it=>it.id == this.contentId);
       if(variants.length>0){
-        this.invitationForm.variants.PRODUCT_DESIGN.variantId = variants[0].variantId;
+        this.INVITATION.variants.PRODUCT_DESIGN.variantId = variants[0].variantId;
       }
-      this.invitationForm.variants.PRODUCT_DESIGN.contentId = this.contentId;
+      this.INVITATION.variants.PRODUCT_DESIGN.contentId = this.contentId;
     }
   },
   data: () => ({
     contentId: null,
     contentReferences: [],
-    selectedButton: "",
   }),
 };
 </script>

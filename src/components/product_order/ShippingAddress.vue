@@ -110,7 +110,7 @@
               ></v-text-field>
             </ValidationProvider>
           </v-col>
-          <v-col cols="12" class="pb-0">
+          <v-col cols="12" class="pb-0 pt-0">
             <ValidationProvider
               v-slot="{ errors }"
               :name="$t('views.order.fields.detailAddress')"
@@ -137,7 +137,7 @@
         <label>{{ $t("views.order.fields.preferredShippingVendor") }}</label>
       </v-col>
       <v-col cols="12" sm="9">
-        <v-col cols="12" sm="6" class="pb-0">
+        <v-col cols="12" sm="6" class="pb-0 pt-0">
           <ValidationProvider
             v-slot="{ errors }"
             :name="$t('views.order.fields.preferredShippingVendor')"
@@ -155,7 +155,7 @@
             ></v-select>
           </ValidationProvider>
         </v-col>
-        <v-col cols="12" sm="6" class="pb-0">
+        <v-col cols="12" sm="6" class="pb-0 pt-0">
           <v-checkbox
             v-model="shippingAddressForm.useWoodenCrate"
             :label="$t('views.order.fields.woodenCrate')"

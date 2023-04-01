@@ -49,7 +49,7 @@
           <CarouselImageSelection
             :options="getReferenceContents(VariantTypeCodes.WAX_SEALS)"
             :error-messages="errors"
-            v-model="invitationForm.variants.WAX_SEALS"
+            v-model="INVITATION.variants.WAX_SEALS"
           />
         </ValidationProvider>
       </v-col>
@@ -73,7 +73,7 @@
           <CarouselImageSelection
             :options="getReferenceContents(VariantTypeCodes.DRIED_FLOWERS)"
             :error-messages="errors"
-            v-model="invitationForm.variants.DRIED_FLOWERS"
+            v-model="INVITATION.variants.DRIED_FLOWERS"
           />
         </ValidationProvider>
       </v-col>
@@ -95,7 +95,7 @@
           <CarouselImageSelection
             :options="getReferenceContents(VariantTypeCodes.ENVELOPE)"
             :error-messages="errors"
-            v-model="invitationForm.variants.ENVELOPE"
+            v-model="INVITATION.variants.ENVELOPE"
           />
         </ValidationProvider>
       </v-col>
@@ -119,7 +119,7 @@
           <CarouselImageWithQuantitySelection
             :options="getReferenceContents(VariantTypeCodes.ADDITIONAL_PAPER)"
             :error-messages="errors"
-            v-model="invitationForm.variants.ADDITIONAL_PAPER"
+            v-model="INVITATION.variants.ADDITIONAL_PAPER"
           />
         </ValidationProvider>
       </v-col>
@@ -141,7 +141,7 @@
           <CarouselImageSelection
             :options="getReferenceContents(VariantTypeCodes.VELLUM_WRAP)"
             :error-messages="errors"
-            v-model="invitationForm.variants.VELLUM_WRAP"
+            v-model="INVITATION.variants.VELLUM_WRAP"
           />
         </ValidationProvider>
       </v-col>
@@ -163,7 +163,7 @@
           <CarouselImageSelection
             :options="getReferenceContents(VariantTypeCodes.RIBBON)"
             :error-messages="errors"
-            v-model="invitationForm.variants.RIBBON"
+            v-model="INVITATION.variants.RIBBON"
           />
         </ValidationProvider>
       </v-col>
@@ -187,7 +187,7 @@
           <CarouselImageSelection
             :options="getReferenceContents(VariantTypeCodes.RIBBON_COLOR)"
             :error-messages="errors"
-            v-model="invitationForm.variants.RIBBON_COLOR"
+            v-model="INVITATION.variants.RIBBON_COLOR"
           />
         </ValidationProvider>
       </v-col>
@@ -232,7 +232,7 @@
 import CarouselImageWithQuantitySelection from "../../common/CarouselImageWithQuantitySelection";
 import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 import CarouselImageSelection from "../../common/CarouselImageSelection";
-import { mapWritableState, mapState } from "pinia";
+import { mapWritableState, mapState, mapActions } from "pinia";
 import { useOrderProductForm } from "../../../store/order-form";
 import VariantTypeCodes from "../../../constants/VariantTypeCodes";
 export default {
@@ -244,7 +244,7 @@ export default {
   props: [],
   computed: {
     ...mapWritableState(useOrderProductForm, [
-      "invitationForm",
+      "INVITATION",
       "referenceVariants",
     ]),
     ...mapState(useOrderProductForm, [
@@ -253,32 +253,12 @@ export default {
     ]),
   },
   methods: {
-    transformValue(variantTypeCode, contentId) {
-      const variants = this.getReferenceVariants(variantTypeCode);
-      let variantId = null;
-      for (const variant of variants) {
-        for (const content of variant.contents) {
-          if (content.id == contentId) {
-            variantId = variant.id;
-            break;
-          }
-        }
-        if (variantId != null) {
-          break;
-        }
-      }
-      this.invitationForm.variants[variantTypeCode] = {
-        variantId,
-        contentId,
-      };
-    },
+    ...mapActions(useOrderProductForm, ["transformValue"]),
   },
   data: () => ({
     emboss: null,
     packingService: null,
     VariantTypeCodes,
-    selectedImage: null,
-    selectedButton: "",
   }),
 };
 </script>

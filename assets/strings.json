@@ -47,6 +47,7 @@
         "next":"Next",
         "order":"Order",
         "fields":{
+          "content":"Content",
           "woodenCrate":"Wooden Crate",
           "designProduct":"Produk Design",
           "save":"Save",
@@ -114,6 +115,13 @@
         "invitation":{
           "steps":{
             "design":"Select invitation design",
+            "detail":"Complete your detail order",
+            "additional":"Complete your additional request",
+            "customerData":"Fill customer data"
+          }
+        },
+        "souvenir":{
+          "steps":{
             "detail":"Complete your detail order",
             "additional":"Complete your additional request",
             "customerData":"Fill customer data"
@@ -222,6 +230,7 @@
         "addStep": "Add Step",
         "deadline": "Deadline",
         "fields": {
+          "week":"Weeks",
           "productionEstimation": "Production Estimation",
           "designEstimation": "Design Estimation",
           "productType": "Product Type",
@@ -284,6 +293,7 @@
         "next":"Selanjutnya",
         "order":"Pesan",
         "fields":{
+          "content":"Konten",
           "woodenCrate":"Peti Kayu",
           "designProduct":"Desain Produk",
           "save":"Simpan",
@@ -307,7 +317,7 @@
           "bridegroom":"Mempelai",
           "bride":"Mempelai Wanita",
           "groom":"Mempelai Pria",
-          "eventDetail":"Data Kegiatan",
+          "eventDetail":"Detail Acara",
           "date":"Tanggal",
           "time":"Jam",
           "venue":"Lokasi",
@@ -351,6 +361,13 @@
         "invitation":{
           "steps":{
             "design":"Pilih desain undangan",
+            "detail":"Lengkapi detail pesanan",
+            "additional":"Lengkapi info tambahan",
+            "customerData":"Isi data pemesan"
+          }
+        },
+        "souvenir":{
+          "steps":{
             "detail":"Lengkapi detail pesanan",
             "additional":"Lengkapi info tambahan",
             "customerData":"Isi data pemesan"
@@ -456,10 +473,11 @@
         "filter": "Filter berdasarkan",
         "updateCategory": "Ubah Kategori",
         "addNewCategory": "Tambah Kategori Baru",
-        "addCategory": "Tempel kategori lainnya",
+        "addCategory": "Tempel kategori",
         "addStep": "Tambah Step",
         "deadline": "Deadline",
         "fields": {
+          "week":"Minggu",
           "productionEstimation": "Estimasi Produksi",
           "designEstimation": "Estimasi Desain",
           "productType": "Jenis Produk",

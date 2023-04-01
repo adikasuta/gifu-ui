@@ -139,7 +139,7 @@ export default {
   },
   async created() {},
   computed: {
-    ...mapWritableState(useOrderProductForm, ["invitationForm"]),
+    ...mapWritableState(useOrderProductForm, ["INVITATION"]),
     ...mapState(useReferenceData, ["publicCategories"]),
     ...mapState(useOrderProductForm, ["publicCategories", "productTypes"]),
   },

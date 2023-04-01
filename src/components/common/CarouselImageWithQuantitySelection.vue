@@ -55,6 +55,7 @@
                   :rules="{
                     required: true,
                     numeric: true,
+                    min_value: minQtyPerItem,
                   }"
                 >
                   <v-text-field
@@ -95,6 +96,10 @@ export default {
     ValidationProvider,
   },
   props: {
+    minQtyPerItem:{
+      type: Number,
+      default: 0,
+    },
     options: {
       type: Array,
       required: true,
@@ -221,7 +226,7 @@ export default {
               publishedData.push({
                 variantId: opt.variantId,
                 contentId: opt.id,
-                quantity: this.selectedItems[i].quantity,
+                quantity: parseInt(this.selectedItems[i].quantity),
               });
               break;
             }

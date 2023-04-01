@@ -78,7 +78,7 @@
             >
               <v-text-field
                 outlined
-                v-model="invitationForm.brideInfo.fullname"
+                v-model="INVITATION.brideInfo.fullname"
                 :error-messages="errors"
                 :label="$t('views.order.fields.fullname')"
               ></v-text-field>
@@ -95,7 +95,7 @@
             >
               <v-text-field
                 outlined
-                v-model="invitationForm.brideInfo.nickname"
+                v-model="INVITATION.brideInfo.nickname"
                 :error-messages="errors"
                 :label="$t('views.order.fields.nickname')"
               ></v-text-field>
@@ -113,7 +113,7 @@
             >
               <v-text-field
                 outlined
-                v-model="invitationForm.brideInfo.motherName"
+                v-model="INVITATION.brideInfo.motherName"
                 :error-messages="errors"
                 :label="$t('views.order.fields.motherName')"
               ></v-text-field>
@@ -130,7 +130,7 @@
             >
               <v-text-field
                 outlined
-                v-model="invitationForm.brideInfo.fatherName"
+                v-model="INVITATION.brideInfo.fatherName"
                 :error-messages="errors"
                 :label="$t('views.order.fields.fatherName')"
               ></v-text-field>
@@ -147,7 +147,7 @@
             >
               <v-text-field
                 outlined
-                v-model="invitationForm.brideInfo.instagramAccount"
+                v-model="INVITATION.brideInfo.instagramAccount"
                 :error-messages="errors"
                 :label="$t('views.order.fields.instagramAccount')"
               ></v-text-field>
@@ -174,7 +174,7 @@
             >
               <v-text-field
                 outlined
-                v-model="invitationForm.groomInfo.fullname"
+                v-model="INVITATION.groomInfo.fullname"
                 :error-messages="errors"
                 :label="$t('views.order.fields.fullname')"
               ></v-text-field>
@@ -191,7 +191,7 @@
             >
               <v-text-field
                 outlined
-                v-model="invitationForm.groomInfo.nickname"
+                v-model="INVITATION.groomInfo.nickname"
                 :error-messages="errors"
                 :label="$t('views.order.fields.nickname')"
               ></v-text-field>
@@ -209,7 +209,7 @@
             >
               <v-text-field
                 outlined
-                v-model="invitationForm.groomInfo.motherName"
+                v-model="INVITATION.groomInfo.motherName"
                 :error-messages="errors"
                 :label="$t('views.order.fields.motherName')"
               ></v-text-field>
@@ -226,7 +226,7 @@
             >
               <v-text-field
                 outlined
-                v-model="invitationForm.groomInfo.fatherName"
+                v-model="INVITATION.groomInfo.fatherName"
                 :error-messages="errors"
                 :label="$t('views.order.fields.fatherName')"
               ></v-text-field>
@@ -243,7 +243,7 @@
             >
               <v-text-field
                 outlined
-                v-model="invitationForm.groomInfo.instagramAccount"
+                v-model="INVITATION.groomInfo.instagramAccount"
                 :error-messages="errors"
                 :label="$t('views.order.fields.instagramAccount')"
               ></v-text-field>
@@ -260,14 +260,14 @@
         <v-row>
           <v-col
           cols="12"
-            v-for="(eventDetail, index) of invitationForm.eventDetails"
+            v-for="(eventDetail, index) of INVITATION.eventDetails"
             :key="index"
           >
             <EventDetails
-              v-model="invitationForm.eventDetails[index]"
+              v-model="INVITATION.eventDetails[index]"
               :index="index"
               @on:delete="handleRemoveEvent"
-              :hideRemoveButton="invitationForm.eventDetails.length == 1"
+              :hideRemoveButton="INVITATION.eventDetails.length == 1"
             />
           </v-col>
         </v-row>
@@ -283,6 +283,28 @@
     </v-row>
     <v-divider class="mb-5 mt-5"></v-divider>
     <ShippingAddress/>
+    <v-row>
+      <v-col cols="12" sm="3">
+        <label>{{ $t("views.order.fields.notes") }}</label>
+      </v-col>
+      <v-col cols="12" sm="9">
+        <ValidationProvider
+          v-slot="{ errors }"
+          :name="$t('views.order.fields.notes')"
+          vid="notes"
+          :rules="{
+            required: true,
+          }"
+        >
+          <v-text-field
+            outlined
+            v-model="INVITATION.notes"
+            :error-messages="errors"
+            :label="$t('views.order.fields.notes')"
+          ></v-text-field>
+        </ValidationProvider>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -303,7 +325,7 @@ export default {
   computed: {
     ...mapWritableState(useOrderProductForm, [
       "customerInfoForm",
-      "invitationForm",
+      "INVITATION",
       "referenceVariants",
     ]),
     ...mapState(useOrderProductForm, [
@@ -313,44 +335,18 @@ export default {
   },
   methods: {
     handleRemoveEvent(index){
-        this.invitationForm.eventDetails.splice(index, 1);
+        this.INVITATION.eventDetails.splice(index, 1);
     },
     handleAddEvent() {
-      this.invitationForm.eventDetails.push({
+      this.INVITATION.eventDetails.push({
         name: "",
         venue: "",
         date: null,
       });
     },
-    transformValue(variantTypeCode, contentId) {
-      const variants = this.getReferenceVariants(variantTypeCode);
-      let variantId = null;
-      for (const variant of variants) {
-        for (const content of variant.contents) {
-          if (content.id == contentId) {
-            variantId = variant.id;
-            break;
-          }
-        }
-        if (variantId != null) {
-          break;
-        }
-      }
-      this.invitationForm[variantTypeCode] = {
-        variantId,
-        contentId,
-      };
-    },
   },
   data: () => ({
-    foilColor: null,
-    foilPosition: null,
-    language: null,
-    boardOrientationContentId: null,
-    envelopeOrientationContentId: null,
     VariantTypeCodes,
-    selectedImage: null,
-    selectedButton: "",
   }),
 };
 </script>

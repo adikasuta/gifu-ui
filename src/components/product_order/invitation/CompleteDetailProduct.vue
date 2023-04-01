@@ -17,7 +17,7 @@
         >
           <v-text-field
             outlined
-            v-model="invitationForm.quantity"
+            v-model="INVITATION.quantity"
             :error-messages="errors"
             :label="$t('views.order.fields.quantity')"
           ></v-text-field>
@@ -42,7 +42,7 @@
           <CarouselImageSelection
             :options="getReferenceContents(VariantTypeCodes.ENVELOPE_PAPER)"
             :error-messages="errors"
-            v-model="invitationForm.variants.ENVELOPE_PAPER"
+            v-model="INVITATION.variants.ENVELOPE_PAPER"
           />
         </ValidationProvider>
       </v-col>
@@ -63,7 +63,7 @@
           <CarouselImageSelection
             :options="getReferenceContents(VariantTypeCodes.BOARD_PAPER)"
             :error-messages="errors"
-            v-model="invitationForm.variants.BOARD_PAPER"
+            v-model="INVITATION.variants.BOARD_PAPER"
           />
         </ValidationProvider>
       </v-col>
@@ -255,7 +255,7 @@
 <script>
 import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 import CarouselImageSelection from "../../common/CarouselImageSelection";
-import { mapWritableState, mapState } from "pinia";
+import { mapWritableState, mapState, mapActions } from "pinia";
 import { useOrderProductForm } from "../../../store/order-form";
 import VariantTypeCodes from "../../../constants/VariantTypeCodes";
 export default {
@@ -266,7 +266,7 @@ export default {
   props: [],
   computed: {
     ...mapWritableState(useOrderProductForm, [
-      "invitationForm",
+      "INVITATION",
       "referenceVariants",
     ]),
     ...mapState(useOrderProductForm, [
@@ -276,25 +276,7 @@ export default {
     ]),
   },
   methods: {
-    transformValue(variantTypeCode, contentId) {
-      const variants = this.getReferenceVariants(variantTypeCode);
-      let variantId = null;
-      for (const variant of variants) {
-        for (const content of variant.contents) {
-          if (content.id == contentId) {
-            variantId = variant.id;
-            break;
-          }
-        }
-        if (variantId != null) {
-          break;
-        }
-      }
-      this.invitationForm.variants[variantTypeCode] = {
-        variantId,
-        contentId,
-      };
-    },
+    ...mapActions(useOrderProductForm, ["transformValue"]),
   },
   data: () => ({
     foilColor: null,
@@ -303,8 +285,6 @@ export default {
     boardOrientationContentId: null,
     envelopeOrientationContentId: null,
     VariantTypeCodes,
-    selectedImage: null,
-    selectedButton: "",
   }),
 };
 </script>
