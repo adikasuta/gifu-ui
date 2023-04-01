@@ -305,6 +305,19 @@
         </ValidationProvider>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="12" sm="3">
+        <label>{{ $t("views.order.fields.referralCode") }}</label>
+      </v-col>
+      <v-col cols="12" sm="9">
+          <v-text-field
+            outlined
+            v-model="INVITATION.csReferralToken"
+            :error-messages="errors"
+            :label="$t('views.order.fields.referralCode')"
+          ></v-text-field>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

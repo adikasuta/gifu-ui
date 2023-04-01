@@ -92,7 +92,7 @@ import CompleteDetailProduct from "./souvenir/CompleteDetailProduct";
 import ProductOverview from "./ProductOverview";
 import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
-import { mapState, mapWritableState } from "pinia";
+import { mapState, mapWritableState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
 import { useOrderProductForm } from "../../store/order-form";
 export default {
@@ -126,10 +126,24 @@ export default {
     ...mapState(useOrderProductForm, ["publicCategories", "productTypes"]),
   },
   methods: {
+    ...mapActions(useOrderProductForm, ["postSouvenirOrder"]),
     handleOrder(validator) {
       this.$refs[validator].validate().then(async (success) => {
         if (success) {
-          console.log("Test")
+          try {
+            this.isLoading = true;
+            const order = await this.postSouvenirOrder();
+            this.isLoading = false;
+            this.$router.push(`/invoice?orderId=${order.orderCode}`);
+          } catch (error) {
+            console.log(error);
+            this.isLoading = false;
+            this.isError = true;
+            this.errorMessage = "Unhandled Error";
+            if (error.response) {
+              this.errorMessage = error.response.data.message;
+            }
+          }
         }
       });
     },

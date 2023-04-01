@@ -47,6 +47,7 @@
         "next":"Next",
         "order":"Order",
         "fields":{
+          "referralCode":"Referral Code",
           "content":"Content",
           "woodenCrate":"Wooden Crate",
           "designProduct":"Produk Design",
@@ -293,6 +294,7 @@
         "next":"Selanjutnya",
         "order":"Pesan",
         "fields":{
+          "referralCode":"Kode Referral",
           "content":"Konten",
           "woodenCrate":"Peti Kayu",
           "designProduct":"Desain Produk",

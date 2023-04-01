@@ -75,7 +75,10 @@
               </ValidationObserver>
               <v-divider class="mt-10 mb-5"></v-divider>
               <v-btn text @click="e1 = 3"> {{ $t("views.order.back") }} </v-btn>
-              <v-btn color="pink lighten-1" @click="handleOrder('customerDataObserver')">
+              <v-btn
+                color="pink lighten-1"
+                @click="handleOrder('customerDataObserver')"
+              >
                 {{ $t("views.order.order") }}
               </v-btn>
             </v-stepper-content>
@@ -108,7 +111,7 @@ import CompleteDetailProduct from "./invitation/CompleteDetailProduct";
 import ProductOverview from "./ProductOverview";
 import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
-import { mapState, mapWritableState } from "pinia";
+import { mapState, mapWritableState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
 import { useOrderProductForm } from "../../store/order-form";
 export default {
@@ -144,10 +147,24 @@ export default {
     ...mapState(useOrderProductForm, ["publicCategories", "productTypes"]),
   },
   methods: {
+    ...mapActions(useOrderProductForm, ["postInvitationOrder"]),
     handleOrder(validator) {
       this.$refs[validator].validate().then(async (success) => {
         if (success) {
-          console.log("Test")
+          try {
+            this.isLoading = true;
+            const order = await this.postInvitationOrder();
+            this.isLoading = false;
+            this.$router.push(`/invoice?orderId=${order.orderCode}`);
+          } catch (error) {
+            console.log(error);
+            this.isLoading = false;
+            this.isError = true;
+            this.errorMessage = "Unhandled Error";
+            if (error.response) {
+              this.errorMessage = error.response.data.message;
+            }
+          }
         }
       });
     },

@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
-// import ProductService from "../services/Product.service";
 import PublicProductService from "../services/PublicProduct.service";
 import ProductTypeCodes from "../constants/ProductTypeCodes";
+import VariantTypeCodes from "../constants/VariantTypeCodes";
+import OrderService from "../services/PublicOrder.service";
 
 export const useOrderProductForm = defineStore('OrderProductForm', {
   state: () => ({
@@ -39,6 +40,7 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
       phoneNumber: "",
     },
     SOUVENIR: {
+      csReferralToken: null,
       quantity: 0,
       notes: "",
       brideName: "",
@@ -59,6 +61,7 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
 
     },
     INVITATION: {
+      csReferralToken: null,
       quantity: 0,
       notes: "",
       brideInfo: {
@@ -94,7 +97,7 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
         WAX_SEALS: null,
         DRIED_FLOWERS: null,
         ENVELOPE: null,
-        ADDITIONAL_PAPER: [],
+        // ADDITIONAL_PAPER: [],
         VELLUM_WRAP: null,
         RIBBON: null,
         RIBBON_COLOR: null,
@@ -104,28 +107,18 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
     }
   }),
   getters: {
-    getQtyFromColor(state){
+    getQtyFromColor(state) {
       let qty = 0;
-      for(const content of state.SOUVENIR.variants.COLOR){
-        qty+=content.quantity;
+      for (const content of state.SOUVENIR.variants.COLOR) {
+        qty += content.quantity;
       }
       return qty;
     },
-    getInvitationOrderPayload(state) {
-      let eventDetail, variants;
-      state.invitationForm.brideInfo.fullname
+    getSouvenirOrderPayload: (state) => {
+      let variants;
       let brideGroom = {
-        brideName: state.invitationForm.brideInfo.fullname,
-        brideNickname: state.invitationForm.brideInfo.nickname,
-        brideFather: state.invitationForm.brideInfo.fatherName,
-        brideMother: state.invitationForm.brideInfo.motherName,
-        brideInstagram: state.invitationForm.brideInfo.instagramAccount,
-
-        groomName: state.invitationForm.groomInfo.fullname,
-        groomNickname: state.invitationForm.groomInfo.nickname,
-        groomFather: state.invitationForm.groomInfo.fatherName,
-        groomMother: state.invitationForm.groomInfo.motherName,
-        groomInstagram: state.invitationForm.groomInfo.instagramAccount,
+        brideName: state.SOUVENIR.brideName,
+        groomName: state.SOUVENIR.groomName,
       }
 
       let customerDetails = {
@@ -144,16 +137,91 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
         preferredShippingVendor: state.shippingAddressForm.preferredShippingVendor,
         useWoodenCrate: state.shippingAddressForm.useWoodenCrate
       }
+
+      variants = []
+      for (const key in state.SOUVENIR.variants) {
+        if (state.SOUVENIR.variants[key] && state.SOUVENIR.variants[key].contentId) {
+          const toBePushed = {
+            ...state.SOUVENIR.variants[key],
+            variantTypeCode: key,
+          }
+          if ([VariantTypeCodes.EMBOSS_DESIGN, VariantTypeCodes.GREETINGS_DESIGN].includes(key)) {
+            toBePushed.additionalInfoKey = "content"
+          }
+          variants.push(toBePushed);
+        }
+      }
+      let eventDetail = {
+        name: state.SOUVENIR.eventVenue,
+        venue: state.SOUVENIR.eventVenue,
+        date: state.SOUVENIR.eventDate
+      }
       return {
         productId: state.id,
-        quantity: state.invitationForm.quantity,
+        quantity: state.SOUVENIR.quantity,
         productType: state.productType,
-        notes: state.invitationForm.notes,
-        // TODO: csReferralToken,
+        notes: state.SOUVENIR.notes,
+        csReferralToken: state.SOUVENIR.csReferralToken,
         brideGroom,
         customerDetails,
         shippingDetails,
-        eventDetail,
+        eventDetail: [eventDetail],
+        variants,
+      }
+
+    },
+    getInvitationOrderPayload: (state) => {
+      let variants;
+      let brideGroom = {
+        brideName: state.INVITATION.brideInfo.fullname,
+        brideNickname: state.INVITATION.brideInfo.nickname,
+        brideFather: state.INVITATION.brideInfo.fatherName,
+        brideMother: state.INVITATION.brideInfo.motherName,
+        brideInstagram: state.INVITATION.brideInfo.instagramAccount,
+
+        groomName: state.INVITATION.groomInfo.fullname,
+        groomNickname: state.INVITATION.groomInfo.nickname,
+        groomFather: state.INVITATION.groomInfo.fatherName,
+        groomMother: state.INVITATION.groomInfo.motherName,
+        groomInstagram: state.INVITATION.groomInfo.instagramAccount,
+      }
+
+      let customerDetails = {
+        name: state.customerInfoForm.customerName,
+        email: state.customerInfoForm.customerEmail,
+        phoneNumber: state.customerInfoForm.phoneNumber,
+      }
+
+      let shippingDetails = {
+        provinceId: state.shippingAddressForm.provinceCode,
+        cityId: state.shippingAddressForm.cityCode,
+        distrctId: state.shippingAddressForm.districtCode,
+        kelurahanId: state.shippingAddressForm.kelurahanCode,
+        postalCode: state.shippingAddressForm.postalCode,
+        address: state.shippingAddressForm.address,
+        preferredShippingVendor: state.shippingAddressForm.preferredShippingVendor,
+        useWoodenCrate: state.shippingAddressForm.useWoodenCrate
+      }
+
+      variants = []
+      for (const key in state.INVITATION.variants) {
+        if (state.INVITATION.variants[key] && state.INVITATION.variants[key].contentId) {
+          variants.push({
+            ...state.INVITATION.variants[key],
+            variantTypeCode: key,
+          });
+        }
+      }
+      return {
+        productId: state.id,
+        quantity: state.INVITATION.quantity,
+        productType: state.productType,
+        notes: state.INVITATION.notes,
+        csReferralToken: state.INVITATION.csReferralToken,
+        brideGroom,
+        customerDetails,
+        shippingDetails,
+        eventDetail: state.INVITATION.eventDetails,
         variants,
       }
     },
@@ -238,10 +306,10 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
       };
     },
     async postSouvenirOrder() {
-
+      return await OrderService.postOrder(this.getSouvenirOrderPayload);
     },
     async postInvitationOrder() {
-
+      return await OrderService.postOrder(this.getInvitationOrderPayload);
     },
     resetForm() {
       this.$state.id = null;

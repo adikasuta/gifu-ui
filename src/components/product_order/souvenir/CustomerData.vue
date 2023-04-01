@@ -170,6 +170,20 @@
     </v-row>
 
     <ShippingAddress />
+
+    <v-row>
+      <v-col cols="12" sm="3">
+        <label>{{ $t("views.order.fields.referralCode") }}</label>
+      </v-col>
+      <v-col cols="12" sm="9">
+        <v-text-field
+          outlined
+          v-model="SOUVENIR.csReferralToken"
+          :error-messages="errors"
+          :label="$t('views.order.fields.referralCode')"
+        ></v-text-field>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -186,21 +200,16 @@ export default {
   },
   props: [],
   computed: {
-    ...mapWritableState(useOrderProductForm, [
-      "customerInfoForm",
-      "SOUVENIR",
-    ]),
+    ...mapWritableState(useOrderProductForm, ["customerInfoForm", "SOUVENIR"]),
     ...mapState(useOrderProductForm, [
       "getReferenceContents",
       "getReferenceVariants",
     ]),
   },
-  methods: {
-    
-  },
+  methods: {},
   data: () => ({
     VariantTypeCodes,
-    dateMenu: false
+    dateMenu: false,
   }),
 };
 </script>

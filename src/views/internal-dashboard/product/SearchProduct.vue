@@ -7,18 +7,19 @@
       </template>
       <template v-slot:body>
         <v-row>
-            <v-col cols="12">
-                <v-btn
-          elevation="2"
-          class="mr-5"
-          color="primary"
-          link href="#/dashboard/product/add"
-        >
-          {{ $t("views.product.add") }}</v-btn
-        >
-            </v-col>
+          <v-col cols="12">
+            <v-btn
+              elevation="2"
+              class="mr-5"
+              color="primary"
+              link
+              href="#/dashboard/product/add"
+            >
+              {{ $t("views.product.add") }}</v-btn
+            >
+          </v-col>
         </v-row>
-        
+
         <v-row>
           <v-col cols="6">
             <v-text-field
@@ -74,7 +75,7 @@
                     v-for="(pricing, indexPricing) in item.pricingRanges"
                     :key="indexPricing"
                   >
-                    {{ getRanges(pricing) }} <br>
+                    {{ getRanges(pricing) }} <br />
                   </span>
                 </td>
                 <td>
@@ -82,7 +83,7 @@
                     v-for="(pricing, indexPricing) in item.pricingRanges"
                     :key="indexPricing"
                   >
-                    {{ pricing.price | toCurrency }}  <br>
+                    {{ pricing.price | toCurrency }} <br />
                   </span>
                 </td>
                 <td>
@@ -90,7 +91,8 @@
                     elevation="2"
                     class="mr-5"
                     color="primary"
-                    link :href="`#/dashboard/product/${item.id}`"
+                    link
+                    :href="`#/dashboard/product/${item.id}`"
                   >
                     {{ $t("views.product.edit") }}</v-btn
                   >
@@ -163,11 +165,11 @@ export default {
     ...mapState(useReferenceData, ["publicCategories", "productTypes"]),
   },
   methods: {
-    getRanges(pricing){
-      if(!pricing.qtyMax){
-        return `> ${pricing.qtyMin}`
+    getRanges(pricing) {
+      if (!pricing.qtyMax) {
+        return `> ${pricing.qtyMin}`;
       }
-      return `${pricing.qtyMin} - ${pricing.qtyMax}`
+      return `${pricing.qtyMin} - ${pricing.qtyMax}`;
     },
     async handleRefresh() {
       try {

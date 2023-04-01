@@ -101,7 +101,7 @@
       </v-col>
     </v-row>
 
-    <v-row
+    <!-- <v-row
       v-if="getReferenceContents(VariantTypeCodes.ADDITIONAL_PAPER).length > 0"
     >
       <v-col cols="12" sm="3">
@@ -123,7 +123,7 @@
           />
         </ValidationProvider>
       </v-col>
-    </v-row>
+    </v-row> -->
 
     <v-row v-if="getReferenceContents(VariantTypeCodes.VELLUM_WRAP).length > 0">
       <v-col cols="12" sm="3">
@@ -229,7 +229,7 @@
 </template>
 
 <script>
-import CarouselImageWithQuantitySelection from "../../common/CarouselImageWithQuantitySelection";
+// import CarouselImageWithQuantitySelection from "../../common/CarouselImageWithQuantitySelection";
 import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 import CarouselImageSelection from "../../common/CarouselImageSelection";
 import { mapWritableState, mapState, mapActions } from "pinia";
@@ -239,7 +239,7 @@ export default {
   components: {
     ValidationProvider,
     CarouselImageSelection,
-    CarouselImageWithQuantitySelection,
+    // CarouselImageWithQuantitySelection,
   },
   props: [],
   computed: {

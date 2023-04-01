@@ -226,7 +226,8 @@ export default {
               publishedData.push({
                 variantId: opt.variantId,
                 contentId: opt.id,
-                quantity: parseInt(this.selectedItems[i].quantity),
+                additionalInfoValue: parseInt(this.selectedItems[i].quantity),
+                additionalInfoKey:"quantity"
               });
               break;
             }
@@ -243,7 +244,8 @@ export default {
           publishedData = {
             variantId: filterred[0].variantId,
             contentId: filterred[0].id,
-            quantity: parseInt(this.selectedItems.quantity),
+            additionalInfoValue: parseInt(this.selectedItems.quantity),
+            additionalInfoKey:"quantity"
           };
         }
         this.$emit("input", publishedData);
