@@ -6,15 +6,19 @@
     elevate-on-scroll
     scroll-target="#scrolling-techniques-7"
   >
-    <v-img src="LOGO_GIFU.png" max-height="80" max-width="80" />
-    <v-toolbar-title class="LogoName"
+    <v-img @click="goToHome" src="LOGO_GIFU.png" max-height="80" max-width="80" />
+    <v-toolbar-title @click="goToHome" class="LogoName"
       >GIFU | PT. Elyon Kriya Aguna</v-toolbar-title
     >
 
     <v-spacer></v-spacer>
 
-    <v-btn text @click="goToSouvenir">{{ $t("header.souvenir") }}</v-btn>
-    <v-btn text @click="goToInvitation">{{ $t("header.invitation") }}</v-btn>
+    <v-btn text link href="#/products?productType=SOUVENIR">{{
+      $t("header.souvenir")
+    }}</v-btn>
+    <v-btn text link href="#/products?productType=INVITATION">{{
+      $t("header.invitation")
+    }}</v-btn>
     <v-btn text @click="goToTracking">{{ $t("header.tracking") }}</v-btn>
     <v-btn icon @click="goToCart">
       <v-icon>mdi-cart</v-icon>
@@ -26,11 +30,14 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 export default {
   name: "HeaderComponent",
   components: {},
   methods: {
+    goToHome(){
+      this.$router.push("/");
+    },
     goToTracking() {
       this.$router.push("/theTracking");
     },

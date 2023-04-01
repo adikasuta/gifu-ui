@@ -10,6 +10,9 @@ import SessionUtils from './utils/SessionUtils';
 import {
   extend,
 } from "vee-validate/dist/vee-validate.full";
+import VueRadioButton from "vue-radio-button";
+
+Vue.use(VueRadioButton);
 //attach pinia state manager
 Vue.use(PiniaVuePlugin)
 const pinia = createPinia()
@@ -25,6 +28,17 @@ extend("file_size", {
     return true;
   },
   message: () => `File size exceeds limit of 2MB`,
+});
+
+Vue.filter('toCurrency', function (value) {
+  if (typeof value !== "number") {
+      return value;
+  }
+  var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'IDR'
+  });
+  return formatter.format(value);
 });
 
 router.beforeEach((to, from, next) => {

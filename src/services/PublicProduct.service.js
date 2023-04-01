@@ -7,4 +7,7 @@ export default {
   async getProductById(id) {
     return await api.get(`${BASE_URL}/${id}`);
   },
+  async getVariantsByProductId(id) {
+    return await api.get(`${BASE_URL}/${id}/variants`);
+  },
 }

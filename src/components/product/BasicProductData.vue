@@ -105,7 +105,7 @@
             :name="`Width`"
             :rules="{
               required: true,
-              numeric: true,
+              regex: regexp.decimal,
               min_value: 0,
             }"
             ref="provider"
@@ -115,6 +115,7 @@
               v-model="width"
               :error-messages="errors"
               :label="$t('views.product.fields.width')"
+              suffix="cm"
             ></v-text-field>
           </ValidationProvider>
           <ValidationProvider
@@ -122,7 +123,7 @@
             :name="`Length`"
             :rules="{
               required: true,
-              numeric: true,
+              regex: regexp.decimal,
               min_value: 0,
             }"
             ref="provider"
@@ -132,6 +133,7 @@
               v-model="length"
               :error-messages="errors"
               :label="$t('views.product.fields.length')"
+              suffix="cm"
             ></v-text-field>
           </ValidationProvider>
           <ValidationProvider
@@ -139,7 +141,7 @@
             :name="`Height`"
             :rules="{
               required: true,
-              numeric: true,
+              regex: regexp.decimal,
               min_value: 0,
             }"
             ref="provider"
@@ -149,13 +151,14 @@
               v-model="height"
               :error-messages="errors"
               :label="$t('views.product.fields.height')"
+              suffix="cm"
             ></v-text-field>
           </ValidationProvider>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="4">
-          <span>{{ $t("views.product.fields.weight") }} (kg)</span>
+          <span>{{ $t("views.product.fields.weight") }} (gr)</span>
         </v-col>
         <v-col cols="8">
           <ValidationProvider
@@ -163,7 +166,7 @@
             :name="`Weight`"
             :rules="{
               required: true,
-              numeric: true,
+              regex: regexp.decimal,
               min_value: 0,
             }"
             ref="provider"
@@ -173,6 +176,7 @@
               v-model="weight"
               :error-messages="errors"
               :label="$t('views.product.fields.weight')"
+              suffix="grams"
             ></v-text-field>
           </ValidationProvider>
         </v-col>
@@ -227,6 +231,7 @@ import BasicForm from "../layout/BasicForm";
 import { mapState, mapWritableState } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
 import { useProductForm } from "../../store/product-form";
+import StringUtils from "../../utils/StringUtils";
 
 const decimalMask = createNumberMask({
   prefix: "",
@@ -248,6 +253,7 @@ export default {
   },
   data() {
     return {
+      regexp: StringUtils.regexp,
       decimalMask,
       integerMask,
       previewUrl: null,
@@ -293,7 +299,6 @@ export default {
     validateFileSize(file) {
       const maxSize = 2 * 1024 * 1024; // 2MB in bytes
 
-      console.log(file.size);
       if (file.size > maxSize) {
         this.$validator.errors.add({
           field: "file",

@@ -41,7 +41,7 @@
           <v-col cols="3">
             <v-select
               v-model="filterItems.productCategoryId"
-              :items="categories"
+              :items="publicCategories"
               :label="$t('views.product.fields.productCategory')"
               outlined
               @change="handleRefresh"
@@ -82,7 +82,7 @@
                     v-for="(pricing, indexPricing) in item.pricingRanges"
                     :key="indexPricing"
                   >
-                    {{ pricing.price }} <br>
+                    {{ pricing.price | toCurrency }}  <br>
                   </span>
                 </td>
                 <td>
@@ -160,7 +160,7 @@ export default {
     await this.handleRefresh();
   },
   computed: {
-    ...mapState(useReferenceData, ["categories", "productTypes"]),
+    ...mapState(useReferenceData, ["publicCategories", "productTypes"]),
   },
   methods: {
     getRanges(pricing){

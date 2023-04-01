@@ -28,3 +28,7 @@ module.exports.currencyOption = {
         min: 0,
     }
 }
+
+module.exports.regexp = {
+    decimal: /^\d*\.?\d*$/,
+}

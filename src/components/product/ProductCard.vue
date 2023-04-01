@@ -1,29 +1,50 @@
 <template>
-  <div>
-    <div class="product">
-      <ImageComponent :filename="picture.img" height="500px"></ImageComponent>
-      <h3>{{ productItem.name }}</h3>
-      <h4>{{ price }}</h4>
-      <h5>{{ productItem.size }}</h5>
-      <button link :href="`#/products/${productItem.id}`" class="button">ORDER</button>
-    </div>
-  </div>
+  <v-card class="mx-auto" max-width="344">
+    <ImageComponent
+      :filename="productItem.picture"
+      height="200px"
+    ></ImageComponent>
+
+    <v-card-title>
+      {{ productItem.name }}
+    </v-card-title>
+
+    <v-card-subtitle>
+      <span>
+        {{ $t("views.product.fields.size") }}: {{ productItem.size }}
+      </span>
+      <br>
+      <span>
+        {{ $t("views.product.from") }} <h5> {{ this.productItem.displayPricing.price | toCurrency }}</h5>
+      </span>
+    </v-card-subtitle>
+
+    <v-card-actions>
+      <v-btn color="orange lighten-2" text link :href="`#/products/${productItem.id}`"> {{$t("views.product.order")}} </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 <script>
 import ImageComponent from "../common/ImageComponent";
 export default {
-  components:{
+  components: {
     ImageComponent,
   },
   props: {
-    productItem:{}
+    productItem: {},
   },
-  data: () => ({
-    
-  }),
-  methods: {
-
+  computed:{
+    displayRange(){
+      if(this.productItem.displayPricing){
+        if(this.productItem.displayPricing.qtyMax){
+          return `${this.productItem.displayPricing.qtyMin} - ${this.productItem.displayPricing.qtyMax}`
+        }
+        return `> ${this.productItem.displayPricing.qtyMin}`
+      }
+      return ""
+    }
   },
+  methods: {},
 };
 </script>
 

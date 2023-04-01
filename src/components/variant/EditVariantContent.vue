@@ -94,6 +94,11 @@ export default {
       formData: new FormData(),
     };
   },
+  computed:{
+    isCreate(){
+      return !this.contentForm.id
+    }
+  },
   async created() {
     this.contentForm = this.content;
     this.formData = new FormData();

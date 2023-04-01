@@ -1,27 +1,31 @@
 <template>
   <div>
-    <div class="Banner"></div>
+    <v-row>
+      <v-col cols="12">
+        <v-parallax src="../../public/HomepageBanner.png"></v-parallax>
+      </v-col>
+    </v-row>
     <div class="navbar">
       <li>
-      <div class="filter-option">
-        <input type="checkbox" id="moq" checked @change="setFilter" />
-        <label for="moq"><h5>Minimum Order 30 pcs</h5></label>
-      </div>
-    </li>
-    <li>
-      <div class="dropdown">
-        <button class="dropbtn">
-          <h5>Category</h5>
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <a href="#">Bottles</a>
-          <a href="#">Bulky Pouch</a>
-          <a href="#">Totebag</a>
+        <div class="filter-option">
+          <input type="checkbox" id="moq" checked @change="setFilter" />
+          <label for="moq"><h5>Minimum Order 30 pcs</h5></label>
         </div>
-      </div>
-    </li>
-    <li>
+      </li>
+      <li>
+        <div class="dropdown">
+          <button class="dropbtn">
+            <h5>Category</h5>
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Bottles</a>
+            <a href="#">Bulky Pouch</a>
+            <a href="#">Totebag</a>
+          </div>
+        </div>
+      </li>
+      <li>
         <div class="dropdown">
           <button class="dropbtn">
             <h5>Price</h5>
@@ -32,8 +36,8 @@
             <a href="#">Rp 10.000 - Rp 20.000</a>
             <a href="#">Diatas Rp 20.000</a>
           </div>
-      </div>
-    </li>
+        </div>
+      </li>
     </div>
     <div class="products">
       <theProducts
@@ -64,21 +68,21 @@ export default {
         moq: false,
       },
       status: "",
-      GifuProduct
+      GifuProduct,
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
-#moq{
-  margin:0 10px 0 0;
+#moq {
+  margin: 0 10px 0 0;
 }
-.filter-option{
+.filter-option {
   display: flex;
   padding: 10px;
 }
-li{
+li {
   border-right: 1px solid #bbb;
   display: inline;
   text-align: center;
@@ -183,4 +187,3 @@ li:hover {
   background-color: rgb(253, 245, 245);
 }
 </style>
-

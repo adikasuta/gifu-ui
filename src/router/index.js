@@ -21,6 +21,8 @@ import SearchUsers from '../views/internal-dashboard/administration/SearchUsers'
 import SearchProduct from '../views/internal-dashboard/product/SearchProduct';
 import AddProduct from '../views/internal-dashboard/product/AddProduct';
 import EditProduct from '../views/internal-dashboard/product/EditProduct';
+import ProductDisplay from '../views/external-pages/order/ProductDisplay';
+import ProductDetail from '../views/external-pages/order/ProductDetail';
 
 
 Vue.use(VueRouter)
@@ -30,6 +32,22 @@ const routes = [
     path: '/',
     name: 'HomepageComponent',
     component: HomepageComponent,
+    meta:{
+      hideSidebar: true,
+    }
+  },
+  {
+    path: '/products',
+    name: 'ProductDisplayComponent',
+    component: ProductDisplay,
+    meta:{
+      hideSidebar: true,
+    }
+  },
+  {
+    path: '/products/:id',
+    name: 'ProductDetailComponent',
+    component: ProductDetail,
     meta:{
       hideSidebar: true,
     }

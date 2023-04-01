@@ -5,7 +5,6 @@ module.exports.isAuthorized = function () {
     try {
         const token = Cookies.get('BEARER');
         const decode = jwtDecode(token);
-        console.log(decode)
         return !!decode.email;
     } catch (_) {
         return false;
