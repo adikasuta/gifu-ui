@@ -16,6 +16,7 @@ RUN npm install
 
 # Build the Vue.js app
 RUN npm run build
+RUN cat ./node_modules/.bin
 
 # Expose port 3000 for the Vue.js app
 EXPOSE 3000
