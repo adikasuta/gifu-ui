@@ -114,6 +114,7 @@ import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import { mapState, mapWritableState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
 import { useOrderProductForm } from "../../store/order-form";
+import SessionUtils from "../../utils/SessionUtils";
 export default {
   name: "OrderInvitation",
   components: {
@@ -142,7 +143,7 @@ export default {
   },
   async created() {},
   computed: {
-    ...mapWritableState(useOrderProductForm, ["INVITATION"]),
+    ...mapWritableState(useOrderProductForm, ["customerInfoForm"]),
     ...mapState(useReferenceData, ["publicCategories"]),
     ...mapState(useOrderProductForm, ["publicCategories", "productTypes"]),
   },
@@ -154,8 +155,13 @@ export default {
           try {
             this.isLoading = true;
             const order = await this.postInvitationOrder();
+            SessionUtils.putSessionData(
+              "client_email",
+              this.customerInfoForm.customerEmail,
+              24 * 7
+            );
             this.isLoading = false;
-            this.$router.push(`/invoice?orderId=${order.orderCode}`);
+            this.$router.push(`/order/${order.orderCode}/invoice`);
           } catch (error) {
             console.log(error);
             this.isLoading = false;

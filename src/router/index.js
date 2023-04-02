@@ -23,6 +23,7 @@ import AddProduct from '../views/internal-dashboard/product/AddProduct';
 import EditProduct from '../views/internal-dashboard/product/EditProduct';
 import ProductDisplay from '../views/external-pages/order/ProductDisplay';
 import ProductDetail from '../views/external-pages/order/ProductDetail';
+import InvoicePage from '../views/external-pages/order/InvoicePage';
 
 
 Vue.use(VueRouter)
@@ -48,6 +49,14 @@ const routes = [
     path: '/products/:id',
     name: 'ProductDetailComponent',
     component: ProductDetail,
+    meta:{
+      hideSidebar: true,
+    }
+  },
+  {
+    path: '/order/:orderCode/invoice',
+    name: 'OrderInvoiceComponent',
+    component: InvoicePage,
     meta:{
       hideSidebar: true,
     }

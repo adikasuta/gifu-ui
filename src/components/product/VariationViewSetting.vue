@@ -17,16 +17,16 @@
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left">
+                <th width="30%" class="text-left">
                   {{ $t("views.product.fields.variantType") }}
                 </th>
-                <th class="text-left">
+                <th width="30%" class="text-left">
                   {{ $t("views.product.fields.variant") }}
                 </th>
-                <th class="text-left">
+                <th width="20%" class="text-left">
                   {{ $t("views.product.fields.willBeVisibleWhen") }}
                 </th>
-                <th class="text-left">
+                <th width="20%" class="text-left">
                   {{ $t("views.product.fields.action") }}
                 </th>
               </tr>
@@ -81,6 +81,7 @@
                   <v-btn
                     elevation="2"
                     color="primary"
+                    class="mr-5"
                     @click="
                       () => {
                         handleChangeVisibilityRule(index);
@@ -89,8 +90,6 @@
                   >
                     {{ $t("views.product.modifyRule") }}</v-btn
                   >
-                </td>
-                <td>
                   <v-btn
                     elevation="2"
                     class="mr-5"

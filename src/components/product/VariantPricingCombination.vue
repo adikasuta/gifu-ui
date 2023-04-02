@@ -12,11 +12,13 @@
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left">
+                <th width="40%" class="text-left">
                   {{ $t("views.product.fields.variant") }}
                 </th>
-                <th class="text-left">
+                <th width="40%" class="text-left">
                   {{ $t("views.product.fields.price") }}
+                </th>
+                <th width="20%" class="text-left">
                 </th>
               </tr>
             </thead>

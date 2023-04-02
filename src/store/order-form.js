@@ -5,112 +5,114 @@ import VariantTypeCodes from "../constants/VariantTypeCodes";
 import OrderService from "../services/PublicOrder.service";
 
 export const useOrderProductForm = defineStore('OrderProductForm', {
-  state: () => ({
-    id: null,
-    productCode: null,
-    productCategoryId: null,
-    productType: null,
-    name: null,
-    existingPicture: null,
-    length: null,
-    width: null,
-    height: null,
-    weight: null,
-    minOrder: 0,
-    description: null,
-    pricingRanges: [],
-    productVariantPrices: [],
-    productVariantViews: [],
-    referenceVariants: [],
+  state: () => (
+    {
+      id: null,
+      productCode: null,
+      productCategoryId: null,
+      productType: null,
+      name: null,
+      existingPicture: null,
+      length: null,
+      width: null,
+      height: null,
+      weight: null,
+      minOrder: 0,
+      description: null,
+      pricingRanges: [],
+      productVariantPrices: [],
+      productVariantViews: [],
+      referenceVariants: [],
 
-    shippingAddressForm: {
-      provinceCode: "",
-      cityCode: "",
-      districtCode: "",
-      kelurahanCode: "",
-      address: "",
-      postalCode: "",
-      preferredShippingVendor: null,
-      useWoodenCrate: false,
-    },
-
-    customerInfoForm: {
-      customerName: "",
-      customerEmail: "",
-      phoneNumber: "",
-    },
-    SOUVENIR: {
-      csReferralToken: null,
-      quantity: 0,
-      notes: "",
-      brideName: "",
-      groomName: "",
-      eventDate: null,
-      eventVenue: "",
-      variants: {
-        COLOR: [],
-        PACKAGING: null,
-        COLOR_PACKAGING_1: null,
-        COLOR_PACKAGING_2: null,
-        ACCESSORIES: null,
-        EMBOSS_DESIGN: null,
-        SIZE: null,
-        POSITION: null,
-        GREETINGS_DESIGN: null,
+      shippingAddressForm: {
+        provinceCode: "",
+        cityCode: "",
+        districtCode: "",
+        kelurahanCode: "",
+        address: "",
+        postalCode: "",
+        preferredShippingVendor: null,
+        useWoodenCrate: false,
       },
 
-    },
-    INVITATION: {
-      csReferralToken: null,
-      quantity: 0,
-      notes: "",
-      brideInfo: {
-        fullname: "",
-        nickname: "",
-        instagramAccount: "",
-        motherName: "",
-        fatherName: ""
+      customerInfoForm: {
+        customerName: "",
+        customerEmail: "",
+        phoneNumber: "",
       },
-      groomInfo: {
-        fullname: "",
-        nickname: "",
-        instagramAccount: "",
-        motherName: "",
-        fatherName: ""
-      },
-      eventDetails: [{
-
-      }],
-      variants: {
-        PRODUCT_DESIGN: {
-          variantId: null,
-          contentId: null,
+      SOUVENIR: {
+        csReferralToken: null,
+        quantity: 0,
+        notes: "",
+        brideName: "",
+        groomName: "",
+        eventDate: null,
+        eventVenue: "",
+        variants: {
+          COLOR: [],
+          PACKAGING: null,
+          COLOR_PACKAGING_1: null,
+          COLOR_PACKAGING_2: null,
+          ACCESSORIES: null,
+          EMBOSS_DESIGN: null,
+          SIZE: null,
+          POSITION: null,
+          GREETINGS_DESIGN: null,
         },
-        BOARD_PAPER: null,
-        ENVELOPE_PAPER: null,
-        ORIENTATION_BOARD: null,
-        ORIENTATION_ENVELOPE: null,
-        LANGUAGE: null,
-        FOIL_COLOR: null,
-        FOIL_POSITION: null,
-        EMBOSS_DESIGN: null,
-        WAX_SEALS: null,
-        DRIED_FLOWERS: null,
-        ENVELOPE: null,
-        // ADDITIONAL_PAPER: [],
-        VELLUM_WRAP: null,
-        RIBBON: null,
-        RIBBON_COLOR: null,
-        PACKAGING_SERVICE: null
-      }
 
+      },
+      INVITATION: {
+        csReferralToken: null,
+        quantity: 0,
+        notes: "",
+        brideInfo: {
+          fullname: "",
+          nickname: "",
+          instagramAccount: "",
+          motherName: "",
+          fatherName: ""
+        },
+        groomInfo: {
+          fullname: "",
+          nickname: "",
+          instagramAccount: "",
+          motherName: "",
+          fatherName: ""
+        },
+        eventDetails: [{
+
+        }],
+        variants: {
+          PRODUCT_DESIGN: {
+            variantId: null,
+            contentId: null,
+          },
+          BOARD_PAPER: null,
+          ENVELOPE_PAPER: null,
+          ORIENTATION_BOARD: null,
+          ORIENTATION_ENVELOPE: null,
+          LANGUAGE: null,
+          FOIL_COLOR: null,
+          FOIL_POSITION: null,
+          EMBOSS_DESIGN: null,
+          WAX_SEALS: null,
+          DRIED_FLOWERS: null,
+          ENVELOPE: null,
+          // ADDITIONAL_PAPER: [],
+          VELLUM_WRAP: null,
+          RIBBON: null,
+          RIBBON_COLOR: null,
+          PACKAGING_SERVICE: null
+        }
+
+      }
     }
-  }),
+  ),
   getters: {
     getQtyFromColor(state) {
       let qty = 0;
       for (const content of state.SOUVENIR.variants.COLOR) {
-        qty += content.quantity;
+        qty += content.additionalInfoValue;
       }
       return qty;
     },
@@ -140,6 +142,16 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
 
       variants = []
       for (const key in state.SOUVENIR.variants) {
+        if (key == VariantTypeCodes.COLOR && state.SOUVENIR.variants[key].length > 0) {
+          const colors = state.SOUVENIR.variants[key].map(it => {
+            return {
+              ...it,
+              variantTypeCode: key
+            }
+          })
+          variants.push(...colors);
+          continue;
+        }
         if (state.SOUVENIR.variants[key] && state.SOUVENIR.variants[key].contentId) {
           const toBePushed = {
             ...state.SOUVENIR.variants[key],
@@ -149,6 +161,7 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
             toBePushed.additionalInfoKey = "content"
           }
           variants.push(toBePushed);
+          continue;
         }
       }
       let eventDetail = {
@@ -234,7 +247,7 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
         quantity = state.SOUVENIR.quantity || 0;
       }
       if (state.productType === ProductTypeCodes.INVITATION) {
-        quantity = state.invitationForm.quantity || 0;
+        quantity = state.INVITATION.quantity || 0;
       }
 
       const ranges = state.pricingRanges.filter(it => {
@@ -255,7 +268,7 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
       let variantIds = []
       let form = state.SOUVENIR;
       if (state.productType == ProductTypeCodes.INVITATION) {
-        form = state.invitationForm;
+        form = state.INVITATION;
       }
       for (const view of state.productVariantViews) {
         if (view.variantTypeCode == variantTypeCode) {
@@ -285,6 +298,88 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
     }
   },
   actions: {
+    reset() {
+      // this.$state.id = null;
+      // this.$state.productCode = null;
+      // this.$state.productCategoryId = null;
+      // this.$state.productType = null;
+      // this.$state.name = null;
+      // this.$state.existingPicture = null;
+      // this.$state.length = null;
+      // this.$state.width = null;
+      // this.$state.height = null;
+      // this.$state.weight = null;
+      // this.$state.minOrder = 0;
+      // this.$state.description = null;
+      // this.$state.pricingRanges = [];
+      // this.$state.productVariantPrices = [];
+      // this.$state.productVariantViews = [];
+      // this.$state.referenceVariants = [];
+
+      this.$state.shippingAddressForm.provinceCode = "";
+      this.$state.shippingAddressForm.cityCode = "";
+      this.$state.shippingAddressForm.districtCode = "";
+      this.$state.shippingAddressForm.kelurahanCode = "";
+      this.$state.shippingAddressForm.address = "";
+      this.$state.shippingAddressForm.postalCode = "";
+      this.$state.shippingAddressForm.preferredShippingVendor = null;
+      this.$state.shippingAddressForm.useWoodenCrate = false;
+
+      this.$state.customerInfoForm.customerName = "";
+      this.$state.customerInfoForm.customerEmail = "";
+      this.$state.customerInfoForm.phoneNumber = "";
+
+      this.$state.SOUVENIR.csReferralToken = null;
+      this.$state.SOUVENIR.quantity = 0;
+      this.$state.SOUVENIR.notes = "";
+      this.$state.SOUVENIR.brideName = "";
+      this.$state.SOUVENIR.groomName = "";
+      this.$state.SOUVENIR.eventDate = null;
+      this.$state.SOUVENIR.eventVenue = "";
+      this.$state.SOUVENIR.variants.COLOR = [];
+      this.$state.SOUVENIR.variants.PACKAGING = null;
+      this.$state.SOUVENIR.variants.COLOR_PACKAGING_1 = null;
+      this.$state.SOUVENIR.variants.COLOR_PACKAGING_2 = null;
+      this.$state.SOUVENIR.variants.ACCESSORIES = null;
+      this.$state.SOUVENIR.variants.EMBOSS_DESIGN = null;
+      this.$state.SOUVENIR.variants.SIZE = null;
+      this.$state.SOUVENIR.variants.POSITION = null;
+      this.$state.SOUVENIR.variants.GREETINGS_DESIGN = null;
+
+      this.$state.INVITATION.csReferralToken = null;
+      this.$state.INVITATION.quantity = 0;
+      this.$state.INVITATION.notes = "";
+      this.$state.INVITATION.brideInfo.fullname = "";
+      this.$state.INVITATION.brideInfo.nickname = "";
+      this.$state.INVITATION.brideInfo.instagramAccount = "";
+      this.$state.INVITATION.brideInfo.motherName = "";
+      this.$state.INVITATION.brideInfo.fatherName = "";
+      this.$state.INVITATION.groomInfo.fullname = "";
+      this.$state.INVITATION.groomInfo.nickname = "";
+      this.$state.INVITATION.groomInfo.instagramAccount = "";
+      this.$state.INVITATION.groomInfo.motherName = "";
+      this.$state.INVITATION.groomInfo.fatherName = "";
+      this.$state.INVITATION.eventDetails = [{}];
+      this.$state.INVITATION.variants.PRODUCT_DESIGN.variantId = null;
+      this.$state.INVITATION.variants.PRODUCT_DESIGN.contentId = null;
+      this.$state.INVITATION.variants.BOARD_PAPER = null;
+      this.$state.INVITATION.variants.ENVELOPE_PAPER = null;
+      this.$state.INVITATION.variants.ORIENTATION_BOARD = null;
+      this.$state.INVITATION.variants.ORIENTATION_ENVELOPE = null;
+      this.$state.INVITATION.variants.LANGUAGE = null;
+      this.$state.INVITATION.variants.FOIL_COLOR = null;
+
+      this.$state.INVITATION.variants.FOIL_POSITION = null;
+      this.$state.INVITATION.variants.EMBOSS_DESIGN = null;
+      this.$state.INVITATION.variants.WAX_SEALS = null;
+      this.$state.INVITATION.variants.DRIED_FLOWERS = null;
+      this.$state.INVITATION.variants.DRIED_FLOWERS = null;
+      this.$state.INVITATION.variants.ENVELOPE = null;
+      this.$state.INVITATION.variants.VELLUM_WRAP = null;
+      this.$state.INVITATION.variants.RIBBON = null;
+      this.$state.INVITATION.variants.RIBBON_COLOR = null;
+      this.$state.INVITATION.variants.PACKAGING_SERVICE = null;
+    },
     transformValue(variantTypeCode, contentId) {
       const variants = this.getReferenceVariants(variantTypeCode);
       let variantId = null;
@@ -306,28 +401,14 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
       };
     },
     async postSouvenirOrder() {
-      return await OrderService.postOrder(this.getSouvenirOrderPayload);
+      const result = await OrderService.postOrder(this.getSouvenirOrderPayload);
+      this.reset();
+      return result;
     },
     async postInvitationOrder() {
-      return await OrderService.postOrder(this.getInvitationOrderPayload);
-    },
-    resetForm() {
-      this.$state.id = null;
-      this.$state.productCode = null;
-      this.$state.productCategoryId = null;
-      this.$state.productType = null;
-      this.$state.name = null;
-      this.$state.existingPicture = null;
-      this.$state.length = null;
-      this.$state.width = null;
-      this.$state.height = null;
-      this.$state.weight = null;
-      this.$state.minOrder = null;
-      this.$state.description = null;
-      this.$state.pricingRanges = [];
-      this.$state.productVariantPrices = [];
-      this.$state.productVariantViews = [];
-      this.$state.referenceVariants = [];
+      const result = await OrderService.postOrder(this.getInvitationOrderPayload);
+      this.reset();
+      return result;
     },
     async loadProductForm(productId) {
       const res = await PublicProductService.getProductById(productId);
@@ -358,11 +439,5 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
         }
       });
     },
-    // async postProduct() {
-    //   const formData = new FormData();
-    //   formData.set("file", this.$state.pictureFile);
-    //   formData.set("payload", JSON.stringify(this.postPayload));
-    //   await ProductService.postProduct(formData);
-    // }
   }
 })

@@ -29,6 +29,7 @@
               :name="$t('views.order.fields.email')"
               vid="email"
               :rules="{
+                email:true,
                 required: true,
               }"
             >
@@ -313,7 +314,6 @@
           <v-text-field
             outlined
             v-model="INVITATION.csReferralToken"
-            :error-messages="errors"
             :label="$t('views.order.fields.referralCode')"
           ></v-text-field>
       </v-col>

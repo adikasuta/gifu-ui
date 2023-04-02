@@ -45,7 +45,7 @@
               </ValidationObserver>
               <v-divider class="mt-10 mb-5"></v-divider>
 
-              <v-btn text @click="e1 = 2"> {{ $t("views.order.back") }} </v-btn>
+              <v-btn text @click="e1 = 1"> {{ $t("views.order.back") }} </v-btn>
               <v-btn
                 color="pink lighten-1"
                 @click="validateAndNext('additionalRequestObserver', 3)"
@@ -60,7 +60,10 @@
               </ValidationObserver>
               <v-divider class="mt-10 mb-5"></v-divider>
               <v-btn text @click="e1 = 2"> {{ $t("views.order.back") }} </v-btn>
-              <v-btn color="pink lighten-1" @click="handleOrder('customerDataObserver')">
+              <v-btn
+                color="pink lighten-1"
+                @click="handleOrder('customerDataObserver')"
+              >
                 {{ $t("views.order.order") }}
               </v-btn>
             </v-stepper-content>
@@ -95,6 +98,7 @@ import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import { mapState, mapWritableState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
 import { useOrderProductForm } from "../../store/order-form";
+import SessionUtils from "../../utils/SessionUtils";
 export default {
   name: "OrderSouvenir",
   components: {
@@ -121,20 +125,25 @@ export default {
   },
   async created() {},
   computed: {
-    ...mapWritableState(useOrderProductForm, ["INVITATION"]),
+    ...mapWritableState(useOrderProductForm, ["customerInfoForm","SOUVENIR"]),
     ...mapState(useReferenceData, ["publicCategories"]),
     ...mapState(useOrderProductForm, ["publicCategories", "productTypes"]),
   },
   methods: {
-    ...mapActions(useOrderProductForm, ["postSouvenirOrder"]),
+    ...mapActions(useOrderProductForm, ["postSouvenirOrder","reset"]),
     handleOrder(validator) {
       this.$refs[validator].validate().then(async (success) => {
         if (success) {
           try {
             this.isLoading = true;
             const order = await this.postSouvenirOrder();
+            SessionUtils.putSessionData(
+              "client_email",
+              this.customerInfoForm.customerEmail,
+              24 * 7
+            );
             this.isLoading = false;
-            this.$router.push(`/invoice?orderId=${order.orderCode}`);
+            this.$router.push(`/order/${order.orderCode}/invoice`);
           } catch (error) {
             console.log(error);
             this.isLoading = false;
@@ -147,7 +156,7 @@ export default {
         }
       });
     },
-    validateAndNext(validator, nextStep) {
+    validateAndNext(validator,nextStep) {
       this.$refs[validator].validate().then(async (success) => {
         if (success) {
           this.e1 = nextStep;

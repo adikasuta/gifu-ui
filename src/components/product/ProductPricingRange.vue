@@ -8,18 +8,20 @@
         <v-btn elevation="2" class="mr-5" color="primary" @click="handleAdd">
           {{ $t("views.product.addPricingRange") }}</v-btn
         >
-        <v-simple-table>
+        <v-simple-table >
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left">
+                <th width="25%" class="text-left">
                   {{ $t("views.product.fields.min") }}
                 </th>
-                <th class="text-left">
+                <th width="25%" class="text-left">
                   {{ $t("views.product.fields.max") }}
                 </th>
-                <th class="text-left">
+                <th width="25%" class="text-left">
                   {{ $t("views.product.fields.price") }}
+                </th>
+                <th width="25%" class="text-left">
                 </th>
               </tr>
             </thead>

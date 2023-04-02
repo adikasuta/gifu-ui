@@ -48,7 +48,7 @@ export default {
       this.contentId=this.INVITATION.variants.PRODUCT_DESIGN.contentId;
     }
     this.contentReferences = this.getReferenceContents(
-      VariantTypeCodes.ENVELOPE_PAPER
+      VariantTypeCodes.PRODUCT_DESIGN
     );
   },
   methods: {
