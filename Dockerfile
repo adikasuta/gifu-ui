@@ -16,10 +16,10 @@ RUN npm install
 
 # Build the Vue.js app
 RUN npm run build
-RUN ls node_modules/.bin
 
 # Expose port 3000 for the Vue.js app
 EXPOSE 3000
 
 # Start the server using the command "npm start"
-CMD ["npm", "run", "serve", "--", "--port", "3000"]
+# CMD ["npm", "run", "serve", "--", "--port", "3000"]
+CMD ["ls", "node_modules/.bin", "serve", "--", "--port", "3000"]
