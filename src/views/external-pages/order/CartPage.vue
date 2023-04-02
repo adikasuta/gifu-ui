@@ -8,6 +8,9 @@
         :key="index"
       />
     </v-container>
+    <v-container v-if="getCartItems.length <= 0">
+      <h3>{{ $t("views.cart.noCartItems") }}</h3>
+    </v-container>
     <v-divider class="mt-10 mb-10" />
     <v-row>
       <v-col cols="12" class="text-right">
@@ -17,7 +20,7 @@
         </h3>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="getCartItems.length > 0">
       <v-col cols="3">
         <h3 class="text-right">{{ $t("views.cart.paymentTerm") }}</h3>
       </v-col>
@@ -63,6 +66,7 @@
           {{ $t("views.cart.shopping") }}
         </v-btn>
         <v-btn
+          v-if="getCartItems.length > 0"
           @click="handleCheckout"
           class="mr-10 mb-10"
           color="pink lighten-1"

@@ -51,7 +51,7 @@
         "downpayment": "Several Payment Terms",
         "downpaymentke":"Down Payment",
         "shopping":"Add more order",
-        
+        "noCartItems":"There is no item in cart yet",
         "checkout":"Checkout"
       },
       "invoice": {
@@ -331,7 +331,8 @@
         "downpayment": "Angsuran",
         "downpaymentke":"Angsuran ke",
         "checkout":"Checkout",
-        "shopping":"Tambah pesanan lainnya"
+        "shopping":"Tambah pesanan lainnya",
+        "noCartItems":"Belum ada data di dalam kerjanjang"
       },
       "invoice": {
         "print": "Cetak Invoice",
