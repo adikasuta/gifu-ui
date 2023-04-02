@@ -12,6 +12,9 @@ export default {
       if (this.isPreview) {
         return this.filename;
       }
+      if(!this.filename){
+        return "no_image.jpg";
+      }
       return BASE_URL + "/public/api/assets/images?filename=" + this.filename;
     },
   },

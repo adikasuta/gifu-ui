@@ -42,8 +42,20 @@
       "orderyours": "Order your souvenirs, printed invitation, digital invitation, hampers, and Bridesmaid Box from GIFU. You will definitely save your time!"
     },
     "views": {
+      "cart": {
+        "remove": "Hapus",
+        "seeInvoice": "Lihat Invoice",
+        "grandTotal": "Grand Total",
+        "paymentTerm": "Payment Term",
+        "cash": "Full Payment",
+        "downpayment": "Several Payment Terms",
+        "downpaymentke":"Down Payment",
+        "shopping":"Add more order",
+        
+        "checkout":"Checkout"
+      },
       "invoice": {
-        "print":"Print Invoice",
+        "print": "Print Invoice",
         "customerName": "Name",
         "customerEmail": "Email",
         "customerPhone": "Phone Number",
@@ -62,7 +74,7 @@
         "subtotal": "Subtotal",
         "grandTotal": "Grand Total",
         "totalAmount": "Total Amount",
-        "addToCart":"Add to Cart"
+        "addToCart": "Add to Cart"
       },
       "order": {
         "back": "Back",
@@ -310,8 +322,19 @@
       "orderyours": "Pesan Souvenir, Undangan Fisik, Undangan Digital, Hampers, dan Bridesmaid Box cukup di satu tempat saja"
     },
     "views": {
+      "cart": {
+        "remove": "Hapus",
+        "seeInvoice": "Lihat Invoice",
+        "grandTotal": "Grand Total",
+        "paymentTerm": "Cara Pembayaran",
+        "cash": "Cash",
+        "downpayment": "Angsuran",
+        "downpaymentke":"Angsuran ke",
+        "checkout":"Checkout",
+        "shopping":"Tambah pesanan lainnya"
+      },
       "invoice": {
-        "print":"Cetak Invoice",
+        "print": "Cetak Invoice",
         "customerName": "Nama",
         "customerEmail": "Email",
         "customerPhone": "Nomor Telepon",
@@ -330,7 +353,7 @@
         "subtotal": "Subtotal",
         "grandTotal": "Grand Total",
         "totalAmount": "Total Amount",
-        "addToCart":"Tambahakan ke Kerjanjang"
+        "addToCart": "Tambahakan ke Kerjanjang"
       },
       "order": {
         "back": "Kembali",

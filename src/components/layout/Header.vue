@@ -6,7 +6,12 @@
     elevate-on-scroll
     scroll-target="#scrolling-techniques-7"
   >
-    <v-img @click="goToHome" src="LOGO_GIFU.png" max-height="80" max-width="80" />
+    <v-img
+      @click="goToHome"
+      src="LOGO_GIFU.png"
+      max-height="80"
+      max-width="80"
+    />
     <v-toolbar-title @click="goToHome" class="LogoName"
       >GIFU | PT. Elyon Kriya Aguna</v-toolbar-title
     >
@@ -21,7 +26,7 @@
     }}</v-btn>
     <v-btn text @click="goToTracking">{{ $t("header.tracking") }}</v-btn>
     <v-btn icon @click="goToCart">
-      <v-icon>mdi-cart</v-icon>
+      <v-badge :content="getCartLength" :value="getCartLength>0" bordered overlap><v-icon>mdi-cart</v-icon></v-badge>
     </v-btn>
     <v-btn icon>
       <v-icon @click="toggleLanguage">mdi-translate</v-icon>
@@ -31,11 +36,16 @@
 
 <script>
 import Cookies from "js-cookie";
+import { mapState } from "pinia";
+import { useCartData } from "../../store/cart-data";
 export default {
   name: "HeaderComponent",
+  computed:{
+    ...mapState(useCartData, ["getCartLength"]),
+  },
   components: {},
   methods: {
-    goToHome(){
+    goToHome() {
       this.$router.push("/");
     },
     goToTracking() {

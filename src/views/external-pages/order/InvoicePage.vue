@@ -46,7 +46,7 @@
           <tbody>
             <tr>
               <td colspan="2">{{ invoice.productName }}</td>
-              <td>{{ invoice.quantity }}</td>
+              <td>{{ invoice.quantity }} pcs</td>
               <td class="text-right">{{ invoice.productPrice | toCurrency }}</td>
               <td class="text-right">{{ totalProductAmount | toCurrency }}</td>
             </tr>

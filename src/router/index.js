@@ -24,6 +24,7 @@ import EditProduct from '../views/internal-dashboard/product/EditProduct';
 import ProductDisplay from '../views/external-pages/order/ProductDisplay';
 import ProductDetail from '../views/external-pages/order/ProductDetail';
 import InvoicePage from '../views/external-pages/order/InvoicePage';
+import CartPage from '../views/external-pages/order/CartPage';
 
 
 Vue.use(VueRouter)
@@ -57,6 +58,14 @@ const routes = [
     path: '/order/:orderCode/invoice',
     name: 'OrderInvoiceComponent',
     component: InvoicePage,
+    meta:{
+      hideSidebar: true,
+    }
+  },
+  {
+    path: '/cart',
+    name: 'CartComponent',
+    component: CartPage,
     meta:{
       hideSidebar: true,
     }
