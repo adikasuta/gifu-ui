@@ -7,11 +7,11 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
-
 # Copy the current directory contents into the container at /app
 COPY . .
+
+# Install dependencies
+RUN npm install
 
 # Build the Vue.js app
 RUN npm run build
