@@ -11,7 +11,6 @@ COPY package*.json ./
 COPY . .
 
 # Install dependencies
-RUN rm -rf node_modules
 RUN npm install
 
 # Build the Vue.js app
@@ -21,5 +20,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Start the server using the command "npm start"
-# CMD ["npm", "run", "serve", "--", "--port", "3000"]
-CMD ["ls", "node_modules/.bin", "serve", "--", "--port", "3000"]
+CMD ["npm", "run", "serve", "--", "--port", "3000"]
