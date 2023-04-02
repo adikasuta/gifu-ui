@@ -1,7 +1,13 @@
 <template>
   <div>
     <v-container id="printArea">
-      <v-row class="mb-5">
+      <v-row>
+        <v-col class="text-left" cols="3">
+          <label>{{ $t("views.invoice.orderCode") }}</label>
+        </v-col>
+        <v-col class="text-left" cols="9">: {{ $route.params.orderCode }}</v-col>
+      </v-row>
+      <v-row>
         <v-col class="text-left" cols="3">
           <label>{{ $t("views.invoice.customerName") }}</label>
         </v-col>
