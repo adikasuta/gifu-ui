@@ -137,7 +137,7 @@ export default {
         this.isLoading = true;
         await PublicOrderService.addToCart(this.$route.params.orderCode);
         this.isLoading = false;
-        this.$router.push(`/carts`);
+        this.$router.push(`/cart`);
       } catch (error) {
         this.isLoading = false;
         this.isError = true;
@@ -170,4 +170,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

@@ -138,8 +138,8 @@ export default {
             this.isLoading = true;
             const order = await this.postSouvenirOrder();
             SessionUtils.putSessionData(
-              "client_email",
-              this.customerInfoForm.customerEmail,
+              "client_gifu",
+              JSON.stringify(this.customerInfoForm),
               24 * 7
             );
             this.isLoading = false;

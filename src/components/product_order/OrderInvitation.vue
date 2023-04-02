@@ -156,8 +156,8 @@ export default {
             this.isLoading = true;
             const order = await this.postInvitationOrder();
             SessionUtils.putSessionData(
-              "client_email",
-              this.customerInfoForm.customerEmail,
+              "client_gifu",
+              JSON.stringify(this.customerInfoForm),
               24 * 7
             );
             this.isLoading = false;

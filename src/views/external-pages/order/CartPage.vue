@@ -2,6 +2,7 @@
   <div>
     <v-container>
       <CartItem
+        class="mb-5"
         v-for="(item, index) of getCartItems"
         :cartItem="item"
         :index="index"
@@ -89,6 +90,8 @@
 </template>
 
 <script>
+
+// TODO: DELETE METHOD
 import { ValidationObserver } from "vee-validate";
 import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 import ErrorDialog from "../../../components/dialogs/ErrorDialog.vue";

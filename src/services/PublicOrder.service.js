@@ -12,12 +12,15 @@ export default {
     return await api.post(`${BASE_URL}/${orderCode}`, null, null);
   },
   async getCart() {
-    const clientEmail = Cookies.get('client_email');
+    const clientData = Cookies.get('client_gifu');
     return await api.get(`${BASE_URL}/cart`, null, {
-      session_customer: clientEmail
+      client_gifu: clientData
     });
   },
-  async postCheckout(request){
-    return await api.post(`${BASE_URL}/checkout`, null, request);
+  async postCheckout(request) {
+    const clientData = Cookies.get('client_gifu');
+    return await api.post(`${BASE_URL}/checkout`, null, request, {
+      client_gifu: clientData
+    });
   }
 }
