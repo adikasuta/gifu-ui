@@ -11,6 +11,7 @@ COPY package*.json ./
 COPY . .
 
 # Install dependencies
+RUN rm -rf node_modules
 RUN npm install
 
 # Build the Vue.js app
