@@ -114,7 +114,7 @@ import ConfirmationDialog from "../../../components/dialogs/ConfirmationDialog";
 import LoadingDialog from "../../../components/dialogs/LoadingDialog.vue";
 import BasicForm from "../../../components/layout/BasicForm";
 import UserService from "../../../services/User.service";
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useReferenceData } from "../../../store/reference-data";
 import { useErrorMessage } from "../../../store/error-message";
 export default {

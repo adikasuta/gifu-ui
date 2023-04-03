@@ -39,6 +39,7 @@ import ConfirmationDialog from "../dialogs/ConfirmationDialog";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import StringUtils from "../../utils/StringUtils";
 import WorkflowService from "../../services/Workflow.service";
+import { mapActions } from "pinia";
 import { useErrorMessage } from "../../store/error-message";
 export default {
   name: "WorkflowViewMode",

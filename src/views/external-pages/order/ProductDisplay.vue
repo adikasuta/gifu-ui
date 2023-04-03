@@ -76,7 +76,7 @@
 import LoadingDialog from "../../../components/dialogs/LoadingDialog.vue";
 import PublicProductService from "../../../services/PublicProduct.service";
 import ProductCard from "../../../components/product/ProductCard";
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useReferenceData } from "../../../store/reference-data";
 import { useErrorMessage } from "../../../store/error-message";
 export default {

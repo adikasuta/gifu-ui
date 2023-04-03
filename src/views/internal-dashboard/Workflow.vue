@@ -59,7 +59,7 @@
 <script>
 import ConfirmationDialog from "../../components/dialogs/ConfirmationDialog";
 import LoadingDialog from "../../components/dialogs/LoadingDialog.vue";
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
 import { useErrorMessage } from "../../store/error-message";
 import WorkflowService from "../../services/Workflow.service";

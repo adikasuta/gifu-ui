@@ -68,6 +68,7 @@ import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import BasicForm from "../layout/BasicForm";
 import VariantService from "../../services/Variant.service";
+import { mapActions } from "pinia";
 import { useErrorMessage } from "../../store/error-message";
 export default {
   props: ["content", "variantId"],

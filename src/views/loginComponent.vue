@@ -26,6 +26,7 @@ import AuthService from "../services/Auth.service";
 import LoadingDialog from "../components/dialogs/LoadingDialog.vue";
 import SessionUtils from "../utils/SessionUtils";
 import { useErrorMessage } from "../store/error-message";
+import { mapActions } from "pinia";
 
 export default {
   components: {
