@@ -272,13 +272,15 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
       }
       for (const view of state.productVariantViews) {
         if (view.variantTypeCode == variantTypeCode) {
-          let passesRule = true;
+          let passesRule = false;
           if (view.rules.length > 0) {
             for (const rule of view.rules) {
               const ruleVariantIds = rule.variantIds.split(",").map(id => parseInt(id));
-              if (!ruleVariantIds.includes(form[rule.variantTypeCode].variantId)) {
-                passesRule = false;
-                break;
+              if(form[rule.variantTypeCode] && form[rule.variantTypeCode].variantId){
+                if (ruleVariantIds.includes(form[rule.variantTypeCode].variantId)) {
+                  passesRule = true;
+                  break;
+                }
               }
             }
           }
