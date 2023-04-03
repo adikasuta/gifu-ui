@@ -82,8 +82,18 @@ export const useProductForm = defineStore('ProductForm', {
         }
       });
       this.$state.productVariantViews = res.productVariantViews.map(it=>{
+        let parsedRules = []
+        if(it.rules.length>0){
+          parsedRules = it.rules.map(rule=>{
+            return {
+              ...rule,
+              variantIds: rule.variantIds.split(","),
+            }
+          })
+        }
         return {
           ...it,
+          rules: parsedRules,
           variantIds: it.variantIds.split(","),
         }
       });
