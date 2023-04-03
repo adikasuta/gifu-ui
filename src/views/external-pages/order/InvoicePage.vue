@@ -5,7 +5,9 @@
         <v-col class="text-left" cols="3">
           <label>{{ $t("views.invoice.orderCode") }}</label>
         </v-col>
-        <v-col class="text-left" cols="9">: {{ $route.params.orderCode }}</v-col>
+        <v-col class="text-left" cols="9"
+          >: {{ $route.params.orderCode }}</v-col
+        >
       </v-row>
       <v-row>
         <v-col class="text-left" cols="3">
@@ -23,7 +25,9 @@
         <v-col class="text-left" cols="3">
           <label>{{ $t("views.invoice.customerPhone") }}</label>
         </v-col>
-        <v-col class="text-left" cols="9">: {{ invoice.customerPhoneNo }}</v-col>
+        <v-col class="text-left" cols="9"
+          >: {{ invoice.customerPhoneNo }}</v-col
+        >
       </v-row>
       <v-row>
         <v-col class="text-left" cols="3">
@@ -31,7 +35,7 @@
         </v-col>
         <v-col cols="9">: {{ fullAddress }}</v-col>
       </v-row>
-      <v-divider style="margin-top:20px;margin-bottom: 5px;"></v-divider>
+      <v-divider style="margin-top: 20px; margin-bottom: 5px"></v-divider>
       <v-simple-table>
         <template v-slot:default>
           <thead>
@@ -47,7 +51,9 @@
             <tr>
               <td colspan="2">{{ invoice.productName }}</td>
               <td>{{ invoice.quantity }} pcs</td>
-              <td class="text-right">{{ invoice.productPrice | toCurrency }}</td>
+              <td class="text-right">
+                {{ invoice.productPrice | toCurrency }}
+              </td>
               <td class="text-right">{{ totalProductAmount | toCurrency }}</td>
             </tr>
             <tr v-for="(variant, index) of invoice.variants" :key="index">
@@ -60,19 +66,27 @@
               <td colspan="3"></td>
             </tr>
             <tr>
-              <td class="text-right" colspan="4">{{ $t("views.invoice.additionalCost") }}</td>
+              <td class="text-right" colspan="4">
+                {{ $t("views.invoice.additionalCost") }}
+              </td>
               <td class="text-right">{{ totalVariantAmount | toCurrency }}</td>
             </tr>
             <tr>
-              <td class="text-right" colspan="4">{{ $t("views.invoice.subtotal") }}</td>
+              <td class="text-right" colspan="4">
+                {{ $t("views.invoice.subtotal") }}
+              </td>
               <td class="text-right">{{ invoice.subTotal | toCurrency }}</td>
             </tr>
             <tr>
-              <td class="text-right" colspan="4">{{ $t("views.invoice.shippingFee") }}</td>
+              <td class="text-right" colspan="4">
+                {{ $t("views.invoice.shippingFee") }}
+              </td>
               <td class="text-right">{{ invoice.shippingFee | toCurrency }}</td>
             </tr>
             <tr>
-              <td class="text-right" colspan="4">{{ $t("views.invoice.grandTotal") }}</td>
+              <td class="text-right" colspan="4">
+                {{ $t("views.invoice.grandTotal") }}
+              </td>
               <td class="text-right">{{ invoice.grandTotal | toCurrency }}</td>
             </tr>
           </tbody>
@@ -85,7 +99,12 @@
         <v-btn class="mr-10 mb-10" color="pink lighten-1" @click="handlePrint">
           {{ $t("views.invoice.print") }}
         </v-btn>
-        <v-btn v-if="invoice.status == 'DRAFT'" class="mr-10 mb-10" color="pink lighten-1" @click="handleAddToCart">
+        <v-btn
+          v-if="invoice.status == 'DRAFT'"
+          class="mr-10 mb-10"
+          color="pink lighten-1"
+          @click="handleAddToCart"
+        >
           {{ $t("views.invoice.addToCart") }}
         </v-btn>
       </v-col>
@@ -94,27 +113,19 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
   </div>
 </template>
 
 <script>
-import ErrorDialog from "../../../components/dialogs/ErrorDialog.vue";
 import LoadingDialog from "../../../components/dialogs/LoadingDialog.vue";
 import PublicOrderService from "../../../services/PublicOrder.service";
+import { useErrorMessage } from "../../../store/error-message";
 export default {
-  components: { ErrorDialog, LoadingDialog },
+  components: { LoadingDialog },
   data() {
     return {
       invoice: {},
       isLoading: false,
-      isError: false,
-      errorMessage: "",
     };
   },
   async created() {
@@ -132,6 +143,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     async handleAddToCart() {
       try {
         this.isLoading = true;
@@ -140,11 +152,7 @@ export default {
         this.$router.push(`/cart`);
       } catch (error) {
         this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
+        this.pushError(error);
       }
     },
     async handlePrint() {
@@ -159,17 +167,11 @@ export default {
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
+        this.pushError(error);
       }
     },
   },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

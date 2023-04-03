@@ -117,12 +117,6 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
     <v-dialog v-model="isOpenConfirmOrder" persistent width="50%">
       <OrderConfirmation
         v-if="isOpenConfirmOrder"
@@ -137,15 +131,14 @@
 <script>
 import OrderConfirmation from "./OrderConfirmation";
 import DateComponent from "../common/DateComponent";
-import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import OrderService from "../../services/Order.service";
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
+import { useErrorMessage } from "../../store/error-message";
 export default {
   components: {
     DateComponent,
-    ErrorDialog,
     LoadingDialog,
     OrderConfirmation,
   },
@@ -177,6 +170,7 @@ export default {
     ...mapState(useReferenceData, ["orderStatuses", "productTypes"]),
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     handleConfirmOrder(item) {
       this.confirmOrderInput = {
         orderId: item.id,
@@ -219,11 +213,7 @@ export default {
       } catch (error) {
         console.log(error);
         this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
+        this.pushError(error);
       }
     },
   },

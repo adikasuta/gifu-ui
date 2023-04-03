@@ -74,16 +74,6 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog
-      v-model="isError"
-      persistent
-      :width="$vuetify.breakpoint.xsOnly ? '100%' : '25%'"
-    >
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
   </div>
 </template>
 
@@ -93,11 +83,11 @@ import CustomerData from "./souvenir/CustomerData";
 import AdditionalRequest from "./souvenir/AdditionalRequest";
 import CompleteDetailProduct from "./souvenir/CompleteDetailProduct";
 import ProductOverview from "./ProductOverview";
-import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import { mapState, mapWritableState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
 import { useOrderProductForm } from "../../store/order-form";
+import { useErrorMessage } from "../../store/error-message";
 import SessionUtils from "../../utils/SessionUtils";
 export default {
   name: "OrderSouvenir",
@@ -106,7 +96,6 @@ export default {
     CustomerData,
     AdditionalRequest,
     CompleteDetailProduct,
-    ErrorDialog,
     LoadingDialog,
     ProductOverview,
   },
@@ -114,8 +103,6 @@ export default {
     return {
       e1: 1,
       isLoading: false,
-      isError: false,
-      errorMessage: "",
       stepTitles: [
         "views.order.souvenir.steps.detail",
         "views.order.souvenir.steps.additional",
@@ -130,6 +117,7 @@ export default {
     ...mapState(useOrderProductForm, ["publicCategories", "productTypes"]),
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     ...mapActions(useOrderProductForm, ["postSouvenirOrder","reset"]),
     handleOrder(validator) {
       this.$refs[validator].validate().then(async (success) => {
@@ -147,11 +135,7 @@ export default {
           } catch (error) {
             console.log(error);
             this.isLoading = false;
-            this.isError = true;
-            this.errorMessage = "Unhandled Error";
-            if (error.response) {
-              this.errorMessage = error.response.data.message;
-            }
+            this.pushError(error);
           }
         }
       });

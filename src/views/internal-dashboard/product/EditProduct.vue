@@ -16,12 +16,6 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
   </v-container>
 </template>
 
@@ -31,10 +25,10 @@ import ProductPricingRange from "../../../components/product/ProductPricingRange
 import VariantPricingCombination from "../../../components/product/VariantPricingCombination";
 import BasicProductData from "../../../components/product/BasicProductData";
 import VariationViewSetting from "../../../components/product/VariationViewSetting";
-import ErrorDialog from "../../../components/dialogs/ErrorDialog.vue";
 import LoadingDialog from "../../../components/dialogs/LoadingDialog.vue";
 import { mapActions } from "pinia";
 import { useProductForm } from "../../../store/product-form";
+import { useErrorMessage } from "../../../store/error-message";
 export default {
   components: {
     ValidationObserver,
@@ -42,14 +36,11 @@ export default {
     VariantPricingCombination,
     VariationViewSetting,
     BasicProductData,
-    ErrorDialog,
     LoadingDialog,
   },
   data() {
     return {
       isLoading: false,
-      isError: false,
-      errorMessage: "",
     };
   },
   computed: {},
@@ -60,14 +51,11 @@ export default {
       this.isLoading = false;
     } catch (error) {
       this.isLoading = false;
-      this.isError = true;
-      this.errorMessage = "Unhandled Error";
-      if (error.response) {
-        this.errorMessage = error.response.data.message;
-      }
+      this.pushError(error);
     }
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     ...mapActions(useProductForm, ["postProduct", "loadProductForm"]),
     async handleSubmit() {
       this.$refs.observer.validate().then(async (success) => {
@@ -80,11 +68,7 @@ export default {
           } catch (error) {
             console.log(error);
             this.isLoading = false;
-            this.isError = true;
-            this.errorMessage = "Unhandled Error";
-            if (error.response) {
-              this.errorMessage = error.response.data.message;
-            }
+            this.pushError(error);
           }
         }
       });

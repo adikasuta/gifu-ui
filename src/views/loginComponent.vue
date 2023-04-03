@@ -18,24 +18,17 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
   </div>
 </template>
 
 <script>
 import AuthService from "../services/Auth.service";
-import ErrorDialog from "../components/dialogs/ErrorDialog.vue";
 import LoadingDialog from "../components/dialogs/LoadingDialog.vue";
 import SessionUtils from "../utils/SessionUtils";
+import { useErrorMessage } from "../store/error-message";
 
 export default {
   components: {
-    ErrorDialog,
     LoadingDialog,
   },
   data() {
@@ -45,8 +38,6 @@ export default {
         password: "",
       },
       isLoading: false,
-      isError: false,
-      errorMessage: "",
     };
   },
   async created() {
@@ -56,17 +47,26 @@ export default {
     };
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     async handleSubmit() {
       try {
         this.isLoading = true;
         const response = await AuthService.login(this.loginForm);
-        SessionUtils.putSessionData("BEARER", response.token, 24*3)
+        SessionUtils.putSessionData("BEARER", response.token, 24 * 3);
         this.isLoading = false;
         this.$router.push("/dashboard");
       } catch (error) {
         this.isLoading = false;
         this.isError = true;
         this.errorMessage = "Password or Email is not valid";
+        this.pushError({
+          response: {
+            data: {
+              message: "Password or Email is not valid",
+            },
+            status: 401,
+          },
+        });
       }
     },
   },

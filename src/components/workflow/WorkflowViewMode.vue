@@ -30,27 +30,20 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
     <ConfirmationDialog ref="confirmationDialog" />
   </div>
 </template>
 
 <script>
-import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import ConfirmationDialog from "../dialogs/ConfirmationDialog";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import StringUtils from "../../utils/StringUtils";
 import WorkflowService from "../../services/Workflow.service";
+import { useErrorMessage } from "../../store/error-message";
 export default {
   name: "WorkflowViewMode",
   props: ["workflow"],
   components: {
-    ErrorDialog,
     ConfirmationDialog,
     LoadingDialog,
   },
@@ -58,11 +51,10 @@ export default {
     return {
       name: this.workflow.name,
       isLoading: false,
-      isError: false,
-      errorMessage: "",
     };
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     ...StringUtils,
     async handleChangeName(e) {
       try {
@@ -74,11 +66,7 @@ export default {
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
+        this.pushError(error);
       }
     },
     handleEdit() {
@@ -96,11 +84,7 @@ export default {
           this.isLoading = false;
         } catch (error) {
           this.isLoading = false;
-          this.isError = true;
-          this.errorMessage = "Unhandled Error";
-          if (error.response) {
-            this.errorMessage = error.response.data.message;
-          }
+          this.pushError(error);
         }
       }
     },

@@ -70,7 +70,15 @@
                 >
                   {{ $t("views.variant.edit") }}</v-btn
                 >
-                <v-btn elevation="2" color="primary" @click="()=>{handleDelete(item.id)}">
+                <v-btn
+                  elevation="2"
+                  color="primary"
+                  @click="
+                    () => {
+                      handleDelete(item.id);
+                    }
+                  "
+                >
                   {{ $t("views.variant.delete") }}</v-btn
                 >
               </td>
@@ -93,28 +101,21 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
     <ConfirmationDialog ref="confirmationDialog" />
   </div>
 </template>
 
 <script>
-import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import ConfirmationDialog from "../dialogs/ConfirmationDialog";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import SmallImage from "../common/SmallImage";
 import VariantService from "../../services/Variant.service";
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
+import { useErrorMessage } from "../../store/error-message";
 export default {
   components: {
     SmallImage,
-    ErrorDialog,
     ConfirmationDialog,
     LoadingDialog,
   },
@@ -131,8 +132,6 @@ export default {
         pageSize: 20,
       },
       isLoading: false,
-      isError: false,
-      errorMessage: "",
     };
   },
   async created() {
@@ -142,6 +141,7 @@ export default {
     ...mapState(useReferenceData, ["variantTypes"]),
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     async handleEdit(id) {
       this.$router.push(`/dashboard/variant/${id}`);
     },
@@ -157,11 +157,7 @@ export default {
           this.isLoading = false;
         } catch (error) {
           this.isLoading = false;
-          this.isError = true;
-          this.errorMessage = "Unhandled Error";
-          if (error.response) {
-            this.errorMessage = error.response.data.message;
-          }
+          this.pushError(error);
         }
       }
     },
@@ -182,11 +178,7 @@ export default {
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
+        this.pushError(error);
       }
     },
   },

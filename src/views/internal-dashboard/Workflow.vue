@@ -52,29 +52,22 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
     <ConfirmationDialog ref="confirmationDialog" />
   </v-container>
 </template>
 
 <script>
-import ErrorDialog from "../../components/dialogs/ErrorDialog.vue";
 import ConfirmationDialog from "../../components/dialogs/ConfirmationDialog";
 import LoadingDialog from "../../components/dialogs/LoadingDialog.vue";
 import { mapState } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
+import { useErrorMessage } from "../../store/error-message";
 import WorkflowService from "../../services/Workflow.service";
 import WorkflowListItem from "../../components/workflow/WorkflowListItem";
 export default {
   name: "WorkflowComponent",
   components: {
     WorkflowListItem,
-    ErrorDialog,
     ConfirmationDialog,
     LoadingDialog,
   },
@@ -97,8 +90,6 @@ export default {
       },
       workflowList: [],
       isLoading: false,
-      isError: false,
-      errorMessage: "",
     };
   },
   async created() {
@@ -108,6 +99,7 @@ export default {
     ...mapState(useReferenceData, ["categories"]),
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     async handleRefresh() {
       try {
         this.isLoading = true;
@@ -125,11 +117,7 @@ export default {
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
+        this.pushError(error);
       }
     },
     handleAddWorkflow() {

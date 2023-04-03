@@ -115,29 +115,22 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
     <ConfirmationDialog ref="confirmationDialog" />
   </v-container>
 </template>
 
 <script>
-import ErrorDialog from "../../../components/dialogs/ErrorDialog.vue";
 import ConfirmationDialog from "../../../components/dialogs/ConfirmationDialog";
 import LoadingDialog from "../../../components/dialogs/LoadingDialog.vue";
 import BasicForm from "../../../components/layout/BasicForm";
 import PublicProductService from "../../../services/PublicProduct.service";
 import { mapState } from "pinia";
 import { useReferenceData } from "../../../store/reference-data";
+import { useErrorMessage } from "../../../store/error-message";
 export default {
   components: {
     BasicForm,
     ConfirmationDialog,
-    ErrorDialog,
     LoadingDialog,
   },
   data() {
@@ -154,8 +147,6 @@ export default {
         pageSize: 20,
       },
       isLoading: false,
-      isError: false,
-      errorMessage: "",
     };
   },
   async created() {
@@ -165,6 +156,7 @@ export default {
     ...mapState(useReferenceData, ["publicCategories", "productTypes"]),
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     getRanges(pricing) {
       if (!pricing.qtyMax) {
         return `> ${pricing.qtyMin}`;
@@ -183,11 +175,7 @@ export default {
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
+        this.pushError(error);
       }
     },
   },

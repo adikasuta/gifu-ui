@@ -131,7 +131,7 @@
             <v-col cols="4">
               <ValidationProvider
                 v-slot="{ errors }"
-                :name="`Step ${index+1}`"
+                :name="`Step ${index + 1}`"
                 rules="required"
                 ref="provider"
               >
@@ -146,7 +146,7 @@
             <v-col cols="4">
               <ValidationProvider
                 v-slot="{ errors }"
-                :name="`Staff ${index+1}`"
+                :name="`Staff ${index + 1}`"
                 rules="required"
                 ref="provider"
               >
@@ -211,27 +211,21 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
     <ConfirmationDialog ref="confirmationDialog" />
   </ValidationObserver>
 </template>
 
 <script>
-import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import ConfirmationDialog from "../dialogs/ConfirmationDialog";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import draggable from "vuedraggable";
 import AddNewCategory from "./AddNewCategory";
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import StringUtils from "../../utils/StringUtils";
 import { useReferenceData } from "../../store/reference-data";
 import WorkflowService from "../../services/Workflow.service";
 import CategoryService from "../../services/Category.service";
+import { useErrorMessage } from "../../store/error-message";
 import { ValidationObserver } from "vee-validate";
 import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 export default {
@@ -241,7 +235,6 @@ export default {
     draggable,
     AddNewCategory,
     ConfirmationDialog,
-    ErrorDialog,
     ValidationObserver,
     ValidationProvider,
   },
@@ -252,8 +245,6 @@ export default {
       isLoading: false,
       isAddNewCategory: false,
       toBeChangedCategory: null,
-      isError: false,
-      errorMessage: "",
     };
   },
   computed: {
@@ -272,6 +263,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     ...StringUtils,
     handleRemoveMapping(index) {
       this.workflowContent.productCategories.splice(index, 1);
@@ -289,11 +281,7 @@ export default {
           this.isLoading = false;
         } catch (error) {
           this.isLoading = false;
-          this.isError = true;
-          this.errorMessage = "Unhandled Error";
-          if (error.response) {
-            this.errorMessage = error.response.data.message;
-          }
+          this.pushError(error);
         }
       }
     },
@@ -351,11 +339,7 @@ export default {
             this.isLoading = false;
           } catch (error) {
             this.isLoading = false;
-            this.isError = true;
-            this.errorMessage = "Unhandled Error";
-            if (error.response) {
-              this.errorMessage = error.response.data.message;
-            }
+            this.pushError(error);
           }
         }
       });

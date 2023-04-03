@@ -59,27 +59,20 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
   </div>
 </template>
 
 <script>
 import { ValidationObserver } from "vee-validate";
 import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
-import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import BasicForm from "../layout/BasicForm";
 import VariantService from "../../services/Variant.service";
+import { useErrorMessage } from "../../store/error-message";
 export default {
   props: ["content", "variantId"],
   components: {
     BasicForm,
-    ErrorDialog,
     LoadingDialog,
     ValidationProvider,
     ValidationObserver,
@@ -88,8 +81,6 @@ export default {
     return {
       contentForm: this.content,
       isLoading: false,
-      isError: false,
-      errorMessage: "",
       file: null,
       formData: new FormData(),
     };
@@ -105,6 +96,7 @@ export default {
     this.file = null;
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     hideDialog() {
       this.$emit("close:dialog");
       this.contentForm = {};
@@ -124,11 +116,7 @@ export default {
             this.isLoading = false;
           } catch (error) {
             this.isLoading = false;
-            this.isError = true;
-            this.errorMessage = "Unhandled Error";
-            if (error.response) {
-              this.errorMessage = error.response.data.message;
-            }
+            this.pushError(error);
           }
         }
       });

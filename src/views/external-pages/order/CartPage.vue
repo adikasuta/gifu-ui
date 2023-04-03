@@ -80,28 +80,20 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
   </div>
 </template>
 
 <script>
-
 // TODO: DELETE METHOD
 import { ValidationObserver } from "vee-validate";
 import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
-import ErrorDialog from "../../../components/dialogs/ErrorDialog.vue";
 import LoadingDialog from "../../../components/dialogs/LoadingDialog.vue";
 import CartItem from "../../../components/product/CartItem";
 import { mapState, mapActions, mapWritableState } from "pinia";
 import { useCartData } from "../../../store/cart-data";
+import { useErrorMessage } from "../../../store/error-message";
 export default {
   components: {
-    ErrorDialog,
     LoadingDialog,
     CartItem,
     ValidationProvider,
@@ -110,8 +102,6 @@ export default {
   data() {
     return {
       isLoading: false,
-      isError: false,
-      errorMessage: "",
     };
   },
   async created() {
@@ -143,6 +133,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     ...mapActions(useCartData, ["loadCartItems", "checkout"]),
     async handleCheckout() {
       this.$refs.observer.validate().then(async (success) => {
@@ -154,11 +145,7 @@ export default {
             this.$router.push("/checkout");
           } catch (error) {
             this.isLoading = false;
-            this.isError = true;
-            this.errorMessage = "Unhandled Error";
-            if (error.response) {
-              this.errorMessage = error.response.data.message;
-            }
+            this.pushError(error);
           }
         }
       });
@@ -170,11 +157,7 @@ export default {
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
+        this.pushError(error);
       }
     },
   },

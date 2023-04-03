@@ -105,18 +105,11 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
   </div>
 </template>
 
 <script>
 import { ValidationObserver } from "vee-validate";
-import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 import BasicForm from "../layout/BasicForm";
@@ -124,6 +117,8 @@ import CurrencyInput from "../common/CurrencyInput";
 import DateComponent from "../common/DateComponent";
 import OrderService from "../../services/Order.service";
 import StringUtils from "../../utils/StringUtils";
+import { mapActions } from "pinia";
+import { useErrorMessage } from "../../store/error-message";
 
 export default {
   props: ["requestInput"],
@@ -132,7 +127,6 @@ export default {
     ValidationProvider,
     CurrencyInput,
     DateComponent,
-    ErrorDialog,
     LoadingDialog,
     ValidationObserver,
   },
@@ -150,6 +144,7 @@ export default {
     (this.deadline = null), (this.shippingFee = null);
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     async confirmOrder() {
       this.$refs.observer.validate().then(async (success) => {
         if (success) {
@@ -166,11 +161,7 @@ export default {
             this.contentCategory = {};
           } catch (error) {
             this.isLoading = false;
-            this.isError = true;
-            this.errorMessage = "Unhandled Error";
-            if (error.response) {
-              this.errorMessage = error.response.data.message;
-            }
+            this.pushError(error);
           }
         }
       });

@@ -69,29 +69,19 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog
-      v-model="isError"
-      persistent
-      :width="$vuetify.breakpoint.xsOnly ? '100%' : '25%'"
-    >
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
   </div>
 </template>
 
 <script>
-import ErrorDialog from "../../../components/dialogs/ErrorDialog.vue";
 import LoadingDialog from "../../../components/dialogs/LoadingDialog.vue";
 import PublicProductService from "../../../services/PublicProduct.service";
 import ProductCard from "../../../components/product/ProductCard";
 import { mapState } from "pinia";
 import { useReferenceData } from "../../../store/reference-data";
+import { useErrorMessage } from "../../../store/error-message";
 export default {
   name: "ProductDisplay",
-  components: { ProductCard, ErrorDialog, LoadingDialog },
+  components: { ProductCard, LoadingDialog },
   data() {
     return {
       products: [],
@@ -106,8 +96,6 @@ export default {
         pageSize: 20,
       },
       isLoading: false,
-      isError: false,
-      errorMessage: "",
     };
   },
   watch: {
@@ -128,6 +116,7 @@ export default {
     ...mapState(useReferenceData, ["publicCategories", "productTypes"]),
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     async handleRefresh() {
       try {
         this.isLoading = true;
@@ -140,11 +129,7 @@ export default {
         this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
-        this.isError = true;
-        this.errorMessage = "Unhandled Error";
-        if (error.response) {
-          this.errorMessage = error.response.data.message;
-        }
+        this.pushError(error);
       }
     },
   },

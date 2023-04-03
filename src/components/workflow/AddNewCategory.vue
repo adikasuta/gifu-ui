@@ -100,12 +100,6 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isError" width="25%" persistent>
-      <ErrorDialog
-        :errorDescription="errorMessage"
-        @close:dialog="isError = !isError"
-      />
-    </v-dialog>
   </div>
 </template>
 
@@ -113,16 +107,15 @@
 import { ValidationObserver } from "vee-validate";
 import { ValidationProvider } from "vee-validate/dist/vee-validate.full";
 import BasicForm from "../layout/BasicForm";
-import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import CategoryService from "../../services/Category.service";
 import { mapState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
+import { useErrorMessage } from "../../store/error-message";
 export default {
   name: "AddNewCategory",
   components: {
     LoadingDialog,
-    ErrorDialog,
     BasicForm,
     ValidationObserver,
     ValidationProvider,
@@ -142,6 +135,7 @@ export default {
     ...mapState(useReferenceData, ["productTypes"]),
   },
   methods: {
+    ...mapActions(useErrorMessage, ["pushError"]),
     ...mapActions(useReferenceData, ["loadReferenceData"]),
     async handleSave() {
       this.$refs.observer.validate().then(async (success) => {
@@ -159,11 +153,7 @@ export default {
             this.contentCategory = {};
           } catch (error) {
             this.isLoading = false;
-            this.isError = true;
-            this.errorMessage = "Unhandled Error";
-            if (error.response) {
-              this.errorMessage = error.response.data.message;
-            }
+            this.pushError(error);
           }
         }
       });
