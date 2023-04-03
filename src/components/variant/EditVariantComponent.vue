@@ -70,7 +70,7 @@ import ErrorDialog from "../dialogs/ErrorDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import BasicForm from "../layout/BasicForm";
 import VariantService from "../../services/Variant.service";
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
 export default {
   props: ["id"],
@@ -103,6 +103,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(useReferenceData, ["loadReferenceData"]),
     initVariant() {
       this.variant = {
         id: null,
@@ -117,6 +118,7 @@ export default {
           try {
             this.isLoading = true;
             await VariantService.postVariant(this.variant);
+            await this.loadReferenceData();
             this.isLoading = false;
             if (this.isCreate) {
               this.$router.push(`/dashboard/variant`);

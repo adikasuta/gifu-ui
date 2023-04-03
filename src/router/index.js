@@ -2,17 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomepageComponent from '../views/Homepage';
 import TrackingComponent from '../views/theTracking';
-import SouvenirComponent from '../views/Souvenir';
-import OrderSouvenirComponent from '../views/OrderSouvenir';
-import InvoiceSouvenirComponent from '../views/invoiceSouvenir';
-import InvitationComponent from '../views/Invitation';
-import OrderInvitationComponent from '../views/OrderInvitation';
-import InvoiceInvitationComponent from '../views/invoiceInvitation';
-import designInvitationComponent from '../views/designInvitation';
-import CartComponent from '../views/TheCart';
 import CheckoutComponent from '../views/CheckoutComponent';
 import LoginComponent from '../views/loginComponent';
-import DashboardComponent from '../views/DashboardComponent';
 import WorkflowComponent from '../views/internal-dashboard/Workflow';
 import VariantComponent from '../views/internal-dashboard/variant/Variant';
 import EditVariantPage from '../views/internal-dashboard/variant/EditVariantPage';
@@ -25,6 +16,7 @@ import ProductDisplay from '../views/external-pages/order/ProductDisplay';
 import ProductDetail from '../views/external-pages/order/ProductDetail';
 import InvoicePage from '../views/external-pages/order/InvoicePage';
 import CartPage from '../views/external-pages/order/CartPage';
+import HomepageDashboard from "../views/internal-dashboard/home-pages/HomepageDashboard";
 
 
 Vue.use(VueRouter)
@@ -71,73 +63,9 @@ const routes = [
     }
   },
   {
-    path: '/theTracking',
+    path: '/tracking',
     name: 'TrackingComponent',
     component: TrackingComponent,
-    meta:{
-      hideSidebar: true,
-    }
-  },
-  {
-    path: '/souvenir',
-    name: 'SouvenirComponent',
-    component: SouvenirComponent,
-    meta:{
-      hideSidebar: true,
-    }
-  },
-  {
-    path: '/OrderSouvenir',
-    name: 'OrderSouvenirComponent',
-    component: OrderSouvenirComponent,
-    meta:{
-      hideSidebar: true,
-    }
-  },
-  {
-    path: '/InvoiceSouvenir',
-    name: 'InvoiceSouvenirComponent',
-    component: InvoiceSouvenirComponent,
-    meta:{
-      hideSidebar: true,
-    }
-  },
-  {
-    path: '/Invitation',
-    name: 'InvitationComponent',
-    component: InvitationComponent,
-    meta:{
-      hideSidebar: true,
-    }
-  },
-  {
-    path: '/OrderInvitation',
-    name: 'OrderInvitationComponent',
-    component: OrderInvitationComponent,
-    meta:{
-      hideSidebar: true,
-    }
-  },
-  {
-    path: '/InvoiceInvitation',
-    name: 'InvoiceInvitationComponent',
-    component: InvoiceInvitationComponent,
-    meta:{
-      hideSidebar: true,
-    }
-  },
-  {
-    path: '/designInvitation',
-    name: 'designInvitationComponent',
-    component: designInvitationComponent,
-    meta:{
-      hideSidebar: true,
-    }
-  },
-  {
-    path: '/Cart',
-    name: 'CartComponent',
-    component: CartComponent,
     meta:{
       hideSidebar: true,
     }
@@ -160,11 +88,10 @@ const routes = [
       hideFooter: true,
     }
   },
-  
   {
     path: '/dashboard',
     name: 'DashboardComponent',
-    component: DashboardComponent,
+    component: HomepageDashboard,
     meta:{
       requiresAuth: true,
       breadcrumb:[

@@ -33,5 +33,8 @@ export default {
   },
   async getShippingVendors() {
     return await api.get(`${BASE_URL}/shipping-vendors`);
+  },
+  async getOrderStatus() {
+    return await api.get(`${BASE_URL}/order-status`);
   }
 }

@@ -31,7 +31,7 @@
 import AuthService from "../services/Auth.service";
 import ErrorDialog from "../components/dialogs/ErrorDialog.vue";
 import LoadingDialog from "../components/dialogs/LoadingDialog.vue";
-import Cookies from "js-cookie";
+import SessionUtils from "../utils/SessionUtils";
 
 export default {
   components: {
@@ -60,9 +60,7 @@ export default {
       try {
         this.isLoading = true;
         const response = await AuthService.login(this.loginForm);
-        const now = new Date();
-        const expires = new Date(now.getTime() + 30 * 60 * 1000);
-        Cookies.set("BEARER", response.token, { expires });
+        SessionUtils.putSessionData("BEARER", response.token, 24*3)
         this.isLoading = false;
         this.$router.push("/dashboard");
       } catch (error) {

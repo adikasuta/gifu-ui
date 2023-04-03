@@ -49,13 +49,7 @@ export default {
       this.$router.push("/");
     },
     goToTracking() {
-      this.$router.push("/theTracking");
-    },
-    goToSouvenir() {
-      this.$router.push("/Souvenir");
-    },
-    goToInvitation() {
-      this.$router.push("/Invitation");
+      this.$router.push("/tracking");
     },
     goToCart() {
       this.$router.push("/Cart");

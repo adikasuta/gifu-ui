@@ -42,6 +42,37 @@
       "orderyours": "Order your souvenirs, printed invitation, digital invitation, hampers, and Bridesmaid Box from GIFU. You will definitely save your time!"
     },
     "views": {
+      "dashboard": {
+        "confirm": "Confirm",
+        "cancel": "Back",
+        "orderConfirmation": "Order Confirmation",
+        "billOrder": "Bill Order",
+        "staffTodoList": "Staff Assignments",
+        "orderHistoryData": "Historical Data Order",
+        "confirmOrder": "Konfirmasi Pesanan",
+        "fields": {
+          "status": "Status",
+          "productType": "Product Type",
+          "search": "Search Order",
+          "periodStart": "Date From",
+          "periodEnd": "Date Until",
+          "createDate": "Order Date",
+          "orderCode": "Order Number",
+          "customerName": "Customer Name",
+          "productName": "Product Name",
+          "quantity": "Quantity",
+          "deadline": "Deadline",
+          "shippingFee": "Shipping Fee",
+          "grandTotal": "Grand Total",
+          "paymentDate": "Payment Date",
+          "province": "Province",
+          "city": "City",
+          "district": "District",
+          "kelurahan": "Kelurahan",
+          "postalCode": "Postal Code",
+          "shippingVendor": "Shipping Vendor"
+        }
+      },
       "cart": {
         "remove": "Hapus",
         "seeInvoice": "Lihat Invoice",
@@ -49,10 +80,10 @@
         "paymentTerm": "Payment Term",
         "cash": "Full Payment",
         "downpayment": "Several Payment Terms",
-        "downpaymentke":"Down Payment",
-        "shopping":"Add more order",
-        "noCartItems":"There is no item in cart yet",
-        "checkout":"Checkout"
+        "downpaymentke": "Down Payment",
+        "shopping": "Add more order",
+        "noCartItems": "There is no item in cart yet",
+        "checkout": "Checkout"
       },
       "invoice": {
         "print": "Print Invoice",
@@ -322,6 +353,38 @@
       "orderyours": "Pesan Souvenir, Undangan Fisik, Undangan Digital, Hampers, dan Bridesmaid Box cukup di satu tempat saja"
     },
     "views": {
+      "dashboard": {
+        "confirm": "Konfirmasi",
+        "cancel": "Kembali",
+        "orderConfirmation": "Konfirmasi Pesanan",
+        "billOrder": "Tagihan Pesanan",
+        "staffTodoList": "Penugasan Staff Produksi",
+        "orderHistoryData": "Data Historis Pesanan",
+        "confirmOrder": "Konfirmasi Pesanan",
+        "fields": {
+          "status": "Status",
+          "productType": "Jenis Produk",
+          "search": "Cari Pesanan",
+          "periodStart": "Dari tanggal",
+          "periodEnd": "Sampai tanggal",
+          "createDate": "Tanggal Order",
+          "shippingFee": "Biaya Pengiriman",
+          "orderCode": "Nomor Order",
+          "customerName": "Nama Konsumen",
+          "productName": "Produk",
+          "quantity": "Jumlah",
+          "deadline": "Deadline",
+          "grandTotal": "Grand Total",
+          "paymentDate": "Tanggal Pembayaran",
+          
+          "province": "Provinsi",
+          "city": "Kota",
+          "district": "Kecamatan",
+          "kelurahan": "Kelurahan",
+          "postalCode": "Kode Pos",
+          "shippingVendor": "Shipping Vendor"
+        }
+      },
       "cart": {
         "remove": "Hapus",
         "seeInvoice": "Lihat Invoice",
@@ -329,10 +392,10 @@
         "paymentTerm": "Cara Pembayaran",
         "cash": "Cash",
         "downpayment": "Angsuran",
-        "downpaymentke":"Angsuran ke",
-        "checkout":"Checkout",
-        "shopping":"Tambah pesanan lainnya",
-        "noCartItems":"Belum ada data di dalam kerjanjang"
+        "downpaymentke": "Angsuran ke",
+        "checkout": "Checkout",
+        "shopping": "Tambah pesanan lainnya",
+        "noCartItems": "Belum ada data di dalam kerjanjang"
       },
       "invoice": {
         "print": "Cetak Invoice",

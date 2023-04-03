@@ -16,7 +16,8 @@ export const useReferenceData = defineStore('ReferenceData', {
     districts: [],
     kelurahans: [],
     shippingVendors: [],
-    users: []
+    users: [],
+    orderStatuses: [],
   }),
   getters: {
 
@@ -41,6 +42,7 @@ export const useReferenceData = defineStore('ReferenceData', {
       this.kelurahans = await ReferenceService.getKelurahans(districtId);
     },
     async loadReferenceData() {
+      this.orderStatuses = await ReferenceService.getOrderStatus();
       this.shippingVendors = await ReferenceService.getShippingVendors();
       this.variants = await ReferenceService.getAllVariant();
       this.productTypes = await ReferenceService.getProductType();
