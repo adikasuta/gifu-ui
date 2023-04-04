@@ -49,8 +49,15 @@
         "billOrder": "Bill Order",
         "staffTodoList": "Staff Assignments",
         "orderHistoryData": "Historical Data Order",
-        "confirmOrder": "Konfirmasi Pesanan",
+        "confirmOrder": "Confirm Order",
+        "createBill":"Create Bill",
+        "detailpayment":"Payment Detail",
         "fields": {
+          "customerPhoneNo":"Customer Phone No",
+          "customerEmail":"Customer Email",
+          "orders":"Orders",
+          "paymentTerm":"Payment Term",
+          "payments":"Payments",
           "status": "Status",
           "productType": "Product Type",
           "search": "Search Order",
@@ -70,7 +77,10 @@
           "district": "District",
           "kelurahan": "Kelurahan",
           "postalCode": "Postal Code",
-          "shippingVendor": "Shipping Vendor"
+          "shippingVendor": "Shipping Vendor",
+          "bankCode":"Bank",
+          "virtualAccount":"Virtual Account",
+          "accountName":"Account Name"
         }
       },
       "cart": {
@@ -361,6 +371,8 @@
         "staffTodoList": "Penugasan Staff Produksi",
         "orderHistoryData": "Data Historis Pesanan",
         "confirmOrder": "Konfirmasi Pesanan",
+        "detailpayment":"Lihat detil pembayaran",
+        "createBill":"Buat Tagihan",
         "fields": {
           "status": "Status",
           "productType": "Jenis Produk",
@@ -376,13 +388,21 @@
           "deadline": "Deadline",
           "grandTotal": "Grand Total",
           "paymentDate": "Tanggal Pembayaran",
+          "customerPhoneNo":"Nomor Telepon Customer",
+          "customerEmail":"Email Customer",
+          "orders":"Pesanan",
+          "paymentTerm":"Cara Pembayaran",
+          "payments":"Pembayaran",
           
           "province": "Provinsi",
           "city": "Kota",
           "district": "Kecamatan",
           "kelurahan": "Kelurahan",
           "postalCode": "Kode Pos",
-          "shippingVendor": "Shipping Vendor"
+          "shippingVendor": "Shipping Vendor",
+          "bankCode":"Bank",
+          "virtualAccount":"Akun Virtual",
+          "accountName":"Nama Akun"
         }
       },
       "cart": {

@@ -13,6 +13,7 @@
           <v-card color="basil" flat>
             <v-card-text>
               <OrderHistoricalTable v-if="index == 0" />  
+              <OrderCheckoutTable v-if="index == 1" />  
             </v-card-text>
           </v-card>
         </v-tab-item>
@@ -22,9 +23,10 @@
 </template>
 
 <script>
+import OrderCheckoutTable from "../../../components/dashboard/OrderCheckoutTable";
 import OrderHistoricalTable from "../../../components/dashboard/OrderHistoricalTable";
 export default {
-  components: { OrderHistoricalTable },
+  components: { OrderHistoricalTable, OrderCheckoutTable },
   data() {
     return {
       tab: null,

@@ -49,33 +49,25 @@
               {{ $t("views.dashboard.fields.createDate") }}
             </th>
             <th class="text-left">
-              {{ $t("views.dashboard.fields.orderCode") }}
-            </th>
-            <th class="text-left">
-              {{ $t("views.dashboard.fields.productType") }}
-            </th>
-            <th class="text-left">
-              {{ $t("views.dashboard.fields.productName") }}
-            </th>
-            <th class="text-left">
               {{ $t("views.dashboard.fields.customerName") }}
             </th>
             <th class="text-left">
-              {{ $t("views.dashboard.fields.quantity") }}
+              {{ $t("views.dashboard.fields.customerPhoneNo") }}
             </th>
-
-            <th class="text-right">
+            <th class="text-left">
+              {{ $t("views.dashboard.fields.customerEmail") }}
+            </th>
+            <th class="text-left">
+              {{ $t("views.dashboard.fields.orders") }}
+            </th>
+            <th class="text-left">
               {{ $t("views.dashboard.fields.grandTotal") }}
             </th>
-
-            <th class="text-left">
-              {{ $t("views.dashboard.fields.deadline") }}
+            <th class="text-right">
+              {{ $t("views.dashboard.fields.payments") }}
             </th>
-            <th class="text-left">
-              {{ $t("views.dashboard.fields.paymentDate") }}
-            </th>
-            <th class="text-left">
-              {{ $t("views.dashboard.fields.status") }}
+            <th class="text-right">
+              {{ $t("views.dashboard.fields.paymentTerm") }}
             </th>
             <th class="text-left"></th>
           </tr>
@@ -83,29 +75,42 @@
         <tbody>
           <tr v-for="(item, index) in orders" :key="index">
             <td>{{ item.createdDate }}</td>
-            <td>{{ item.orderCode }}</td>
-            <td>{{ item.productType }}</td>
-            <td>{{ item.productName }}</td>
             <td>{{ item.customerName }}</td>
-            <td>{{ item.quantity }} pcs</td>
-            <td class="text-right">{{ item.grandTotal | toCurrency }}</td>
-            <td>{{ item.deadline }}</td>
-            <td>{{ item.paymentDate }}</td>
-            <td>{{ item.statusText }}</td>
+            <td>{{ item.customerPhoneNo }}</td>
+            <td>{{ item.customerEmail }}</td>
             <td>
-              <v-btn
-                v-if="item.status == 'WAITING_FOR_CONFIRMATION'"
-                elevation="2"
-                class="mr-5"
-                color="primary"
-                @click="handleConfirmOrder(item)"
+              <span
+                v-for="(order, indexOrder) in item.orders"
+                :key="indexOrder"
               >
-                {{ $t("views.dashboard.orderConfirmation") }}</v-btn
+                {{
+                  `${order.orderCode} - ${order.productName}; Status=${order.orderStatus};GrandTotal`
+                }}{{ order.grandTotal | toCurrency }}
+                <br />
+              </span>
+            </td>
+            <td class="text-right">
+              {{ item.grandTotalCheckout | toCurrency }}
+            </td>
+            <td>
+              <span
+                v-for="(payment, indexPayment) in item.payments"
+                :key="indexPayment"
+              >
+                {{ `${payment.sequenceNo}.` }}{{ payment.amount | toCurrency
+                }}{{ payment.paid ? payment.paymentDate : "" }}
+                <br />
+              </span>
+            </td>
+            <td>{{ item.paymentTerm }}</td>
+            <td>
+              <v-btn @click="handleShowDetailPopup(item)" elevation="2" class="mr-5" color="primary">
+                {{ $t("views.dashboard.detailpayment") }}</v-btn
               >
             </td>
           </tr>
           <tr v-if="orders.length === 0">
-            <td colspan="11">No matching records found</td>
+            <td colspan="9">No matching records found</td>
           </tr>
         </tbody>
       </template>
@@ -117,19 +122,18 @@
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
-    <v-dialog v-model="isOpenConfirmOrder" persistent width="50%">
-      <OrderConfirmation
-        v-if="isOpenConfirmOrder"
-        @close:dialog="toggleConfirmOrderDialog"
-        :request-input="confirmOrderInput"
-        @on:success="handleRefresh"
+    <v-dialog v-model="showCheckoutDetail" width="80%" persistent>
+      <OrderCheckoutDetail
+        v-if="showCheckoutDetail"
+        :orderCheckoutId="selectedOrderCheckoutId"
+        @on:close="toggleShowCheckoutDetail"
       />
     </v-dialog>
   </div>
 </template>
 
 <script>
-import OrderConfirmation from "./OrderConfirmation";
+import OrderCheckoutDetail from "./OrderCheckoutDetail";
 import DateComponent from "../common/DateComponent";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import OrderService from "../../services/Order.service";
@@ -138,14 +142,14 @@ import { useReferenceData } from "../../store/reference-data";
 import { useErrorMessage } from "../../store/error-message";
 export default {
   components: {
+    OrderCheckoutDetail,
     DateComponent,
     LoadingDialog,
-    OrderConfirmation,
   },
   data() {
     return {
-      confirmOrderInput: null,
-      isOpenConfirmOrder: false,
+      selectedOrderCheckoutId: null,
+      showCheckoutDetail: false,
       filterItems: {
         query: "",
         dateRanges: [],
@@ -159,8 +163,6 @@ export default {
         pageSize: 20,
       },
       isLoading: false,
-      isError: false,
-      errorMessage: "",
     };
   },
   async created() {
@@ -171,23 +173,12 @@ export default {
   },
   methods: {
     ...mapActions(useErrorMessage, ["pushError"]),
-    handleConfirmOrder(item) {
-      this.confirmOrderInput = {
-        orderId: item.id,
-        orderCode: item.orderCode,
-        provinceName: item.provinceName,
-        cityName: item.cityName,
-        districtName: item.districtName,
-        kelurahanName: item.kelurahanName,
-        postalCode: item.postalCode,
-        address: item.address,
-        shippingVendorName: item.shippingVendorName,
-        shippingVendorCode: item.shippingVendorCode,
-      };
-      this.toggleConfirmOrderDialog();
+    toggleShowCheckoutDetail(){
+      this.showCheckoutDetail = !this.showCheckoutDetail;
     },
-    toggleConfirmOrderDialog() {
-      this.isOpenConfirmOrder = !this.isOpenConfirmOrder;
+    handleShowDetailPopup(item){
+      this.selectedOrderCheckoutId = item.orderCheckoutId;
+      this.showCheckoutDetail = true;
     },
     async handleRefresh() {
       try {
@@ -203,7 +194,7 @@ export default {
           filter.periodUntil = this.filterItems.dateRanges[1];
         }
         filter.dateRanges = undefined;
-        const response = await OrderService.searchOrders({
+        const response = await OrderService.searchCheckouts({
           ...filter,
           ...this.pagination,
         });
