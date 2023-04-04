@@ -92,7 +92,7 @@
       <v-row>
         <v-col cols="12">
           <v-pagination
-          @change="handleRefresh"
+            @input="handleRefresh"
             v-model="pagination.pageNumber"
             :length="pagination.totalPages"
           ></v-pagination>
@@ -164,6 +164,7 @@ export default {
     },
     async handleRefresh() {
       try {
+        console.log("test")
         this.isLoading = true;
         const variantPage = await VariantService.getSearchVariant({
           ...this.filterItems,

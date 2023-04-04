@@ -116,7 +116,7 @@
       </template>
     </v-simple-table>
     <v-pagination
-          @change="handleRefresh"
+          @input="handleRefresh"
       v-model="pagination.pageNumber"
       :length="pagination.totalPages"
     ></v-pagination>
