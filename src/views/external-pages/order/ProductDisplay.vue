@@ -56,6 +56,7 @@
           <v-row>
             <v-col>
               <v-pagination
+          @change="handleRefresh"
                 v-model="pagination.pageNumber"
                 :length="pagination.totalPages"
                 circle

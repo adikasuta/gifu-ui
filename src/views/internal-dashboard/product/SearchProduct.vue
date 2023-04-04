@@ -107,6 +107,7 @@
       </template>
       <template v-slot:footer>
         <v-pagination
+          @change="handleRefresh"
           v-model="pagination.pageNumber"
           :length="pagination.totalPages"
         ></v-pagination>

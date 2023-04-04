@@ -77,6 +77,7 @@
           </v-col>
           <v-col cols="6">
             <v-pagination
+          @change="handleRefresh"
               v-model="pagination.pageNumber"
               :length="pagination.totalPages"
             ></v-pagination>
