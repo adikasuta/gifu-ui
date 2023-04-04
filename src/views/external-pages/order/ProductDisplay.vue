@@ -56,6 +56,7 @@
           <v-row>
             <v-col>
               <v-pagination
+              color="pink lighten-1"
           @input="handleRefresh"
                 v-model="pagination.pageNumber"
                 :length="pagination.totalPages"

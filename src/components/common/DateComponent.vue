@@ -23,7 +23,7 @@
     </template>
     <v-date-picker
       :clearable="clearable"
-      color="pink lighten-1"
+      color="pink lighten-1" dark 
       v-model="formValue"
       :range="range"
       @input="dateMenu = false"

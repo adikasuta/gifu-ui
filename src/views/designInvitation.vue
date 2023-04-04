@@ -34,7 +34,7 @@
         ></theDesign>
       </div>
       <div class="pagination">
-        <v-pagination v-model="page" :length="7" circle></v-pagination>
+        <v-pagination color="pink lighten-1"  v-model="page" :length="7" circle></v-pagination>
       </div>
     </div>
   </template>

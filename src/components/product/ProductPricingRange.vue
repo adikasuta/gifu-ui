@@ -5,7 +5,7 @@
         {{ $t("views.product.pricingRange") }}
       </template>
       <template v-slot:body>
-        <v-btn elevation="2" class="mr-5" color="primary" @click="handleAdd">
+        <v-btn elevation="2" class="mr-5" small @click="handleAdd">
           {{ $t("views.product.addPricingRange") }}</v-btn
         >
         <v-simple-table >
@@ -89,7 +89,7 @@
                   <v-btn
                     elevation="2"
                     class="mr-5"
-                    color="primary"
+                    small
                     @click="() => _remove(index)"
                   >
                     {{ $t("common.remove") }}</v-btn

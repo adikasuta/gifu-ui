@@ -8,7 +8,7 @@
         <v-btn
           elevation="2"
           class="mr-5"
-          color="primary"
+          small
           @click="handleAddForm"
         >
           {{ $t("views.product.addVariationFormSetting") }}</v-btn
@@ -71,7 +71,7 @@
                     <v-btn
                       elevation="2"
                       class="mr-5"
-                      color="primary"
+                      small
                       @click="()=>_remove(index)"
                     >
                       {{ $t("common.remove") }}</v-btn
@@ -87,10 +87,10 @@
         </ValidationObserver>
       </template>
       <template v-slot:footer>
-        <v-btn elevation="2" class="mr-5" color="primary" @click="_confirm">
+        <v-btn elevation="2" class="mr-5" small @click="_confirm">
           {{ $t("views.product.save") }}</v-btn
         >
-        <v-btn elevation="2" class="mr-5" color="primary" @click="_cancel">
+        <v-btn elevation="2" class="mr-5" small @click="_cancel">
           {{ $t("views.product.cancel") }}</v-btn
         >
       </template>

@@ -30,7 +30,7 @@
                   <v-btn
                     elevation="2"
                     class="mr-5"
-                    color="primary"
+                    small
                     @click="
                       () => {
                         handleEdit(item);
@@ -41,7 +41,7 @@
                   >
                   <v-btn
                     elevation="2"
-                    color="primary"
+                    small
                     @click="
                       () => {
                         handleDelete(item.id);
@@ -65,7 +65,7 @@
             <v-btn
               elevation="2"
               class="mr-5"
-              color="primary"
+              small
               @click="
                 () => {
                   handleAdd(item);
@@ -76,7 +76,7 @@
             >
           </v-col>
           <v-col cols="6">
-            <v-pagination
+            <v-pagination color="pink lighten-1" 
           @input="handleRefresh"
               v-model="pagination.pageNumber"
               :length="pagination.totalPages"

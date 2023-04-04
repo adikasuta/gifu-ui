@@ -156,7 +156,7 @@
           </ValidationProvider>
         </v-col>
         <v-col cols="12" sm="6" class="pb-0 pt-0">
-          <v-checkbox
+          <v-checkbox color="pink lighten-1" 
             v-model="shippingAddressForm.useWoodenCrate"
             :label="$t('views.order.fields.woodenCrate')"
           ></v-checkbox>

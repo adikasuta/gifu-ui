@@ -131,7 +131,8 @@
             <v-col cols="4">
               <ValidationProvider
                 v-slot="{ errors }"
-                :name="`Step ${index + 1}`"
+                :name="`Step`"
+                :vid="`step_${index + 1}`"
                 rules="required"
                 ref="provider"
               >
@@ -146,11 +147,13 @@
             <v-col cols="4">
               <ValidationProvider
                 v-slot="{ errors }"
-                :name="`Staff ${index + 1}`"
+                name="Staff"
+                
+                :vid="`staff_${index + 1}`"
                 rules="required"
                 ref="provider"
               >
-                <v-autocomplete
+                <v-autocomplete 
                   item-text="name"
                   item-value="id"
                   v-model="item.assignedToUserId"
@@ -166,7 +169,7 @@
               </ValidationProvider>
             </v-col>
             <v-col cols="2">
-              <v-checkbox
+              <v-checkbox color="pink lighten-1" 
                 v-model="item.needApproval"
                 :label="$t('views.workflow.fields.needApproval')"
               ></v-checkbox>
@@ -193,10 +196,10 @@
         style="flex-direction: row-reverse"
         class="pt-5 pb-5 pr-5 pl-5"
       >
-        <v-btn elevation="2" color="primary" @click="handleSaveWorkflow">
+        <v-btn elevation="2" small @click="handleSaveWorkflow">
           {{ $t("views.workflow.save") }}</v-btn
         >
-        <v-btn elevation="2" color="primary" @click="handleBack" class="mr-5">
+        <v-btn elevation="2" small @click="handleBack" class="mr-5">
           {{ $t("views.workflow.back") }}</v-btn
         >
       </v-card-actions>

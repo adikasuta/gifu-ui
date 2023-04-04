@@ -275,7 +275,7 @@
         <v-row>
           <v-col cols="12">
             <v-divider class="mb-5 mt-5"></v-divider>
-            <v-btn color="pink lighten-1" @click="handleAddEvent">
+            <v-btn color="pink lighten-1" dark  @click="handleAddEvent">
               {{ $t("views.order.fields.addEvent") }}
             </v-btn>
           </v-col>

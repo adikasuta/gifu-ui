@@ -44,7 +44,7 @@
           </v-row>
         </template>
         <template v-slot:footer>
-          <v-btn elevation="2" color="primary" @click="handleSave">
+          <v-btn elevation="2" small @click="handleSave">
             {{ $t("views.variant.submit") }}</v-btn
           >
         </template>

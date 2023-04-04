@@ -11,7 +11,7 @@
             <v-btn
               elevation="2"
               class="mr-5"
-              color="primary"
+              small
               link
               href="#/dashboard/product/add"
             >
@@ -90,7 +90,7 @@
                   <v-btn
                     elevation="2"
                     class="mr-5"
-                    color="primary"
+                    small
                     link
                     :href="`#/dashboard/product/${item.id}`"
                   >
@@ -106,7 +106,7 @@
         </v-simple-table>
       </template>
       <template v-slot:footer>
-        <v-pagination
+        <v-pagination color="pink lighten-1" 
           @input="handleRefresh"
           v-model="pagination.pageNumber"
           :length="pagination.totalPages"

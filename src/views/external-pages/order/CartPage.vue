@@ -61,7 +61,7 @@
           link
           href="#/products"
           class="ml-10 mb-10"
-          color="pink lighten-1"
+          color="pink lighten-1" dark 
           height="40px"
         >
           {{ $t("views.cart.shopping") }}
@@ -70,7 +70,7 @@
           v-if="getCartItems.length > 0"
           @click="handleCheckout"
           class="mr-10 mb-10"
-          color="pink lighten-1"
+          color="pink lighten-1" dark 
           height="40px"
         >
           {{ $t("views.cart.checkout") }}

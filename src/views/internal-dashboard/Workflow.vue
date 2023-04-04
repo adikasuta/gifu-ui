@@ -6,10 +6,18 @@
         <h3>{{ $t("views.workflow.title") }}</h3>
       </v-col>
     </v-row>
+    
+    <v-row>
+      <v-col cols="3">
+        <v-btn elevation="2" small @click="handleAddWorkflow">{{
+          $t("views.workflow.add")
+        }}</v-btn>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col lg="10" md="8" sm="6">
         <v-text-field
-          solo
+          outlined
           v-model="filter.query"
           :label="$t('views.workflow.search')"
           append-icon="mdi-magnify"
@@ -34,15 +42,8 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="3">
-        <v-btn elevation="2" small @click="handleAddWorkflow">{{
-          $t("views.workflow.add")
-        }}</v-btn>
-      </v-col>
-    </v-row>
-    <v-row>
       <v-col cols="12">
-        <v-pagination
+        <v-pagination color="pink lighten-1" 
           @input="handleRefresh"
           v-model="pagination.pageNumber"
           :length="pagination.totalPages"

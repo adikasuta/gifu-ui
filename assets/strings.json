@@ -42,6 +42,16 @@
       "orderyours": "Order your souvenirs, printed invitation, digital invitation, hampers, and Bridesmaid Box from GIFU. You will definitely save your time!"
     },
     "views": {
+      "staffTasks": {
+        "fields": {
+          "stepName": "Step",
+          "statusName": "Status",
+          "assigneeName": "Staff",
+          "productName": "Product",
+          "quantity": "Quantity",
+          "deadline": "Deadline"
+        }
+      },
       "dashboard": {
         "confirm": "Confirm",
         "cancel": "Back",
@@ -50,14 +60,14 @@
         "staffTodoList": "Staff Assignments",
         "orderHistoryData": "Historical Data Order",
         "confirmOrder": "Confirm Order",
-        "createBill":"Create Bill",
-        "detailpayment":"Payment Detail",
+        "createBill": "Create Bill",
+        "detailpayment": "Payment Detail",
         "fields": {
-          "customerPhoneNo":"Customer Phone No",
-          "customerEmail":"Customer Email",
-          "orders":"Orders",
-          "paymentTerm":"Payment Term",
-          "payments":"Payments",
+          "customerPhoneNo": "Customer Phone No",
+          "customerEmail": "Customer Email",
+          "orders": "Orders",
+          "paymentTerm": "Payment Term",
+          "payments": "Payments",
           "status": "Status",
           "productType": "Product Type",
           "search": "Search Order",
@@ -78,9 +88,9 @@
           "kelurahan": "Kelurahan",
           "postalCode": "Postal Code",
           "shippingVendor": "Shipping Vendor",
-          "bankCode":"Bank",
-          "virtualAccount":"Virtual Account",
-          "accountName":"Account Name"
+          "bankCode": "Bank",
+          "virtualAccount": "Virtual Account",
+          "accountName": "Account Name"
         }
       },
       "cart": {
@@ -363,6 +373,16 @@
       "orderyours": "Pesan Souvenir, Undangan Fisik, Undangan Digital, Hampers, dan Bridesmaid Box cukup di satu tempat saja"
     },
     "views": {
+      "staffTasks": {
+        "fields": {
+          "stepName": "Step",
+          "statusName": "Status",
+          "assigneeName": "Staff",
+          "productName": "Produk",
+          "quantity": "Jumlah",
+          "deadline": "Deadline"
+        }
+      },
       "dashboard": {
         "confirm": "Konfirmasi",
         "cancel": "Kembali",
@@ -371,8 +391,8 @@
         "staffTodoList": "Penugasan Staff Produksi",
         "orderHistoryData": "Data Historis Pesanan",
         "confirmOrder": "Konfirmasi Pesanan",
-        "detailpayment":"Lihat detil pembayaran",
-        "createBill":"Buat Tagihan",
+        "detailpayment": "Lihat detil pembayaran",
+        "createBill": "Buat Tagihan",
         "fields": {
           "status": "Status",
           "productType": "Jenis Produk",
@@ -388,21 +408,20 @@
           "deadline": "Deadline",
           "grandTotal": "Grand Total",
           "paymentDate": "Tanggal Pembayaran",
-          "customerPhoneNo":"Nomor Telepon Customer",
-          "customerEmail":"Email Customer",
-          "orders":"Pesanan",
-          "paymentTerm":"Cara Pembayaran",
-          "payments":"Pembayaran",
-          
+          "customerPhoneNo": "Nomor Telepon Customer",
+          "customerEmail": "Email Customer",
+          "orders": "Pesanan",
+          "paymentTerm": "Cara Pembayaran",
+          "payments": "Pembayaran",
           "province": "Provinsi",
           "city": "Kota",
           "district": "Kecamatan",
           "kelurahan": "Kelurahan",
           "postalCode": "Kode Pos",
           "shippingVendor": "Shipping Vendor",
-          "bankCode":"Bank",
-          "virtualAccount":"Akun Virtual",
-          "accountName":"Nama Akun"
+          "bankCode": "Bank",
+          "virtualAccount": "Akun Virtual",
+          "accountName": "Nama Akun"
         }
       },
       "cart": {
@@ -415,7 +434,7 @@
         "downpaymentke": "Angsuran ke",
         "checkout": "Checkout",
         "shopping": "Tambah pesanan lainnya",
-        "noCartItems": "Belum ada data di dalam kerjanjang"
+        "noCartItems": "Belum ada data di dalam keranjang"
       },
       "invoice": {
         "print": "Cetak Invoice",
@@ -437,7 +456,7 @@
         "subtotal": "Subtotal",
         "grandTotal": "Grand Total",
         "totalAmount": "Total Amount",
-        "addToCart": "Tambahakan ke Kerjanjang"
+        "addToCart": "Tambahakan ke Keranjang"
       },
       "order": {
         "back": "Kembali",

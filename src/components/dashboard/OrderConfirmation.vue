@@ -93,10 +93,10 @@
           </v-row>
         </template>
         <template v-slot:footer>
-          <v-btn elevation="2" color="primary" @click="confirmOrder">
+          <v-btn elevation="2" small @click="confirmOrder">
             {{ $t("views.dashboard.confirm") }}</v-btn
           >
-          <v-btn elevation="2" color="primary" @click="hideDialog" class="mr-5">
+          <v-btn elevation="2" small @click="hideDialog" class="mr-5">
             {{ $t("views.dashboard.cancel") }}</v-btn
           >
         </template>

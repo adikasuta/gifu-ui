@@ -7,7 +7,7 @@
         <VariationViewSetting class="mb-10" />
         <VariantPricingCombination class="mb-10" />
         <ProductPricingRange class="mb-10" />
-        <v-btn elevation="2" color="primary" @click="handleSubmit">
+        <v-btn elevation="2" small @click="handleSubmit">
           {{ $t("views.product.save") }}</v-btn
         >
       </form>

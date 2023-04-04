@@ -97,7 +97,7 @@
                 v-if="item.status == 'WAITING_FOR_CONFIRMATION'"
                 elevation="2"
                 class="mr-5"
-                color="primary"
+                small
                 @click="handleConfirmOrder(item)"
               >
                 {{ $t("views.dashboard.orderConfirmation") }}</v-btn
@@ -110,7 +110,7 @@
         </tbody>
       </template>
     </v-simple-table>
-    <v-pagination
+    <v-pagination color="pink lighten-1" 
           @input="handleRefresh"
       v-model="pagination.pageNumber"
       :length="pagination.totalPages"

@@ -104,7 +104,7 @@
             </td>
             <td>{{ item.paymentTerm }}</td>
             <td>
-              <v-btn @click="handleShowDetailPopup(item)" elevation="2" class="mr-5" color="primary">
+              <v-btn @click="handleShowDetailPopup(item)" elevation="2" class="mr-5" small>
                 {{ $t("views.dashboard.detailpayment") }}</v-btn
               >
             </td>
@@ -115,7 +115,7 @@
         </tbody>
       </template>
     </v-simple-table>
-    <v-pagination
+    <v-pagination color="pink lighten-1" 
           @input="handleRefresh"
       v-model="pagination.pageNumber"
       :length="pagination.totalPages"

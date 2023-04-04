@@ -12,7 +12,7 @@
                 :key="`step-${index}`"
                 :complete="e1 > index"
                 :step="index + 1"
-                color="pink lighten-1"
+                color="pink lighten-1" dark 
               >
                 {{ $t(step) }}
               </v-stepper-step>
@@ -32,7 +32,7 @@
 
               <v-divider class="mt-10 mb-5"></v-divider>
               <v-btn
-                color="pink lighten-1"
+                color="pink lighten-1" dark 
                 @click="validateAndNext('detailProductObserver', 2)"
               >
                 {{ $t("views.order.next") }}
@@ -47,7 +47,7 @@
 
               <v-btn text @click="e1 = 1"> {{ $t("views.order.back") }} </v-btn>
               <v-btn
-                color="pink lighten-1"
+                color="pink lighten-1" dark 
                 @click="validateAndNext('additionalRequestObserver', 3)"
               >
                 {{ $t("views.order.next") }}
@@ -61,7 +61,7 @@
               <v-divider class="mt-10 mb-5"></v-divider>
               <v-btn text @click="e1 = 2"> {{ $t("views.order.back") }} </v-btn>
               <v-btn
-                color="pink lighten-1"
+                color="pink lighten-1" dark 
                 @click="handleOrder('customerDataObserver')"
               >
                 {{ $t("views.order.order") }}

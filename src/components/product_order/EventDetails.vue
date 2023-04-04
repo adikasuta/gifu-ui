@@ -69,7 +69,7 @@
               </ValidationProvider>
             </template>
             <v-date-picker
-              color="pink lighten-1"
+              color="pink lighten-1" dark 
               v-model="formData.date"
               @input="dateMenu = false"
             ></v-date-picker>
@@ -109,7 +109,7 @@
               </ValidationProvider>
             </template>
             <v-time-picker
-              color="pink lighten-1"
+              color="pink lighten-1" dark 
               v-if="timeMenu"
               v-model="formData.time"
               full-width
@@ -120,7 +120,7 @@
       </v-row>
     </template>
     <template v-slot:footer>
-      <v-btn v-if="!hideRemoveButton" color="pink lighten-1" @click="handleRemove">
+      <v-btn v-if="!hideRemoveButton" color="pink lighten-1" dark  @click="handleRemove">
         {{ $t("views.order.fields.removeEvent") }}
       </v-btn>
     </template>

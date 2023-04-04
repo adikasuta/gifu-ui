@@ -143,7 +143,7 @@
                 </ValidationProvider>
               </template>
               <v-date-picker
-                color="pink lighten-1"
+                color="pink lighten-1" dark 
                 v-model="SOUVENIR.eventDate"
                 @input="dateMenu = false"
               ></v-date-picker>

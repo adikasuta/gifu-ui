@@ -12,8 +12,9 @@
         <v-tab-item v-for="(item, index) in items" :key="item">
           <v-card color="basil" flat>
             <v-card-text>
-              <OrderHistoricalTable v-if="index == 0" />  
-              <OrderCheckoutTable v-if="index == 1" />  
+              <OrderHistoricalTable v-if="index == 0" />
+              <OrderCheckoutTable v-if="index == 1" />
+              <StaffJobUpdate v-if="index == 2"/>
             </v-card-text>
           </v-card>
         </v-tab-item>
@@ -23,10 +24,11 @@
 </template>
 
 <script>
+import StaffJobUpdate from "../../../components/dashboard/StaffJobUpdate";
 import OrderCheckoutTable from "../../../components/dashboard/OrderCheckoutTable";
 import OrderHistoricalTable from "../../../components/dashboard/OrderHistoricalTable";
 export default {
-  components: { OrderHistoricalTable, OrderCheckoutTable },
+  components: { OrderHistoricalTable, OrderCheckoutTable, StaffJobUpdate },
   data() {
     return {
       tab: null,

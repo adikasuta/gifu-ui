@@ -2,7 +2,7 @@
   <v-container>
     <slot name="breadcrumb"></slot>
     <v-container>
-      <v-btn elevation="2" class="mt-5" color="primary" @click="handleAdd">
+      <v-btn elevation="2" class="mt-5" small @click="handleAdd">
         {{ $t("views.variant.add") }}</v-btn
       >
     </v-container>

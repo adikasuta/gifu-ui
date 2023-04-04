@@ -96,13 +96,13 @@
     <v-divider class="mt-5 mb-5"></v-divider>
     <v-row>
       <v-col style="text-align: right" cols="12">
-        <v-btn class="mr-10 mb-10" color="pink lighten-1" @click="handlePrint">
+        <v-btn class="mr-10 mb-10" color="pink lighten-1" dark  @click="handlePrint">
           {{ $t("views.invoice.print") }}
         </v-btn>
         <v-btn
           v-if="invoice.status == 'DRAFT'"
           class="mr-10 mb-10"
-          color="pink lighten-1"
+          color="pink lighten-1" dark 
           @click="handleAddToCart"
         >
           {{ $t("views.invoice.addToCart") }}

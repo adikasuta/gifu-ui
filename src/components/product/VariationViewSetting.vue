@@ -8,7 +8,7 @@
         <v-btn
           elevation="2"
           class="mr-5"
-          color="primary"
+          small
           @click="handleAddVariationSetting"
         >
           {{ $t("views.product.addVariationFormSetting") }}</v-btn
@@ -80,7 +80,7 @@
                 <td>
                   <v-btn
                     elevation="2"
-                    color="primary"
+                    small
                     class="mr-5"
                     @click="
                       () => {
@@ -93,7 +93,7 @@
                   <v-btn
                     elevation="2"
                     class="mr-5"
-                    color="primary"
+                    small
                     @click="() => _remove(index)"
                   >
                     {{ $t("common.remove") }}</v-btn

@@ -70,7 +70,7 @@
                   elevation="2"
                   class="mr-5"
                   @click="postBillCreation(item)"
-                  color="primary"
+                  small
                 >
                   {{ $t("views.dashboard.createBill") }}</v-btn
                 >
@@ -80,7 +80,7 @@
         </v-data-table>
       </template>
       <template v-slot:footer>
-        <v-btn @click="handleClose" elevation="2" class="mr-5" color="primary">
+        <v-btn @click="handleClose" elevation="2" class="mr-5" small>
           {{ $t("views.dashboard.cancel") }}</v-btn
         >
       </template>

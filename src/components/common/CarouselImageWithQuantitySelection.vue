@@ -69,10 +69,10 @@
             </v-row>
           </template>
           <template v-slot:footer>
-            <v-btn color="pink lighten-1" class="ml-5" @click="handleSubmit">
+            <v-btn color="pink lighten-1" dark  class="ml-5" @click="handleSubmit">
               {{ $t("views.order.fields.save") }}
             </v-btn>
-            <v-btn color="pink lighten-1" text @click="handleCancel">
+            <v-btn color="pink lighten-1" dark  text @click="handleCancel">
               {{ $t("views.order.fields.cancel") }}
             </v-btn>
           </template>

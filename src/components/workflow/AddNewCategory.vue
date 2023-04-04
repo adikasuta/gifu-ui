@@ -88,10 +88,10 @@
           </v-container>
         </template>
         <template v-slot:footer>
-          <v-btn elevation="2" color="primary" @click="handleSave">
+          <v-btn elevation="2" small @click="handleSave">
             {{ $t("views.workflow.save") }}</v-btn
           >
-          <v-btn elevation="2" color="primary" @click="hideDialog" class="mr-5">
+          <v-btn elevation="2" small @click="hideDialog" class="mr-5">
             {{ $t("views.workflow.back") }}</v-btn
           >
         </template>
