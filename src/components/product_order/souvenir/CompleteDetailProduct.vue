@@ -28,6 +28,24 @@
         <label>{{ $t("views.order.fields.total") }}</label>
       </v-col>
       <v-col cols="12" sm="9">
+        <ValidationProvider
+          v-slot="{ errors }"
+          :name="$t('views.order.fields.quantity')"
+          vid="quantity"
+          :rules="{
+            required: true,
+            numeric: true,
+            min_value: getMinOrder,
+          }"
+        >
+          <v-text-field
+            outlined
+            readonly
+            v-model="SOUVENIR.quantity"
+            :error-messages="errors"
+            :label="$t('views.order.fields.quantity')"
+          ></v-text-field>
+        </ValidationProvider>
         {{ getQtyFromColor }}
       </v-col>
     </v-row>
@@ -53,7 +71,9 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="getReferenceContents(VariantTypeCodes.COLOR_PACKAGING_1).length > 0">
+    <v-row
+      v-if="getReferenceContents(VariantTypeCodes.COLOR_PACKAGING_1).length > 0"
+    >
       <v-col cols="12" sm="3">
         <label>{{ $t("views.order.fields.packagingColor1") }}</label>
       </v-col>
@@ -75,7 +95,9 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="getReferenceContents(VariantTypeCodes.COLOR_PACKAGING_2).length > 0">
+    <v-row
+      v-if="getReferenceContents(VariantTypeCodes.COLOR_PACKAGING_2).length > 0"
+    >
       <v-col cols="12" sm="3">
         <label>{{ $t("views.order.fields.packagingColor2") }}</label>
       </v-col>
@@ -135,15 +157,13 @@ export default {
     CarouselImageWithQuantitySelection,
   },
   props: [],
-  watch:{
-    getQtyFromColor(val){
-      this.SOUVENIR.quantity = val
-    }
+  watch: {
+    getQtyFromColor(val) {
+      this.SOUVENIR.quantity = val;
+    },
   },
   computed: {
-    ...mapWritableState(useOrderProductForm, [
-      "SOUVENIR",
-    ]),
+    ...mapWritableState(useOrderProductForm, ["SOUVENIR"]),
     ...mapState(useOrderProductForm, [
       "getReferenceContents",
       "getReferenceVariants",

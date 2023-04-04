@@ -11,6 +11,9 @@ export default {
   async addToCart(orderCode) {
     return await api.post(`${BASE_URL}/${orderCode}`, null, null);
   },
+  async removeFromCart(orderCode) {
+    return await api.delete(`${BASE_URL}/${orderCode}`);
+  },
   async getCart() {
     const clientData = Cookies.get('client_gifu');
     return await api.get(`${BASE_URL}/cart`, null, {

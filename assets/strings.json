@@ -132,6 +132,7 @@
         "next": "Next",
         "order": "Order",
         "fields": {
+          "payerInformation":"Payer Information",
           "referralCode": "Referral Code",
           "content": "Content",
           "woodenCrate": "Wooden Crate",
@@ -463,6 +464,7 @@
         "next": "Selanjutnya",
         "order": "Pesan",
         "fields": {
+          "payerInformation":"Informasi Pembayar",
           "referralCode": "Kode Referral",
           "content": "Konten",
           "woodenCrate": "Peti Kayu",

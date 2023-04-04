@@ -49,7 +49,7 @@ export default {
   computed: {},
   methods: {
     handleRemove() {
-      this.$emit("on:remove", this.index);
+      this.$emit("on:remove", this.cartItem.orderCode);
     },
     handleSeeInvoice() {
       this.$router.push(`/order/${this.cartItem.orderCode}/invoice`);

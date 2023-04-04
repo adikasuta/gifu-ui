@@ -7,6 +7,7 @@
         :cartItem="item"
         :index="index"
         :key="index"
+        @on:remove="handleRemoveFromCart"
       />
     </v-container>
     <v-container v-if="getCartItems.length <= 0">
@@ -21,47 +22,114 @@
         </h3>
       </v-col>
     </v-row>
-    <v-row v-if="getCartItems.length > 0">
-      <v-col cols="3">
-        <h3 class="text-right">{{ $t("views.cart.paymentTerm") }}</h3>
-      </v-col>
-      <v-col cols="3">
-        <ValidationObserver ref="observer">
-          <ValidationProvider
-            v-slot="{ errors }"
-            :name="`Payment Term`"
-            rules="required"
-          >
-            <v-radio-group
-              v-model="paymentTerm"
-              column
-              :error-messages="errors"
+    <div v-if="getCartItems.length > 0">
+      <ValidationObserver ref="observer">
+        <v-row>
+          <v-col cols="3">
+            <h3 class="text-right">{{ $t("views.cart.paymentTerm") }}</h3>
+          </v-col>
+          <v-col cols="3">
+            <ValidationProvider
+              v-slot="{ errors }"
+              :name="`Payment Term`"
+              rules="required"
             >
-              <v-radio :label="$t('views.cart.cash')" value="CASH"></v-radio>
-              <v-radio
-                :label="$t('views.cart.downpayment')"
-                value="DOWN_PAYMENT"
-              ></v-radio>
-            </v-radio-group>
-          </ValidationProvider>
-        </ValidationObserver>
-      </v-col>
-      <v-col cols="6">
-        <ul>
-          <li v-for="(item, index) of payments" :key="index">
-            {{ `${$t("views.cart.downpaymentke")} ${index + 1}: ` }}
-            {{ item | toCurrency }}
-          </li>
-        </ul>
-      </v-col>
-    </v-row>
+              <v-radio-group
+                v-model="paymentTerm"
+                column
+                :error-messages="errors"
+              >
+                <v-radio :label="$t('views.cart.cash')" value="CASH"></v-radio>
+                <v-radio
+                  :label="$t('views.cart.downpayment')"
+                  value="DOWN_PAYMENT"
+                ></v-radio>
+              </v-radio-group>
+            </ValidationProvider>
+          </v-col>
+          <v-col cols="6">
+            <ul>
+              <li v-for="(item, index) of payments" :key="index">
+                {{ `${$t("views.cart.downpaymentke")} ${index + 1}: ` }}
+                {{ item | toCurrency }}
+              </li>
+            </ul>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="3">
+            <h3 class="text-right">
+              {{ $t("views.order.fields.payerInformation") }}
+            </h3>
+          </v-col>
+          <v-col cols="9">
+            <v-row>
+              <v-col cols="12" sm="6" class="pb-0">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :name="$t('views.order.fields.name')"
+                  vid="name"
+                  :rules="{
+                    required: true,
+                  }"
+                >
+                  <v-text-field
+                    outlined
+                    v-model="customerName"
+                    :error-messages="errors"
+                    :label="$t('views.order.fields.name')"
+                  ></v-text-field>
+                </ValidationProvider>
+              </v-col>
+              <v-col cols="12" sm="6" class="pb-0">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :name="$t('views.order.fields.email')"
+                  vid="email"
+                  :rules="{
+                    email: true,
+                    required: true,
+                  }"
+                >
+                  <v-text-field
+                    outlined
+                    v-model="customerEmail"
+                    :error-messages="errors"
+                    :label="$t('views.order.fields.email')"
+                  ></v-text-field>
+                </ValidationProvider>
+              </v-col>
+              <v-col cols="12" sm="6" class="pt-0">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :name="$t('views.order.fields.phoneNumber')"
+                  vid="phoneNumber"
+                  :rules="{
+                    required: true,
+                  }"
+                >
+                  <v-text-field
+                    outlined
+                    v-model="phoneNumber"
+                    :error-messages="errors"
+                    :label="$t('views.order.fields.phoneNumber')"
+                  ></v-text-field>
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </ValidationObserver>
+    </div>
+
     <v-row>
       <v-col cols="12" class="d-flex justify-space-between">
         <v-btn
           link
           href="#/products"
           class="ml-10 mb-10"
-          color="pink lighten-1" dark 
+          color="pink lighten-1"
+          dark
           height="40px"
         >
           {{ $t("views.cart.shopping") }}
@@ -70,7 +138,8 @@
           v-if="getCartItems.length > 0"
           @click="handleCheckout"
           class="mr-10 mb-10"
-          color="pink lighten-1" dark 
+          color="pink lighten-1"
+          dark
           height="40px"
         >
           {{ $t("views.cart.checkout") }}
@@ -108,7 +177,12 @@ export default {
     await this.onrefresh();
   },
   computed: {
-    ...mapWritableState(useCartData, ["paymentTerm"]),
+    ...mapWritableState(useCartData, [
+      "paymentTerm",
+      "phoneNumber",
+      "customerName",
+      "customerEmail",
+    ]),
     ...mapState(useCartData, ["getCartItems"]),
     totalPayment() {
       let total = 0;
@@ -134,7 +208,19 @@ export default {
   },
   methods: {
     ...mapActions(useErrorMessage, ["pushError"]),
-    ...mapActions(useCartData, ["loadCartItems", "checkout"]),
+    ...mapActions(useCartData, ["loadCartItems", "checkout", "removeFromCart"]),
+    async handleRemoveFromCart(orderCode) {
+      try {
+        this.isLoading = true;
+        await this.removeFromCart(orderCode);
+        await this.loadCartItems();
+        this.isLoading = false;
+        this.$router.push("/checkout");
+      } catch (error) {
+        this.isLoading = false;
+        this.pushError(error);
+      }
+    },
     async handleCheckout() {
       this.$refs.observer.validate().then(async (success) => {
         if (success) {

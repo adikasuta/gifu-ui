@@ -6,13 +6,19 @@ export const useCartData = defineStore('CartData', {
     {
       cartItems: [],
       paymentTerm: null,
+      customerEmail: null,
+      customerName: null,
+      phoneNumber: null
     }
   ),
   getters: {
     getCheckoutPayload: (state) => {
       return {
         orderCodes: state.cartItems.map(it => it.orderCode),
-        paymentTermCode: state.paymentTerm
+        paymentTermCode: state.paymentTerm,
+        customerEmail: state.customerEmail,
+        customerName: state.customerName,
+        phoneNumber: state.phoneNumber,
       }
     },
     getCartLength(state) {
@@ -29,6 +35,9 @@ export const useCartData = defineStore('CartData', {
     async checkout() {
       const payload = this.getCheckoutPayload
       return await OrderService.postCheckout(payload)
+    },
+    async removeFromCart(orderCode) {
+      return await OrderService.removeFromCart(orderCode);
     },
     async loadCartItems() {
       this.$state.cartItems = await OrderService.getCart()

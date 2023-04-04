@@ -104,7 +104,6 @@ import { mapState, mapWritableState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
 import { useOrderProductForm } from "../../store/order-form";
 import { useErrorMessage } from "../../store/error-message";
-import SessionUtils from "../../utils/SessionUtils";
 export default {
   name: "OrderInvitation",
   components: {
@@ -143,11 +142,6 @@ export default {
           try {
             this.isLoading = true;
             const order = await this.postInvitationOrder();
-            SessionUtils.putSessionData(
-              "client_gifu",
-              JSON.stringify(this.customerInfoForm),
-              24 * 7
-            );
             this.isLoading = false;
             this.$router.push(`/order/${order.orderCode}/invoice`);
           } catch (error) {
