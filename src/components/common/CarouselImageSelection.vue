@@ -5,7 +5,7 @@
         <v-container class="grey lighten-5 mb-6">
           <v-row>
             <v-col cols="2" v-for="(item, itemIndex) of pages" :key="itemIndex">
-              <label
+              <label :title="item.name"
                 @click="selectOption(item.id)"
                 :class="`v-carousel-label ${
                   isSelected(item.id) ? 'v-carousel-active' : ''
@@ -13,7 +13,11 @@
               >
                 <img :src="fileUrl(item.picture)" width="50" height="50" />
               </label>
-              <div class="text-center text-container" style="width: 100%">
+              <div
+                class="text-center text-container"
+                :title="item.name"
+                style="width: 100%"
+              >
                 {{ item.name }}
               </div>
             </v-col>
@@ -57,14 +61,14 @@ export default {
     if (this.multiple) {
       if (!Array.isArray(this.value)) {
         this.selectedItems = [];
-      }else{
-        this.selectedItems = this.value.map(it=>it.contentId)
+      } else {
+        this.selectedItems = this.value.map((it) => it.contentId);
       }
     } else {
       if (!this.value) {
         this.selectedItems = {};
-      }else {
-        this.selectedItems = this.value.contentId
+      } else {
+        this.selectedItems = this.value.contentId;
       }
     }
   },

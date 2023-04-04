@@ -277,8 +277,8 @@ export const useOrderProductForm = defineStore('OrderProductForm', {
             passesRule = false;
             for (const rule of view.rules) {
               const ruleVariantIds = rule.variantIds.split(",").map(id => parseInt(id));
-              if (form[rule.variantTypeCode] && form[rule.variantTypeCode].variantId) {
-                if (ruleVariantIds.includes(form[rule.variantTypeCode].variantId)) {
+              if (form.variants[rule.variantTypeCode] && form.variants[rule.variantTypeCode].variantId) {
+                if (ruleVariantIds.includes(form.variants[rule.variantTypeCode].variantId)) {
                   passesRule = true;
                   break;
                 }
