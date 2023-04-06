@@ -76,8 +76,9 @@
             >
           </v-col>
           <v-col cols="6">
-            <v-pagination color="pink lighten-1" 
-          @input="handleRefresh"
+            <v-pagination
+              color="pink lighten-1"
+              @input="handleRefresh"
               v-model="pagination.pageNumber"
               :length="pagination.totalPages"
             ></v-pagination>
@@ -171,10 +172,10 @@ export default {
     async handleRefresh() {
       try {
         this.isLoading = true;
-        const response = await VariantService.getContent(
-          this.id,
-          this.pagination
-        );
+        const response = await VariantService.getContent(this.id, {
+          page: this.pagination.pageNumber - 1,
+          pageSize: this.pagination.pageSize,
+        });
         this.contents = response.content;
         this.pagination.totalPages = response.totalPages;
         this.isLoading = false;
