@@ -197,7 +197,7 @@ export default {
         filter.dateRanges = undefined;
         const response = await OrderService.searchCheckouts({
           ...filter,
-          ...this.pagination,
+          page:this.pagination.pageNumber-1,pageSize:this.pagination.pageSize,
         });
         this.orders = response.content;
         this.pagination.totalPages = response.totalPages;

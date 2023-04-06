@@ -107,7 +107,7 @@ export default {
         this.isLoading = true;
         const workflowPage = await WorkflowService.getWorkflows({
           ...this.filter,
-          ...this.pagination,
+          page:this.pagination.pageNumber-1,pageSize:this.pagination.pageSize,
         });
         this.workflowList = workflowPage.content.map((item) => {
           return {

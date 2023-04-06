@@ -168,7 +168,7 @@ export default {
         this.isLoading = true;
         const variantPage = await VariantService.getSearchVariant({
           ...this.filterItems,
-          ...this.pagination,
+          page:this.pagination.pageNumber-1,pageSize:this.pagination.pageSize,
         });
         this.variants = variantPage.content.map((it) => {
           return {

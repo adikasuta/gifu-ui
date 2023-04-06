@@ -169,7 +169,7 @@ export default {
         this.isLoading = true;
         const response = await PublicProductService.searchProducts({
           ...this.filterItems,
-          ...this.pagination,
+          page:this.pagination.pageNumber-1,pageSize:this.pagination.pageSize,
         });
         this.products = response.content;
         this.pagination.totalPages = response.totalPages;

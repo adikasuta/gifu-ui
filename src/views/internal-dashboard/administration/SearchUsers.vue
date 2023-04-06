@@ -174,7 +174,7 @@ export default {
         this.isLoading = true;
         const response = await UserService.searchUser({
           ...this.filterItems,
-          ...this.pagination,
+          page:this.pagination.pageNumber-1,pageSize:this.pagination.pageSize,
         });
         this.users = response.content;
         this.pagination.totalPages = response.totalPages;
