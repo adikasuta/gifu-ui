@@ -217,9 +217,7 @@
       </v-col>
     </v-row>
 
-    <v-row
-      v-if="getReferenceContents(VariantTypeCodes.FOIL_POSITION).length > 0"
-    >
+    <v-row v-if="getReferenceContents(VariantTypeCodes.FOIL_COLOR).length > 0">
       <v-col cols="12" sm="3">
         <label>{{ $t("views.order.fields.foilColor") }}</label>
       </v-col>
@@ -234,7 +232,7 @@
         >
           <v-select
             v-model="foilColor"
-            :items="getReferenceContents(VariantTypeCodes.FOIL_POSITION)"
+            :items="getReferenceContents(VariantTypeCodes.FOIL_COLOR)"
             item-value="id"
             item-text="name"
             :error-messages="errors"
@@ -242,7 +240,7 @@
             outlined
             @change="
               (event) => {
-                transformValue(VariantTypeCodes.FOIL_POSITION, event);
+                transformValue(VariantTypeCodes.FOIL_COLOR, event);
               }
             "
           ></v-select>
