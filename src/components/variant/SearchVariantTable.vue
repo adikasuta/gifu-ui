@@ -59,6 +59,7 @@
               <td>{{ item.numberOfUsage }}</td>
               <td>
                 <v-btn
+                v-if="hasPermission('catalog_edit')"
                   elevation="2"
                   class="mr-5"
                   small
@@ -71,6 +72,7 @@
                   {{ $t("views.variant.edit") }}</v-btn
                 >
                 <v-btn
+                v-if="hasPermission('catalog_delete')"
                   elevation="2"
                   small
                   @click="
@@ -107,6 +109,7 @@
 </template>
 
 <script>
+import SessionUtils from "../../utils/SessionUtils";
 import ConfirmationDialog from "../dialogs/ConfirmationDialog";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import SmallImage from "../common/SmallImage";
@@ -142,6 +145,7 @@ export default {
     ...mapState(useReferenceData, ["variantTypes"]),
   },
   methods: {
+    ...SessionUtils,
     ...mapActions(useErrorMessage, ["pushError"]),
     async handleEdit(id) {
       this.$router.push(`/dashboard/variant/${id}`);

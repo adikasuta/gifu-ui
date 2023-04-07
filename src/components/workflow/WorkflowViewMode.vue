@@ -10,7 +10,7 @@
             {{ getNames(workflow.productCategories, ", ") }}
           </v-col>
           <v-col cols="2">
-            <v-btn elevation="2" small @click="handleEdit">{{
+            <v-btn elevation="2" v-if="hasPermission('workflow_edit')" small @click="handleEdit">{{
               $t("views.workflow.edit")
             }}</v-btn>
           </v-col>
@@ -20,7 +20,7 @@
         <v-row>
           <v-col cols="10"> {{ getNames(workflow.steps, " - ") }} </v-col>
           <v-col cols="2">
-            <v-btn elevation="2" small @click="handleDelete">{{
+            <v-btn elevation="2" v-if="hasPermission('workflow_delete')" small @click="handleDelete">{{
               $t("views.workflow.remove")
             }}</v-btn>
           </v-col>
@@ -38,6 +38,7 @@
 import ConfirmationDialog from "../dialogs/ConfirmationDialog";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import StringUtils from "../../utils/StringUtils";
+import SessionUtils from "../../utils/SessionUtils";
 import WorkflowService from "../../services/Workflow.service";
 import { mapActions } from "pinia";
 import { useErrorMessage } from "../../store/error-message";
@@ -55,6 +56,7 @@ export default {
     };
   },
   methods: {
+    ...SessionUtils,
     ...mapActions(useErrorMessage, ["pushError"]),
     ...StringUtils,
     async handleChangeName(e) {

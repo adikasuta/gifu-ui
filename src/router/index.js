@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import ForbiddenPage from '../views/ForbiddenPage';
 import HomepageComponent from '../views/Homepage';
 import TrackingComponent from '../views/theTracking';
 import CheckoutComponent from '../views/CheckoutComponent';
@@ -29,15 +30,25 @@ const routes = [
     path: '/',
     name: 'HomepageComponent',
     component: HomepageComponent,
-    meta:{
+    meta: {
       hideSidebar: true,
+    }
+  },
+  {
+    path: '/forbidden',
+    name: 'ForbiddenPage',
+    component: ForbiddenPage,
+    meta: {
+      hideHeader: true,
+      hideSidebar: true,
+      hideFooter: true,
     }
   },
   {
     path: '/products',
     name: 'ProductDisplayComponent',
     component: ProductDisplay,
-    meta:{
+    meta: {
       hideSidebar: true,
     }
   },
@@ -45,7 +56,7 @@ const routes = [
     path: '/products/:id',
     name: 'ProductDetailComponent',
     component: ProductDetail,
-    meta:{
+    meta: {
       hideSidebar: true,
     }
   },
@@ -53,7 +64,7 @@ const routes = [
     path: '/order/:orderCode/invoice',
     name: 'OrderInvoiceComponent',
     component: InvoicePage,
-    meta:{
+    meta: {
       hideSidebar: true,
     }
   },
@@ -61,7 +72,7 @@ const routes = [
     path: '/cart',
     name: 'CartComponent',
     component: CartPage,
-    meta:{
+    meta: {
       hideSidebar: true,
     }
   },
@@ -69,7 +80,7 @@ const routes = [
     path: '/tracking',
     name: 'TrackingComponent',
     component: TrackingComponent,
-    meta:{
+    meta: {
       hideSidebar: true,
     }
   },
@@ -77,7 +88,7 @@ const routes = [
     path: '/Checkout',
     name: 'CheckoutComponent',
     component: CheckoutComponent,
-    meta:{
+    meta: {
       hideSidebar: true,
     }
   },
@@ -85,7 +96,7 @@ const routes = [
     path: '/Login',
     name: 'LoginComponent',
     component: LoginComponent,
-    meta:{
+    meta: {
       hideHeader: true,
       hideSidebar: true,
       hideFooter: true,
@@ -95,148 +106,158 @@ const routes = [
     path: '/dashboard',
     name: 'DashboardComponent',
     component: HomepageDashboard,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home"}
-      ]
+      breadcrumb: [
+        { name: "Home" }
+      ],
     }
   },
   {
     path: '/dashboard/user',
     name: 'SearchUsers',
     component: SearchUsers,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Search Users"}
-      ]
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Search Users" }
+      ],
+      hasPermission: "user_search"
     }
   },
   {
     path: '/dashboard/user/add',
     name: 'AddUser',
     component: AddUser,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Search Users", link: "#/dashboard/user"},
-        {name: "Add Users"}
-      ]
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Search Users", link: "#/dashboard/user" },
+        { name: "Add Users" }
+      ],
+      hasPermission: "user_add"
     }
   },
   {
     path: '/dashboard/user/:id',
     name: 'EditUser',
     component: EditUser,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Search Users", link: "#/dashboard/user"},
-        {name: "Edit Users"}
-      ]
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Search Users", link: "#/dashboard/user" },
+        { name: "Edit Users" }
+      ],
+      hasPermission: "user_edit"
     }
   },
   {
     path: '/dashboard/product',
     name: 'SearchProductComponent',
     component: SearchProduct,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Search Product"}
-      ]
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Search Product" }
+      ],
+      hasPermission: "product_search"
     }
   },
   {
     path: '/dashboard/product/add',
     name: 'AddProductComponent',
     component: AddProduct,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Search Product", link:"#/dashboard/product"},
-        {name: "Add Product"}
-      ]
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Search Product", link: "#/dashboard/product" },
+        { name: "Add Product" }
+      ],
+      hasPermission: "product_add"
     }
   },
   {
     path: '/dashboard/product/:id',
     name: 'EditProductComponent',
     component: EditProduct,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Search Product", link:"#/dashboard/product"},
-        {name: "Edit Product"}
-      ]
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Search Product", link: "#/dashboard/product" },
+        { name: "Edit Product" }
+      ],
+      hasPermission: "product_edit"
     }
   },
   {
     path: '/dashboard/workflow',
     name: 'WorkflowComponent',
     component: WorkflowComponent,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Search Workflow"}
-      ]
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Search Workflow" }
+      ],
+      hasPermission: "workflow_search"
     }
   },
   {
     path: '/dashboard/variant',
     name: 'VariantComponent',
     component: VariantComponent,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Search Variant"}
-      ]
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Search Variant" }
+      ],
+      hasPermission: "catalog_search"
     }
   },
   {
     path: '/dashboard/variant/add',
     name: 'AddVariantComponent',
     component: CreateVariantPage,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Search Variant", link: "#/dashboard/variant"},
-        {name: "Add Variant"}
-      ]
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Search Variant", link: "#/dashboard/variant" },
+        { name: "Add Variant" }
+      ],
+      hasPermission: "catalog_add"
     }
   },
   {
     path: '/dashboard/variant/:id',
     name: 'EditVariantComponent',
     component: EditVariantPage,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Search Variant", link: "#/dashboard/variant"},
-        {name: "Edit Variant"}
-      ]
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Search Variant", link: "#/dashboard/variant" },
+        { name: "Edit Variant" }
+      ],
+      hasPermission: "catalog_edit"
     }
   },
   {
     path: '/dashboard/profile',
     name: 'ProfileComponent',
     component: ProfileComponent,
-    meta:{
+    meta: {
       requiresAuth: true,
-      breadcrumb:[
-        {name: "Home", link: "#/dashboard"},
-        {name: "Profile"}
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Profile" }
       ]
     }
   },

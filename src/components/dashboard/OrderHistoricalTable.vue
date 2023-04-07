@@ -77,7 +77,7 @@
             <th class="text-left">
               {{ $t("views.dashboard.fields.status") }}
             </th>
-            <th class="text-left"></th>
+            <th v-if="hasPermission('confirm_order')" class="text-left"></th>
           </tr>
         </thead>
         <tbody>
@@ -94,7 +94,7 @@
             <td>{{ item.statusText }}</td>
             <td>
               <v-btn
-                v-if="item.status == 'WAITING_FOR_CONFIRMATION'"
+                v-if="hasPermission('confirm_order') && item.status == 'WAITING_FOR_CONFIRMATION'"
                 elevation="2"
                 class="mr-5"
                 small
@@ -105,7 +105,7 @@
             </td>
           </tr>
           <tr v-if="orders.length === 0">
-            <td colspan="11">No matching records found</td>
+            <td :colspan="hasPermission('confirm_order')?'11':'10'">No matching records found</td>
           </tr>
         </tbody>
       </template>
@@ -130,6 +130,7 @@
 </template>
 
 <script>
+import SessionUtils from "../../utils/SessionUtils";
 import OrderConfirmation from "./OrderConfirmation";
 import DateComponent from "../common/DateComponent";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
@@ -171,6 +172,7 @@ export default {
     ...mapState(useReferenceData, ["orderStatuses", "productTypes"]),
   },
   methods: {
+    ...SessionUtils,
     ...mapActions(useErrorMessage, ["pushError"]),
     handleConfirmOrder(item) {
       this.confirmOrderInput = {

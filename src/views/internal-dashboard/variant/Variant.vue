@@ -2,7 +2,13 @@
   <v-container>
     <slot name="breadcrumb"></slot>
     <v-container>
-      <v-btn elevation="2" class="mt-5" small @click="handleAdd">
+      <v-btn
+        v-if="hasPermission('catalog_add')"
+        elevation="2"
+        class="mt-5"
+        small
+        @click="handleAdd"
+      >
         {{ $t("views.variant.add") }}</v-btn
       >
     </v-container>
@@ -12,6 +18,7 @@
 </template>
 
 <script>
+import SessionUtils from "../../../utils/SessionUtils";
 import SearchVariantTable from "../../../components/variant/SearchVariantTable";
 export default {
   name: "VariantComponent",
@@ -23,9 +30,10 @@ export default {
   },
   async created() {},
   methods: {
-    handleAdd(){
-      this.$router.push("/dashboard/variant/add")
-    }
+    ...SessionUtils,
+    handleAdd() {
+      this.$router.push("/dashboard/variant/add");
+    },
   },
 };
 </script>

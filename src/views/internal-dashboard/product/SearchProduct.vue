@@ -9,6 +9,7 @@
         <v-row>
           <v-col cols="12">
             <v-btn
+              v-if="hasPermission('product_add')"
               elevation="2"
               class="mr-5"
               small
@@ -88,6 +89,7 @@
                 </td>
                 <td>
                   <v-btn
+                    v-if="hasPermission('product_edit')"
                     elevation="2"
                     class="mr-5"
                     small
@@ -106,7 +108,8 @@
         </v-simple-table>
       </template>
       <template v-slot:footer>
-        <v-pagination color="pink lighten-1" 
+        <v-pagination
+          color="pink lighten-1"
           @input="handleRefresh"
           v-model="pagination.pageNumber"
           :length="pagination.totalPages"
@@ -121,6 +124,7 @@
 </template>
 
 <script>
+import SessionUtils from "../../../utils/SessionUtils";
 import ConfirmationDialog from "../../../components/dialogs/ConfirmationDialog";
 import LoadingDialog from "../../../components/dialogs/LoadingDialog.vue";
 import BasicForm from "../../../components/layout/BasicForm";
@@ -157,6 +161,7 @@ export default {
     ...mapState(useReferenceData, ["publicCategories", "productTypes"]),
   },
   methods: {
+    ...SessionUtils,
     ...mapActions(useErrorMessage, ["pushError"]),
     getRanges(pricing) {
       if (!pricing.qtyMax) {
@@ -169,7 +174,8 @@ export default {
         this.isLoading = true;
         const response = await PublicProductService.searchProducts({
           ...this.filterItems,
-          page:this.pagination.pageNumber-1,pageSize:this.pagination.pageSize,
+          page: this.pagination.pageNumber - 1,
+          pageSize: this.pagination.pageSize,
         });
         this.products = response.content;
         this.pagination.totalPages = response.totalPages;

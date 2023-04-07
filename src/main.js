@@ -45,34 +45,34 @@ extend("file_size", {
 
 Vue.filter('toCurrency', function (value) {
   if (typeof value !== "number") {
-      return value;
+    return value;
   }
   var formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'IDR'
+    style: 'currency',
+    currency: 'IDR'
   });
   return formatter.format(value);
 });
 
 router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requiresAuth)){
-    if(!SessionUtils.isAuthorized()){
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!SessionUtils.isAuthorized()) {
       next({ name: 'LoginComponent' })
     } else {
       const sessionData = SessionUtils.getSessionData();
-      if(to.matched.some(record=>record.meta.requiresPermission)){
-        if(to.matched.some(record=>{
-          return sessionData.permissions.includes(record.meta.requiresPermission)
-        })){
+      if (to.matched.some(record => record.meta.hasPermission)) {
+        if (to.matched.some(record => {
+          return sessionData.permissions.includes(record.meta.hasPermission)
+        })) {
           next();
-        }else {
-          next({ name: 'LoginComponent' })//TODO: change to unauthorize page
+        } else {
+          next({ name: 'ForbiddenPage' })
         }
-      }else {
+      } else {
         next();
       }
     }
-  }else{
+  } else {
     next();
   }
 })

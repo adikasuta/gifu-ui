@@ -8,7 +8,7 @@
       <template v-slot:body>
         <v-row>
           <v-col cols="12">
-            <v-btn elevation="2" class="mt-5" small href="#/dashboard/user/add">
+            <v-btn v-if="hasPermission('user_add')" elevation="2" class="mt-5" small href="#/dashboard/user/add">
               {{ $t("views.administration.addAccount") }}</v-btn
             >
           </v-col>
@@ -63,6 +63,7 @@
                 </td>
                 <td>
                   <v-btn
+                  v-if="hasPermission('user_edit')"
                     elevation="2"
                     class="mr-5"
                     small
@@ -100,6 +101,7 @@
 </template>
 
 <script>
+import SessionUtils from "../../../utils/SessionUtils";
 import ConfirmationDialog from "../../../components/dialogs/ConfirmationDialog";
 import LoadingDialog from "../../../components/dialogs/LoadingDialog.vue";
 import BasicForm from "../../../components/layout/BasicForm";
@@ -135,6 +137,7 @@ export default {
     ...mapState(useReferenceData, ["roles"]),
   },
   methods: {
+    ...SessionUtils,
     ...mapActions(useErrorMessage, ["pushError"]),
     async handleAdd() {},
     async handleEdit() {},

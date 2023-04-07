@@ -9,7 +9,7 @@
     
     <v-row>
       <v-col cols="3">
-        <v-btn elevation="2" small @click="handleAddWorkflow">{{
+        <v-btn elevation="2" v-if="hasPermission('workflow_add')" small @click="handleAddWorkflow">{{
           $t("views.workflow.add")
         }}</v-btn>
       </v-col>
@@ -66,6 +66,7 @@ import { useReferenceData } from "../../store/reference-data";
 import { useErrorMessage } from "../../store/error-message";
 import WorkflowService from "../../services/Workflow.service";
 import WorkflowListItem from "../../components/workflow/WorkflowListItem";
+import SessionUtils from "../../utils/SessionUtils";
 export default {
   name: "WorkflowComponent",
   components: {
@@ -101,6 +102,7 @@ export default {
     ...mapState(useReferenceData, ["categories"]),
   },
   methods: {
+    ...SessionUtils,
     ...mapActions(useErrorMessage, ["pushError"]),
     async handleRefresh() {
       try {

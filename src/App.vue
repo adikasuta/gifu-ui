@@ -55,6 +55,7 @@ export default {
   watch:{
     '$route'(){
       this.breadcrumbList = this.$route.meta.breadcrumb;
+      
     }
   },
   created() {

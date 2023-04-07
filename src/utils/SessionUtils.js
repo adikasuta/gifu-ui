@@ -23,6 +23,14 @@ module.exports.putSessionData = function (key, value, expireInHour) {
     });
 }
 
+module.exports.hasPermission = function (permissionCode) {
+    const sessionData = this.getSessionData();
+    if (!sessionData || !sessionData.permissions) {
+        return false;
+    }
+    return sessionData.permissions.includes(permissionCode);
+}
+
 module.exports.clearCookie = function () {
     Cookies.remove("BEARER");
 }
