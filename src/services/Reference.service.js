@@ -39,5 +39,8 @@ export default {
   },
   async getGender() {
     return await api.get(`${BASE_URL}/gender`);
+  },
+  async getPricingRangeFilter() {
+    return await api.get(`${BASE_URL}/pricing-range-filter`);
   }
 }

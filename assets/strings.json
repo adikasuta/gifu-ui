@@ -273,6 +273,7 @@
         "from": "from",
         "order": "Order",
         "fields": {
+          "pricingRangeFilter": "Price Range",
           "search": "Search Product",
           "picture": "Product Photo",
           "size": "Size",
@@ -646,6 +647,7 @@
         "from": "Mulai dari",
         "order": "Pesan",
         "fields": {
+          "pricingRangeFilter": "Range Harga",
           "search": "Cari Produk",
           "picture": "Foto Produk",
           "size": "Ukuran",

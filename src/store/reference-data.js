@@ -19,6 +19,7 @@ export const useReferenceData = defineStore('ReferenceData', {
     users: [],
     orderStatuses: [],
     genders: [],
+    pricingRangeFilters: [],
   }),
   getters: {
 
@@ -43,6 +44,7 @@ export const useReferenceData = defineStore('ReferenceData', {
       this.kelurahans = await ReferenceService.getKelurahans(districtId);
     },
     async loadReferenceData() {
+      this.pricingRangeFilters = await ReferenceService.getPricingRangeFilter();
       const gendersRef = await ReferenceService.getGender();
       this.genders = gendersRef.map(it=>{
         return {

@@ -9,7 +9,7 @@
       <v-card class="mx-auto" style="margin-top: -64px">
         <v-card-title>
           <v-row style="height: inherit">
-            <v-col cols="12" md="6" sm="4" style="padding: 6px">
+            <v-col cols="12" md="3" sm="4" style="padding: 6px">
               <v-text-field
                 solo
                 :label="$t('views.product.fields.search')"
@@ -29,6 +29,17 @@
                 @change="handleRefresh"
                 :clearable="true"
                 v-model="filterItems.productType"
+              ></v-select>
+            </v-col>
+            <v-col cols="12" md="3" sm="4" style="padding: 6px">
+              <v-select
+                :label="$t('views.product.fields.pricingRangeFilter')"
+                :items="pricingRangeFilters"
+                solo
+                :hide-details="true"
+                @change="handleRefresh"
+                :clearable="true"
+                v-model="filterItems.pricingRangeFilter"
               ></v-select>
             </v-col>
             <v-col cols="12" md="3" sm="4" style="padding: 6px">
@@ -91,6 +102,7 @@ export default {
         searchQuery: "",
         productType: null,
         productCategoryId: null,
+        pricingRangeFilter: null,
       },
       pagination: {
         pageNumber: 1,
@@ -115,7 +127,7 @@ export default {
     await this.handleRefresh();
   },
   computed: {
-    ...mapState(useReferenceData, ["publicCategories", "productTypes"]),
+    ...mapState(useReferenceData, ["publicCategories", "productTypes","pricingRangeFilters"]),
   },
   methods: {
     ...mapActions(useErrorMessage, ["pushError"]),
