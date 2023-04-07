@@ -17,6 +17,7 @@ import ProductDetail from '../views/external-pages/order/ProductDetail';
 import InvoicePage from '../views/external-pages/order/InvoicePage';
 import CartPage from '../views/external-pages/order/CartPage';
 import HomepageDashboard from "../views/internal-dashboard/home-pages/HomepageDashboard";
+import ProfileComponent from "../views/internal-dashboard/administration/UserProfile";
 
 
 Vue.use(VueRouter)
@@ -196,6 +197,18 @@ const routes = [
         {name: "Home", link: "#/dashboard"},
         {name: "Search Variant", link: "#/dashboard/variant"},
         {name: "Edit Variant"}
+      ]
+    }
+  },
+  {
+    path: '/dashboard/profile',
+    name: 'ProfileComponent',
+    component: ProfileComponent,
+    meta:{
+      requiresAuth: true,
+      breadcrumb:[
+        {name: "Home", link: "#/dashboard"},
+        {name: "Profile"}
       ]
     }
   },

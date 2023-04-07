@@ -42,6 +42,22 @@
       "orderyours": "Order your souvenirs, printed invitation, digital invitation, hampers, and Bridesmaid Box from GIFU. You will definitely save your time!"
     },
     "views": {
+      "profile": {
+        "title": "Profile",
+        "save": "Save",
+        "generateCode":"Regenerate",
+        "fields": {
+          "picture": "Profil Picture",
+          "name": "Name",
+          "birthDate": "Birthdate",
+          "roleName": "Role",
+          "email": "Email",
+          "phoneNo": "Phone no",
+          "address": "Address",
+          "gender": "Gender",
+          "referralToken": "Referral Code"
+        }
+      },
       "staffTasks": {
         "fields": {
           "stepName": "Step",
@@ -62,7 +78,7 @@
         "confirmOrder": "Confirm Order",
         "createBill": "Create Bill",
         "detailpayment": "Payment Detail",
-        "changeStatusConfirmation":"Are you sure want to change step status?",
+        "changeStatusConfirmation": "Are you sure want to change step status?",
         "fields": {
           "customerPhoneNo": "Customer Phone No",
           "customerEmail": "Customer Email",
@@ -133,7 +149,7 @@
         "next": "Next",
         "order": "Order",
         "fields": {
-          "payerInformation":"Payer Information",
+          "payerInformation": "Payer Information",
           "referralCode": "Referral Code",
           "content": "Content",
           "woodenCrate": "Wooden Crate",
@@ -375,6 +391,22 @@
       "orderyours": "Pesan Souvenir, Undangan Fisik, Undangan Digital, Hampers, dan Bridesmaid Box cukup di satu tempat saja"
     },
     "views": {
+      "profile": {
+        "title": "Profil",
+        "save": "Simpan",
+        "generateCode":"Generate ulang",
+        "fields": {
+          "picture": "Foto Profil",
+          "name": "Nama",
+          "birthDate": "Tanggal Lahir",
+          "roleName": "Role",
+          "email": "Email",
+          "phoneNo": "Nomor Telepon",
+          "address": "Alamat",
+          "gender": "Jenis Kelamin",
+          "referralToken": "Kode Referral"
+        }
+      },
       "staffTasks": {
         "fields": {
           "stepName": "Step",
@@ -395,7 +427,7 @@
         "confirmOrder": "Konfirmasi Pesanan",
         "detailpayment": "Lihat detil pembayaran",
         "createBill": "Buat Tagihan",
-        "changeStatusConfirmation":"Apakah anda akan mengubah status step?",
+        "changeStatusConfirmation": "Apakah anda akan mengubah status step?",
         "fields": {
           "status": "Status",
           "productType": "Jenis Produk",
@@ -466,7 +498,7 @@
         "next": "Selanjutnya",
         "order": "Pesan",
         "fields": {
-          "payerInformation":"Informasi Pembayar",
+          "payerInformation": "Informasi Pembayar",
           "referralCode": "Kode Referral",
           "content": "Konten",
           "woodenCrate": "Peti Kayu",

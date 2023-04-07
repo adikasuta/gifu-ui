@@ -24,7 +24,7 @@
           </v-list-item>
         </template>
         <v-list nav dense>
-          <v-list-item link>
+          <v-list-item link href="#/dashboard/profile">
             <v-list-item-icon>
               <v-icon>mdi-account-circle</v-icon>
             </v-list-item-icon>

@@ -36,5 +36,8 @@ export default {
   },
   async getOrderStatus() {
     return await api.get(`${BASE_URL}/order-status`);
+  },
+  async getGender() {
+    return await api.get(`${BASE_URL}/gender`);
   }
 }
