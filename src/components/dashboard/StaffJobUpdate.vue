@@ -1,37 +1,5 @@
 <template>
   <div>
-    <!-- <v-row>
-      <v-col cols="12" sm="3">
-        <v-text-field
-          v-model="filterItems.searchQuery"
-          :label="$t('views.dashboard.fields.search')"
-          outlined
-          clearable
-          @change="handleRefresh"
-        ></v-text-field>
-      </v-col>
-      <v-col cols="12" sm="3">
-        <v-select
-          v-model="filterItems.productType"
-          :items="productTypes"
-          :label="$t('views.dashboard.fields.productType')"
-          outlined
-          clearable
-          @change="handleRefresh"
-        ></v-select>
-      </v-col>
-      <v-col cols="12" sm="3">
-        <v-select
-          multiple
-          v-model="filterItems.statuses"
-          :items="orderStatuses"
-          :label="$t('views.dashboard.fields.status')"
-          outlined
-          clearable
-          @change="handleRefresh"
-        ></v-select>
-      </v-col>
-    </v-row> -->
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -57,40 +25,33 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in orders" :key="index">
-            <td>{{ item.createdDate }}</td>
-            <td>{{ item.orderCode }}</td>
-            <td>{{ item.productType }}</td>
-            <td>{{ item.productName }}</td>
-            <td>{{ item.customerName }}</td>
-            <td>{{ item.quantity }} pcs</td>
-            <td class="text-right">{{ item.grandTotal | toCurrency }}</td>
-            <td>{{ item.deadline }}</td>
-            <td>{{ item.paymentDate }}</td>
-            <td>{{ item.statusText }}</td>
+          <tr v-for="(item, index) in tasks" :key="index">
+            <td>{{ item.orderDto.productName }}</td>
+            <td>{{ item.orderDto.quantity }} pcs</td>
+            <td>{{ item.orderDto.deadline }}</td>
+            <td>{{ item.assigneeName }}</td>
+            <td>{{ item.name }}</td>
             <td>
-              <v-btn
-                v-if="item.status == 'WAITING_FOR_CONFIRMATION'"
-                elevation="2"
-                class="mr-5"
-                small
-                @click="handleConfirmOrder(item)"
-              >
-                {{ $t("views.dashboard.orderConfirmation") }}</v-btn
-              >
+              <v-select
+                class="mt-5"
+                v-model="item.newStatusId"
+                :items="item.statuses"
+                item-value="id"
+                item-text="name"
+                :readonly="item.statuses.length <= 1"
+                :label="$t('views.staffTasks.fields.statusName')"
+                outlined
+                @change="(e) => handleChangeStatus(e, item)"
+              ></v-select>
             </td>
           </tr>
-          <tr v-if="orders.length === 0">
-            <td colspan="11">No matching records found</td>
+          <tr v-if="tasks.length === 0">
+            <td colspan="6">No matching records found</td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
-    <v-pagination color="pink lighten-1" 
-      @input="handleRefresh"
-      v-model="pagination.pageNumber"
-      :length="pagination.totalPages"
-    ></v-pagination>
+    <ConfirmationDialog ref="confirmationDialog" />
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
@@ -98,6 +59,7 @@
 </template>
 
 <script>
+import ConfirmationDialog from "../dialogs/ConfirmationDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import TimelineService from "../../services/Timeline.service";
 import { mapState, mapActions } from "pinia";
@@ -106,6 +68,7 @@ import { useErrorMessage } from "../../store/error-message";
 export default {
   components: {
     LoadingDialog,
+    ConfirmationDialog,
   },
   data() {
     return {
@@ -129,12 +92,39 @@ export default {
   },
   methods: {
     ...mapActions(useErrorMessage, ["pushError"]),
+    async handleChangeStatus(newStatus, item) {
+      const yes = await this.$refs.confirmationDialog.showDialog(
+        "views.dashboard.changeStatusConfirmation"
+      );
+      if (yes) {
+        try {
+          this.isLoading = true;
+          await TimelineService.changeStatus({
+            timelineId: item.timelineId,
+            currentStepId: item.id,
+            newStatusId: newStatus,
+          });
+          await this.handleRefresh();
+          this.isLoading = false;
+        } catch (error) {
+          console.log(error);
+          this.isLoading = false;
+          this.pushError(error);
+        }
+      } else {
+        item.newStatusId = item.currentStatusId;
+      }
+    },
     async handleRefresh() {
       try {
         this.isLoading = true;
-        const response = await TimelineService.searchTasks();
-        this.orders = response.content;
-        this.pagination.totalPages = response.totalPages;
+        const res = await TimelineService.searchTasks();
+        this.tasks = res.map((it) => {
+          return {
+            ...it,
+            newStatusId: it.currentStatusId,
+          };
+        });
         this.isLoading = false;
       } catch (error) {
         console.log(error);

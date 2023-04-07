@@ -39,7 +39,7 @@
                       :key="index"
                     >
                       <td>{{ va.bankCode }}</td>
-                      <td>{{ va.fullVaNumber }}</td>
+                      <td>{{ `${va.prefix} ${va.fullVaNumber}` }}</td>
                       <td>{{ va.accountName }}</td>
                     </tr>
                     <tr v-if="item.virtualAccounts.length === 0">
@@ -67,6 +67,7 @@
               <td>{{ item.paymentDate }}</td>
               <td>
                 <v-btn
+                  v-if="item.paymentDate == null"
                   elevation="2"
                   class="mr-5"
                   @click="postBillCreation(item)"

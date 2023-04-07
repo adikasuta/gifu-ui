@@ -24,7 +24,7 @@
     "tracking": {
       "title": "Track Your Order",
       "invoicenumber": "Invoice Number (up to 3 Invoice)",
-      "verification": "Last 4 Digits of Your Phone Number",
+      "verification": "Your Phone Number",
       "button": "Track"
     },
     "jumbotron": {
@@ -62,6 +62,7 @@
         "confirmOrder": "Confirm Order",
         "createBill": "Create Bill",
         "detailpayment": "Payment Detail",
+        "changeStatusConfirmation":"Are you sure want to change step status?",
         "fields": {
           "customerPhoneNo": "Customer Phone No",
           "customerEmail": "Customer Email",
@@ -356,7 +357,7 @@
     "tracking": {
       "title": "Lacak Pesanan Anda",
       "invoicenumber": "Nomor Invoice (maksimal 3 Invoice)",
-      "verification": "4 Digit terakhir nomor HP Anda",
+      "verification": "Nomor HP Anda",
       "button": "Lacak"
     },
     "jumbotron": {
@@ -394,6 +395,7 @@
         "confirmOrder": "Konfirmasi Pesanan",
         "detailpayment": "Lihat detil pembayaran",
         "createBill": "Buat Tagihan",
+        "changeStatusConfirmation":"Apakah anda akan mengubah status step?",
         "fields": {
           "status": "Status",
           "productType": "Jenis Produk",

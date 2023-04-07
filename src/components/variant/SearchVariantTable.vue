@@ -164,7 +164,6 @@ export default {
     },
     async handleRefresh() {
       try {
-        console.log("test")
         this.isLoading = true;
         const variantPage = await VariantService.getSearchVariant({
           ...this.filterItems,
