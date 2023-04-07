@@ -1,5 +1,26 @@
 {
   "en": {
+    "permissions": {
+      "historical_order_table": "Historical order table",
+      "confirm_order": "Confirm order",
+      "bill_order": "Bill order",
+      "staff_assignment": "Staff assignment",
+      "product_search": "Search product",
+      "product_add": "Add product",
+      "product_edit": "Edit product",
+      "catalog_search": "Search catalog",
+      "catalog_add": "Add catalog",
+      "catalog_edit": "Edit catalog",
+      "catalog_delete": "Delete catalog",
+      "workflow_search": "Search workflow",
+      "workflow_add": "Add workflow",
+      "workflow_edit": "Edit workflow",
+      "workflow_delete": "Delete workflow",
+      "user_search": "Search user",
+      "user_add": "Add user",
+      "user_edit": "Edit user",
+      "approve_step_status": "Approval step status"
+    },
     "common": {
       "yes": "Yes",
       "cancel": "Cancel",
@@ -45,7 +66,7 @@
       "profile": {
         "title": "Profile",
         "save": "Save",
-        "generateCode":"Regenerate",
+        "generateCode": "Regenerate",
         "fields": {
           "picture": "Profil Picture",
           "name": "Name",
@@ -282,12 +303,15 @@
         "addAccount": "Add Account",
         "active": "Active",
         "inactive": "Inactive",
-        "edit": "Edit User",
+        "editAccount": "Edit Account",
+        "editPermissions": "Edit Account Permission",
         "fields": {
           "name": "Name",
           "role": "Role",
           "status": "Status",
-          "action": "Action"
+          "action": "Action",
+          "email": "Email",
+          "permissionName": "Permission"
         }
       },
       "variant": {
@@ -349,6 +373,27 @@
     }
   },
   "id": {
+    "permissions": {
+      "historical_order_table": "Tabel historis pesanan",
+      "confirm_order": "Konfirmasi pesanan",
+      "bill_order": "Tagihan pesanan",
+      "staff_assignment": "Penugasan staff",
+      "product_search": "Pencarian produk",
+      "product_add": "Tambah produk",
+      "product_edit": "Ubah produk",
+      "catalog_search": "Pencarian katalog",
+      "catalog_add": "Tambah katalog",
+      "catalog_edit": "Ubah katalog",
+      "catalog_delete": "Hapus katalog",
+      "workflow_search": "Pencarian workflow",
+      "workflow_add": "Tambah workflow",
+      "workflow_edit": "Ubah workflow",
+      "workflow_delete": "Hapus workflow",
+      "user_search": "Pencarian user",
+      "user_add": "Tambah user",
+      "user_edit": "Ubah user",
+      "approve_step_status": "Persetujuan status step"
+    },
     "common": {
       "yes": "Ya",
       "cancel": "Batalkan",
@@ -394,7 +439,7 @@
       "profile": {
         "title": "Profil",
         "save": "Simpan",
-        "generateCode":"Generate ulang",
+        "generateCode": "Generate ulang",
         "fields": {
           "picture": "Foto Profil",
           "name": "Nama",
@@ -631,12 +676,15 @@
         "addAccount": "Tambah Akun",
         "active": "Aktif",
         "inactive": "Non Aktif",
-        "edit": "Ubah User",
+        "editAccount": "Ubah Account",
+        "editPermissions": "Ubah Izin Account",
         "fields": {
           "name": "Nama",
           "role": "Peran",
           "status": "Status",
-          "action": "Aksi"
+          "action": "Aksi",
+          "email": "Email",
+          "permission": "Izin"
         }
       },
       "variant": {

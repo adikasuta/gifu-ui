@@ -7,6 +7,13 @@
       </template>
       <template v-slot:body>
         <v-row>
+          <v-col cols="12">
+            <v-btn elevation="2" class="mt-5" small href="#/dashboard/user/add">
+              {{ $t("views.administration.addAccount") }}</v-btn
+            >
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col cols="8">
             <v-text-field
               v-model="filterItems.searchQuery"
@@ -22,6 +29,7 @@
               :items="roles"
               :label="$t('views.administration.fields.role')"
               outlined
+              clearable
               @change="handleRefresh"
             ></v-select>
           </v-col>
@@ -39,9 +47,7 @@
                 <th class="text-left">
                   {{ $t("views.administration.fields.status") }}
                 </th>
-                <!-- <th class="text-left">
-                  {{ $t("views.administration.fields.action") }}
-                </th> -->
+                <th class="text-left"></th>
               </tr>
             </thead>
             <tbody>
@@ -55,20 +61,16 @@
                       : $t("views.administration.inactive")
                   }}
                 </td>
-                <!-- <td>
+                <td>
                   <v-btn
                     elevation="2"
                     class="mr-5"
                     small
-                    @click="
-                      () => {
-                        handleEdit(item);
-                      }
-                    "
+                    :href="`#/dashboard/user/${item.id}`"
                   >
-                    {{ $t("views.administration.edit") }}</v-btn
+                    {{ $t("views.administration.editAccount") }}</v-btn
                   >
-                </td> -->
+                </td>
               </tr>
               <tr v-if="users.length === 0">
                 <td colspan="5">No matching records found</td>
@@ -79,23 +81,10 @@
       </template>
       <template v-slot:footer>
         <v-row>
-          <!-- <v-col cols="6">
-            <v-btn
-              elevation="2"
-              class="mr-5"
-              small
-              @click="
-                () => {
-                  handleAdd(item);
-                }
-              "
-            >
-              {{ $t("views.administration.addAccount") }}</v-btn
-            >
-          </v-col> -->
           <v-col cols="12">
-            <v-pagination color="pink lighten-1" 
-          @input="handleRefresh"
+            <v-pagination
+              color="pink lighten-1"
+              @input="handleRefresh"
               v-model="pagination.pageNumber"
               :length="pagination.totalPages"
             ></v-pagination>
@@ -174,7 +163,8 @@ export default {
         this.isLoading = true;
         const response = await UserService.searchUser({
           ...this.filterItems,
-          page:this.pagination.pageNumber-1,pageSize:this.pagination.pageSize,
+          page: this.pagination.pageNumber - 1,
+          pageSize: this.pagination.pageSize,
         });
         this.users = response.content;
         this.pagination.totalPages = response.totalPages;

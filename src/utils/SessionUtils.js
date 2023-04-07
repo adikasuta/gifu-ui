@@ -22,3 +22,7 @@ module.exports.putSessionData = function (key, value, expireInHour) {
         expires,
     });
 }
+
+module.exports.clearCookie = function () {
+    Cookies.remove("BEARER");
+}

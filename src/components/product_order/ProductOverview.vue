@@ -13,6 +13,13 @@
         <span>{{ length }} x {{ width }} cm</span>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="12">
+        <v-container>
+          <p>{{ description }}</p>
+        </v-container>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -34,6 +41,7 @@ export default {
       "length",
       "width",
       "getPrice",
+      "description"
     ]),
   },
   methods: {},

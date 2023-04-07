@@ -16,6 +16,7 @@
           </template>
         </router-view>
         <ErrorDialog />
+        <AlertDialog />
         <FooterComponent v-if="!this.$route.meta.hideFooter" />
       </v-sheet>
     </v-main>
@@ -24,6 +25,7 @@
 
 <script>
 import ErrorDialog from "./components/dialogs/ErrorDialog"
+import AlertDialog from "./components/dialogs/AlertDialog"
 import Cookies from 'js-cookie';
 import HeaderComponent from "./components/layout/Header";
 import SidebarComponent from "./components/layout/Sidebar";
@@ -33,7 +35,7 @@ import { useReferenceData } from "./store/reference-data";
 import { localize } from "vee-validate";
 export default {
   name: "App",
-  components: { ErrorDialog, HeaderComponent, SidebarComponent, FooterComponent },
+  components: { ErrorDialog, AlertDialog, HeaderComponent, SidebarComponent, FooterComponent },
   data(){
     return {
       breadcrumbList: this.$route.meta.breadcrumb

@@ -18,6 +18,8 @@ import InvoicePage from '../views/external-pages/order/InvoicePage';
 import CartPage from '../views/external-pages/order/CartPage';
 import HomepageDashboard from "../views/internal-dashboard/home-pages/HomepageDashboard";
 import ProfileComponent from "../views/internal-dashboard/administration/UserProfile";
+import AddUser from "../views/internal-dashboard/administration/AddUser";
+import EditUser from "../views/internal-dashboard/administration/EditUser";
 
 
 Vue.use(VueRouter)
@@ -109,6 +111,32 @@ const routes = [
       breadcrumb:[
         {name: "Home", link: "#/dashboard"},
         {name: "Search Users"}
+      ]
+    }
+  },
+  {
+    path: '/dashboard/user/add',
+    name: 'AddUser',
+    component: AddUser,
+    meta:{
+      requiresAuth: true,
+      breadcrumb:[
+        {name: "Home", link: "#/dashboard"},
+        {name: "Search Users", link: "#/dashboard/user"},
+        {name: "Add Users"}
+      ]
+    }
+  },
+  {
+    path: '/dashboard/user/:id',
+    name: 'EditUser',
+    component: EditUser,
+    meta:{
+      requiresAuth: true,
+      breadcrumb:[
+        {name: "Home", link: "#/dashboard"},
+        {name: "Search Users", link: "#/dashboard/user"},
+        {name: "Edit Users"}
       ]
     }
   },

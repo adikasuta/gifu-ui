@@ -4,9 +4,9 @@
       <v-list-item class="px-2">
         <v-list-item-avatar color="red">
           <!-- <v-img src="https://randomuser.me/api/portraits/women/85.jpg"></v-img> -->
-          <span class="white--text text-h5">{{initials}}</span>
+          <span class="white--text text-h5">{{ initials }}</span>
         </v-list-item-avatar>
-        <v-list-item-title>Hi {{userName}}</v-list-item-title>
+        <v-list-item-title>Hi {{ userName }}</v-list-item-title>
         <v-btn icon @click.stop="mini = !mini">
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
@@ -17,7 +17,7 @@
           <v-list-item link v-bind="attrs" v-on="on">
             <v-list-item-content>
               <v-list-item-title class="text-h6">
-                {{userName}}
+                {{ userName }}
               </v-list-item-title>
               <v-list-item-subtitle>{{ userEmail }}</v-list-item-subtitle>
             </v-list-item-content>
@@ -31,7 +31,7 @@
             <v-list-item-title>Profile</v-list-item-title>
           </v-list-item>
 
-          <v-list-item link>
+          <v-list-item @click="logout">
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
@@ -79,8 +79,8 @@
 </template>
 
 <script>
-import SessionUtils from '../../utils/SessionUtils';
-import StringUtils from '../../utils/StringUtils';
+import SessionUtils from "../../utils/SessionUtils";
+import StringUtils from "../../utils/StringUtils";
 export default {
   name: "SidebarComponent",
   components: {},
@@ -90,17 +90,23 @@ export default {
       mini: true,
     };
   },
-  computed:{
-    initials(){
-      return StringUtils.getInitials(SessionUtils.getSessionData().name)
+  methods: {
+    logout() {
+      SessionUtils.clearCookie();
+      this.$router.push("/login");
     },
-    userName(){
-      return SessionUtils.getSessionData().name
+  },
+  computed: {
+    initials() {
+      return StringUtils.getInitials(SessionUtils.getSessionData().name);
     },
-    userEmail(){
-      return SessionUtils.getSessionData().email
-    }
-  }
+    userName() {
+      return SessionUtils.getSessionData().name;
+    },
+    userEmail() {
+      return SessionUtils.getSessionData().email;
+    },
+  },
 };
 </script>
 
