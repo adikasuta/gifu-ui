@@ -65,9 +65,14 @@
     "views": {
       "profile": {
         "title": "Profile",
+        "changePassword":"Ganti Password",
+        "logout": "Logout",
         "save": "Save",
         "generateCode": "Regenerate",
         "fields": {
+          "oldPassword":"Old Password",
+          "newPassword":"New Password",
+          "confirmNewPassword":"Confirm New Password",
           "picture": "Profil Picture",
           "name": "Name",
           "birthDate": "Birthdate",
@@ -439,9 +444,14 @@
     "views": {
       "profile": {
         "title": "Profil",
+        "changePassword":"Ganti Password",
+        "logout": "Logout",
         "save": "Simpan",
         "generateCode": "Generate ulang",
         "fields": {
+          "oldPassword":"Password Lama",
+          "newPassword":"Password Baru",
+          "confirmNewPassword":"Konfirmasi Password Baru",
           "picture": "Foto Profil",
           "name": "Nama",
           "birthDate": "Tanggal Lahir",

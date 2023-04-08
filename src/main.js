@@ -43,6 +43,13 @@ extend("file_size", {
   message: () => `File size exceeds limit of 2MB`,
 });
 
+extend("confirmPassword", {
+  validate: (value, another ) => {
+    return value == another
+  },
+  message: () => `Confirm password is different with new password`,
+});
+
 Vue.filter('toCurrency', function (value) {
   if (typeof value !== "number") {
     return value;

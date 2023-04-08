@@ -21,6 +21,7 @@ import HomepageDashboard from "../views/internal-dashboard/home-pages/HomepageDa
 import ProfileComponent from "../views/internal-dashboard/administration/UserProfile";
 import AddUser from "../views/internal-dashboard/administration/AddUser";
 import EditUser from "../views/internal-dashboard/administration/EditUser";
+import ChangePasswordComponent from "../views/internal-dashboard/administration/ChangePassword";
 
 
 Vue.use(VueRouter)
@@ -258,6 +259,18 @@ const routes = [
       breadcrumb: [
         { name: "Home", link: "#/dashboard" },
         { name: "Profile" }
+      ]
+    }
+  },
+  {
+    path: '/dashboard/change-password',
+    name: 'ChangePasswordComponent',
+    component: ChangePasswordComponent,
+    meta: {
+      requiresAuth: true,
+      breadcrumb: [
+        { name: "Home", link: "#/dashboard" },
+        { name: "Change Password" }
       ]
     }
   },

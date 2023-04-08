@@ -28,14 +28,21 @@
             <v-list-item-icon>
               <v-icon>mdi-account-circle</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Profile</v-list-item-title>
+            <v-list-item-title>{{$t('views.profile.title')}}</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item link href="#/dashboard/change-password">
+            <v-list-item-icon>
+              <v-icon>mdi-lock-reset</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>{{$t('views.profile.changePassword')}}</v-list-item-title>
           </v-list-item>
 
           <v-list-item @click="logout">
             <v-list-item-icon>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Logout</v-list-item-title>
+            <v-list-item-title>{{$t('views.profile.logout')}}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
