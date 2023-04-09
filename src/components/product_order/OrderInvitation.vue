@@ -12,7 +12,8 @@
                 :key="`step-${index}`"
                 :complete="e1 > index"
                 :step="index + 1"
-                color="pink lighten-1" dark 
+                color="pink lighten-1"
+                dark
               >
                 {{ $t(step) }}
               </v-stepper-step>
@@ -32,7 +33,8 @@
 
               <v-divider class="mt-10 mb-5"></v-divider>
               <v-btn
-                color="pink lighten-1" dark 
+                color="pink lighten-1"
+                dark
                 @click="validateAndNext('designObserver', 2)"
               >
                 {{ $t("views.order.next") }}
@@ -47,7 +49,8 @@
               <v-divider class="mt-10 mb-5"></v-divider>
               <v-btn text @click="e1 = 1"> {{ $t("views.order.back") }} </v-btn>
               <v-btn
-                color="pink lighten-1" dark 
+                color="pink lighten-1"
+                dark
                 @click="validateAndNext('detailProductObserver', 3)"
               >
                 {{ $t("views.order.next") }}
@@ -62,7 +65,8 @@
 
               <v-btn text @click="e1 = 2"> {{ $t("views.order.back") }} </v-btn>
               <v-btn
-                color="pink lighten-1" dark 
+                color="pink lighten-1"
+                dark
                 @click="validateAndNext('additionalRequestObserver', 4)"
               >
                 {{ $t("views.order.next") }}
@@ -76,7 +80,8 @@
               <v-divider class="mt-10 mb-5"></v-divider>
               <v-btn text @click="e1 = 3"> {{ $t("views.order.back") }} </v-btn>
               <v-btn
-                color="pink lighten-1" dark 
+                color="pink lighten-1"
+                dark
                 @click="handleOrder('customerDataObserver')"
               >
                 {{ $t("views.order.order") }}
@@ -86,6 +91,7 @@
         </v-stepper>
       </v-col>
     </v-row>
+    <ConfirmationDialog ref="confirmationDialog" />
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
@@ -99,6 +105,7 @@ import AdditionalRequest from "./invitation/AdditionalRequest";
 import SelectProductDesign from "./invitation/SelectProductDesign";
 import CompleteDetailProduct from "./invitation/CompleteDetailProduct";
 import ProductOverview from "./ProductOverview";
+import ConfirmationDialog from "../dialogs/ConfirmationDialog.vue";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
 import { mapState, mapWritableState, mapActions } from "pinia";
 import { useReferenceData } from "../../store/reference-data";
@@ -114,6 +121,7 @@ export default {
     SelectProductDesign,
     LoadingDialog,
     ProductOverview,
+    ConfirmationDialog,
   },
   data() {
     return {
@@ -139,15 +147,20 @@ export default {
     handleOrder(validator) {
       this.$refs[validator].validate().then(async (success) => {
         if (success) {
-          try {
-            this.isLoading = true;
-            const order = await this.postInvitationOrder();
-            this.isLoading = false;
-            this.$router.push(`/order/${order.orderCode}/invoice`);
-          } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-            this.pushError(error);
+          const yes = await this.$refs.confirmationDialog.showDialog(
+            "views.order.confirmation"
+          );
+          if (yes) {
+            try {
+              this.isLoading = true;
+              const order = await this.postInvitationOrder();
+              this.isLoading = false;
+              this.$router.push(`/order/${order.orderCode}/invoice`);
+            } catch (error) {
+              console.log(error);
+              this.isLoading = false;
+              this.pushError(error);
+            }
           }
         }
       });

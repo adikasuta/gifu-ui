@@ -175,6 +175,7 @@
         "back": "Back",
         "next": "Next",
         "order": "Order",
+        "confirmation":"Your submitted order cannot be changed, please to make sure that you inputted correct data.",
         "fields": {
           "payerInformation": "Payer Information",
           "referralCode": "Referral Code",
@@ -555,6 +556,7 @@
         "back": "Kembali",
         "next": "Selanjutnya",
         "order": "Pesan",
+        "confirmation":"Pesanan yang sudah disubmit tidak dapat diubah kembali, mohon pastikan pesanan anda sudah sesuai.",
         "fields": {
           "payerInformation": "Informasi Pembayar",
           "referralCode": "Kode Referral",

@@ -12,7 +12,8 @@
                 :key="`step-${index}`"
                 :complete="e1 > index"
                 :step="index + 1"
-                color="pink lighten-1" dark 
+                color="pink lighten-1"
+                dark
               >
                 {{ $t(step) }}
               </v-stepper-step>
@@ -32,7 +33,8 @@
 
               <v-divider class="mt-10 mb-5"></v-divider>
               <v-btn
-                color="pink lighten-1" dark 
+                color="pink lighten-1"
+                dark
                 @click="validateAndNext('detailProductObserver', 2)"
               >
                 {{ $t("views.order.next") }}
@@ -47,7 +49,8 @@
 
               <v-btn text @click="e1 = 1"> {{ $t("views.order.back") }} </v-btn>
               <v-btn
-                color="pink lighten-1" dark 
+                color="pink lighten-1"
+                dark
                 @click="validateAndNext('additionalRequestObserver', 3)"
               >
                 {{ $t("views.order.next") }}
@@ -61,7 +64,8 @@
               <v-divider class="mt-10 mb-5"></v-divider>
               <v-btn text @click="e1 = 2"> {{ $t("views.order.back") }} </v-btn>
               <v-btn
-                color="pink lighten-1" dark 
+                color="pink lighten-1"
+                dark
                 @click="handleOrder('customerDataObserver')"
               >
                 {{ $t("views.order.order") }}
@@ -71,6 +75,7 @@
         </v-stepper>
       </v-col>
     </v-row>
+    <ConfirmationDialog ref="confirmationDialog" />
     <v-dialog v-model="isLoading" width="100" persistent>
       <LoadingDialog />
     </v-dialog>
@@ -81,6 +86,7 @@
 import { ValidationObserver } from "vee-validate";
 import CustomerData from "./souvenir/CustomerData";
 import AdditionalRequest from "./souvenir/AdditionalRequest";
+import ConfirmationDialog from "../dialogs/ConfirmationDialog.vue";
 import CompleteDetailProduct from "./souvenir/CompleteDetailProduct";
 import ProductOverview from "./ProductOverview";
 import LoadingDialog from "../dialogs/LoadingDialog.vue";
@@ -97,6 +103,7 @@ export default {
     CompleteDetailProduct,
     LoadingDialog,
     ProductOverview,
+    ConfirmationDialog,
   },
   data() {
     return {
@@ -111,30 +118,35 @@ export default {
   },
   async created() {},
   computed: {
-    ...mapWritableState(useOrderProductForm, ["customerInfoForm","SOUVENIR"]),
+    ...mapWritableState(useOrderProductForm, ["customerInfoForm", "SOUVENIR"]),
     ...mapState(useReferenceData, ["publicCategories"]),
     ...mapState(useOrderProductForm, ["publicCategories", "productTypes"]),
   },
   methods: {
     ...mapActions(useErrorMessage, ["pushError"]),
-    ...mapActions(useOrderProductForm, ["postSouvenirOrder","reset"]),
+    ...mapActions(useOrderProductForm, ["postSouvenirOrder", "reset"]),
     handleOrder(validator) {
       this.$refs[validator].validate().then(async (success) => {
         if (success) {
-          try {
-            this.isLoading = true;
-            const order = await this.postSouvenirOrder();
-            this.isLoading = false;
-            this.$router.push(`/order/${order.orderCode}/invoice`);
-          } catch (error) {
-            console.log(error);
-            this.isLoading = false;
-            this.pushError(error);
+          const yes = await this.$refs.confirmationDialog.showDialog(
+            "views.order.confirmation"
+          );
+          if (yes) {
+            try {
+              this.isLoading = true;
+              const order = await this.postSouvenirOrder();
+              this.isLoading = false;
+              this.$router.push(`/order/${order.orderCode}/invoice`);
+            } catch (error) {
+              console.log(error);
+              this.isLoading = false;
+              this.pushError(error);
+            }
           }
         }
       });
     },
-    validateAndNext(validator,nextStep) {
+    validateAndNext(validator, nextStep) {
       this.$refs[validator].validate().then(async (success) => {
         if (success) {
           this.e1 = nextStep;
