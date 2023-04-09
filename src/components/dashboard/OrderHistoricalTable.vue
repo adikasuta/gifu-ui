@@ -77,7 +77,7 @@
             <th class="text-left">
               {{ $t("views.dashboard.fields.status") }}
             </th>
-            <th v-if="hasPermission('confirm_order')" class="text-left"></th>
+            <th class="text-left"></th>
           </tr>
         </thead>
         <tbody>
@@ -93,6 +93,14 @@
             <td>{{ item.paymentDate }}</td>
             <td>{{ item.statusText }}</td>
             <td>
+              <v-btn
+                elevation="2"
+                class="mr-5"
+                small
+                @click="handleDownloadInvoice(item)"
+              >
+                {{ $t("views.dashboard.downloadInvoice") }}</v-btn
+              >
               <v-btn
                 v-if="hasPermission('confirm_order') && item.status == 'WAITING_FOR_CONFIRMATION'"
                 elevation="2"
@@ -174,6 +182,9 @@ export default {
   methods: {
     ...SessionUtils,
     ...mapActions(useErrorMessage, ["pushError"]),
+    handleDownloadInvoice(item){
+      this.$router.push(`/order/${item.orderCode}/invoice`)
+    },
     handleConfirmOrder(item) {
       this.confirmOrderInput = {
         orderId: item.id,
