@@ -70,11 +70,20 @@
             required: true,
           }"
         >
-          <CarouselImageSelection
-            :options="getReferenceContents(VariantTypeCodes.DRIED_FLOWERS)"
+          <v-select
+            v-model="driedFlower"
+            :items="getReferenceContents(VariantTypeCodes.DRIED_FLOWERS)"
+            item-value="id"
+            item-text="name"
             :error-messages="errors"
-            v-model="INVITATION.variants.DRIED_FLOWERS"
-          />
+            :label="$t('views.order.fields.driedFlower')"
+            outlined
+            @change="
+              (event) => {
+                transformValue(VariantTypeCodes.DRIED_FLOWERS, event);
+              }
+            "
+          ></v-select>
         </ValidationProvider>
       </v-col>
     </v-row>
@@ -138,11 +147,20 @@
             required: true,
           }"
         >
-          <CarouselImageSelection
-            :options="getReferenceContents(VariantTypeCodes.VELLUM_WRAP)"
+          <v-select
+            v-model="vellumWrap"
+            :items="getReferenceContents(VariantTypeCodes.VELLUM_WRAP)"
+            item-value="id"
+            item-text="name"
             :error-messages="errors"
-            v-model="INVITATION.variants.VELLUM_WRAP"
-          />
+            :label="$t('views.order.fields.vellumWrap')"
+            outlined
+            @change="
+              (event) => {
+                transformValue(VariantTypeCodes.VELLUM_WRAP, event);
+              }
+            "
+          ></v-select>
         </ValidationProvider>
       </v-col>
     </v-row>
@@ -257,6 +275,8 @@ export default {
   },
   data: () => ({
     emboss: null,
+    vellumWrap: null,
+    driedFlower: null,
     packingService: null,
     VariantTypeCodes,
   }),

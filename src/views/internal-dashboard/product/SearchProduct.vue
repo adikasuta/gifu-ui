@@ -64,8 +64,9 @@
                   {{ $t("views.product.fields.price") }}
                 </th>
                 <th class="text-left">
-                  {{ $t("views.product.fields.action") }}
+                  {{ $t("views.product.fields.available") }}
                 </th>
+                <th class="text-left"></th>
               </tr>
             </thead>
             <tbody>
@@ -86,6 +87,15 @@
                   >
                     {{ pricing.price | toCurrency }} <br />
                   </span>
+                </td>
+                <td>
+                  <v-switch
+                    style="margin: 0"
+                    hide-details
+                    color="pink lighten-1"
+                    v-model="item.available"
+                    @change="(e) => handleChange(e, item)"
+                  ></v-switch>
                 </td>
                 <td>
                   <v-btn
@@ -128,7 +138,7 @@ import SessionUtils from "../../../utils/SessionUtils";
 import ConfirmationDialog from "../../../components/dialogs/ConfirmationDialog";
 import LoadingDialog from "../../../components/dialogs/LoadingDialog.vue";
 import BasicForm from "../../../components/layout/BasicForm";
-import PublicProductService from "../../../services/PublicProduct.service";
+import ProductService from "../../../services/Product.service";
 import { mapState, mapActions } from "pinia";
 import { useReferenceData } from "../../../store/reference-data";
 import { useErrorMessage } from "../../../store/error-message";
@@ -169,10 +179,22 @@ export default {
       }
       return `${pricing.qtyMin} - ${pricing.qtyMax}`;
     },
+    async handleChange(newValue, item) {
+      try {
+        this.isLoading = true;
+        await ProductService.patchProductStatus(item.id, {
+          available: newValue,
+        });
+        this.isLoading = false;
+      } catch (error) {
+        this.isLoading = false;
+        this.pushError(error);
+      }
+    },
     async handleRefresh() {
       try {
         this.isLoading = true;
-        const response = await PublicProductService.searchProducts({
+        const response = await ProductService.searchProducts({
           ...this.filterItems,
           page: this.pagination.pageNumber - 1,
           pageSize: this.pagination.pageSize,

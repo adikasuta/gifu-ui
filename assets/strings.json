@@ -280,6 +280,7 @@
         "from": "from",
         "order": "Order",
         "fields": {
+          "available":"Available",
           "pricingRangeFilter": "Price Range",
           "search": "Search Product",
           "picture": "Product Photo",
@@ -661,6 +662,7 @@
         "from": "Mulai dari",
         "order": "Pesan",
         "fields": {
+          "available":"Tersedia",
           "pricingRangeFilter": "Range Harga",
           "search": "Cari Produk",
           "picture": "Foto Produk",
