@@ -21,9 +21,13 @@
           :label="$t('tracking.verification')"
         ></v-text-field>
       </div>
-      <div>
+      <div class="d-flex justify-space-between">
         <v-btn dark color="pink lighten-1" @click="handleTrack">
           {{ $t("tracking.button") }}
+        </v-btn>
+
+        <v-btn dark color="pink lighten-1" @click="handleReload">
+          {{ $t("tracking.clear") }}
         </v-btn>
       </div>
     </v-container>
@@ -79,6 +83,11 @@
             <td>{{ item.quantity || `-` }}</td>
             <td>{{ item.lastOrderStatus || `-` }}</td>
             <td>{{ item.remarks }}</td>
+            <td>
+              <v-icon class="mr-2"  @click="onPrint(item.orderCode)">
+                mdi-printer
+              </v-icon>
+            </td>
           </tr>
         </template>
       </v-data-table>
@@ -120,11 +129,18 @@ export default {
         { text: "Quantity", value: "quantity" },
         { text: "Status", value: "lastOrderStatus" },
         { text: "Remarks", value: "remarks" },
+        { text: "Action", value: "action" },
       ],
     };
   },
   methods: {
     ...mapActions(useErrorMessage, ["pushError"]),
+    handleReload(){
+      location.reload();
+    },
+    onPrint(orderCode){
+      this.$router.push(`/order/${orderCode}/invoice`)
+    },
     onExpand(index) {
       if (!this.expanded) {
         this.expanded = [];

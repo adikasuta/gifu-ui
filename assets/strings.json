@@ -46,7 +46,8 @@
       "title": "Track Your Order",
       "invoicenumber": "Invoice Number (up to 3 Invoice)",
       "verification": "Your Phone Number",
-      "button": "Track"
+      "button": "Track",
+      "clear":"Clear"
     },
     "jumbotron": {
       "title": "Hello",
@@ -416,7 +417,8 @@
     "header": {
       "souvenir": "Suvenir",
       "invitation": "Undangan",
-      "tracking": "Pelacakan"
+      "tracking": "Pelacakan",
+      "clear":"Clear"
     },
     "testimonials": {
       "review1": "Saya cukup puas dengan hasilnya"
