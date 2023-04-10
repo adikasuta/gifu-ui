@@ -430,7 +430,8 @@
       "title": "Lacak Pesanan Anda",
       "invoicenumber": "Nomor Invoice (maksimal 3 Invoice)",
       "verification": "Nomor HP Anda",
-      "button": "Lacak"
+      "button": "Lacak",
+      "clear":"Bersihkan"
     },
     "jumbotron": {
       "title": "Halo",
